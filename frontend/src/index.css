@@ -1,0 +1,221 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  text-align: center;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width:100%;
+}
+
+#main-container {
+  background-color:#f5f5f5;
+  /*background-image: url(./images/img-backgr.jpg);*/
+  font-family: 'Abel', sans-serif;
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+}
+
+/* NAVBAR - HEADER - - FOOTER - BGR IMAGE*/
+.header {
+  align-items: center;
+  margin-top: 3em;
+}
+
+.header__banner {
+  text-align: center;
+  width: 90%;
+  justify-content: center;
+  margin: auto;
+}
+
+.header__banner--title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #fff;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.header__banner--subtitle {
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: #fff;
+  overflow-y: hidden;
+}
+
+.navbar {
+  background-color: black;
+  color: #f5f5f5;
+  width: 100%;
+  margin: auto;
+  opacity: 0.8;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.nav__list-ul {
+  list-style: none;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.nav__list-li {
+  font-size: 0.65rem;
+}
+
+.nav__list-li-left{
+  color:#f5f5f5;
+  display: flex;
+  justify-content: center;
+  width: 40%;
+}
+
+.link{
+  justify-content: right;
+  margin-right: 25px;
+  width: 20%;
+}
+
+.logo{
+  border: 5px solid white;
+  padding: 15px;
+  width: 20px;
+  
+}
+
+.navbar__style{
+  color:#f5f5f5;
+  text-decoration: none;
+}
+
+.hover:hover {
+  color: aqua;
+  opacity: 0.7;
+}
+
+footer {
+  background-color: black;
+  color: #f5f5f5;
+  padding: 0.7rem;
+  display: flex;
+  justify-content: space-between!important;
+  flex-direction: row!important;
+  opacity: 0.8;
+}
+
+/* Messages */
+.messageBox {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: center;
+  margin: auto;
+  background-color: 	#FFFAFA;
+  margin-bottom: 40px;
+  box-shadow: 10px 10px 10px 5px black;
+  opacity: 0.95;
+}
+
+.messageBox-upper{
+  display: flex;
+  justify-content: space-around;
+}
+.product__specs {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  color: #221812;
+}
+
+#message-list {
+  text-align: center;
+  margin: 10px;
+  margin-top: 40px;
+}
+
+/*LOGIN/SIGNUP FORM*/
+
+#form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.form__button{
+  width: 80%;
+  justify-content: center;
+  margin: auto;
+  opacity: 0.9;
+}
+
+#form input {
+  width: 90%;
+  height: 2rem;
+  border: solid #eeeeee 2px;
+  margin: 2rem 0 0 0;
+}
+
+#textForm {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#form textarea {
+  width: 90%;
+  margin: 2rem 0 0 0;
+  border: solid #eeeeee 2px;
+  font-family: 'Abel', sans-serif;
+}
+
+/* BUTTON */
+.btn {
+  text-align: center;
+}
+.btn-style {
+  width: 50%;
+  border: none;
+  height: auto;
+  margin: 1rem 0 2rem 0;
+  line-height: 1.5rem;
+  background-color: #212931;
+  transition: background-color 200ms ease-in-out;
+  cursor: pointer;
+  width: 70%;
+  color: white;
+  border: solid #212931 ;
+}
+
+.btn-style:hover {
+  background-color: #FFFAFA;
+  color: black;
+  border: solid #212931 ;
+}
+
+.btn-style__product-page{
+  width: 50%;
+}

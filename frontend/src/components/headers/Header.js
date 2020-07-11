@@ -13,6 +13,11 @@ function Header() {
                         </Link>
                     </li>
                     <li className="nav__list-li">
+                        <Link to={'/login'} className="navbar__style">
+                            <h2 className="hover">LOGIN</h2>
+                        </Link>
+                    </li>
+                    <li className="nav__list-li">
                         <Link to={'/messages/new'} className="navbar__style">
                             <h2 className="hover">New Message</h2>
                         </Link>

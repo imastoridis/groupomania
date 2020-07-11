@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../headers/Header';
 import Footer from '../headers/Footer';
-import MessageTile from './MessageTile'
+
 
 
 function UserProfile() {

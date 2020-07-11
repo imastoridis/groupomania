@@ -9,6 +9,21 @@ var likesCtrl    = require('./routes/likesCtrl');
 exports.router = (function() {
   var apiRouter = express.Router();
 
+  apiRouter.use((req, res, next) => { 
+    
+    res.setHeader('Access-Control-Allow-Origin', "http://localhost:3000"); 
+    res.setHeader('Access-Control-Max-Age', "1000")
+    res.header('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization, client-security-token');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    
+   
+    /*if (req.method === 'OPTIONS') {
+      res.status(200);
+     }*/ 
+  next();
+  });
+
   // Users routes
   apiRouter.route('/users/register/').post(usersCtrl.register);
   apiRouter.route('/users/login/').post(usersCtrl.login);

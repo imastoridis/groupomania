@@ -4,6 +4,7 @@ var jwtUtils = require('../utils/jwt.utils')
 var models = require('../models')
 var asyncLib = require('async')
 
+
 //Cosntants
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const PASSWORD_REGEX = /^(?=.*\d).{4,8}$/
@@ -18,7 +19,7 @@ module.exports = {
         var username = req.body.username
         var password = req.body.password
         var bio = req.body.bio
-
+        console.log(email)
         //Verify that all fields are not empty
         if (email == null || username == null || password == null) {
             return res.status(400).json({ 'error': 'missing parameters' })
@@ -164,7 +165,7 @@ module.exports = {
                 if (user) {
                     res.status(201).json(user);
                 } else {
-                    res.status(404).json({ 'error': 'user not found' });
+                    res.status(404).json({ 'error': 'user not found 1' });
                 }
             })
             .catch(function (err) {
@@ -207,7 +208,7 @@ module.exports = {
                             res.status(500).json({ 'error': 'cannot update user' });
                         });
                 } else {
-                    res.status(404).json({ 'error': 'user not found' });
+                    res.status(404).json({ 'error': 'user not found 2' });
                 }
             },
         ],

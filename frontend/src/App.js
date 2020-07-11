@@ -1,26 +1,84 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import HomePage from './components/pages/Homepage';
+import NewMessage from './components/pages/NewMessage';
+import UserProfile from './components/pages/UserProfile';
+import MessageTile from './components/pages/MessageTile';
+import Login from './components/pages/Login';
+import Register from './components/pages/Register';
+import Header from './components/headers/Header';
+import GuestRoute from './components/auth/GuestRoute'
+import AuthRoute from './components/auth/AuthRoute';
+//import AlertComponent from '../src/components/AlertComponent'
+
 
 function App() {
+  const [title, updateTitle] = useState(null);
+  const [errorMessage, updateErrorMessage] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <React.StrictMode>
+        <Router>
+        <Header title={title}/>
+          <Switch>
+            <GuestRoute path='/' exact component={Register} showError={updateErrorMessage} updateTitle={updateTitle}/>
+            <GuestRoute path='/login' exact component={Login} showError={updateErrorMessage} updateTitle={updateTitle}/>
+            <AuthRoute path='/messages' exact component={MessageTile} showError={updateErrorMessage} updateTitle={updateTitle}/>
+            <AuthRoute path='/messages/new' component={NewMessage} />
+            
+            <AuthRoute path='/userprofile' component={UserProfile} />
+          </Switch>
+        </Router>
+
+      </React.StrictMode>,
     </div>
   );
 }
 
 export default App;
+
+/*
+import React, {Component} from 'react';
+import {Router, Scene} from 'react-native-router-flux';
+import Authentication from './components/Authentication';
+
+class App extends Component {
+  render() {
+    return(
+      <Router>
+        <Scene key='root'>
+          <Scene
+            component={Authentication}
+            hideNavBar={true}
+            initial={!this.state.hasToken}
+            key='Authentication'
+            title='Authentication'
+          />
+          <Scene
+            component={HomePage}
+            hideNavBar={true}
+            initial={this.state.hasToken}
+            key='HomePage'
+            title='Home Page'
+          />
+        </Scene>
+      </Router>
+    )
+  }
+}
+
+export default App;
+
+
+*/
+
+
+
+
+
+
+
+/*
+*/

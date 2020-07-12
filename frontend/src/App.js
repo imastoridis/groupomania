@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+//Imports
 
-import HomePage from './components/pages/Homepage';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import NewMessage from './components/pages/NewMessage';
 import UserProfile from './components/pages/UserProfile';
 import MessageTile from './components/pages/MessageTile';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
-import Header from './components/headers/Header';
 import GuestRoute from './components/auth/GuestRoute'
 import AuthRoute from './components/auth/AuthRoute';
 //import AlertComponent from '../src/components/AlertComponent'
 
+// Router Routes
 
 function App() {
   const [title, updateTitle] = useState(null);
@@ -21,7 +21,6 @@ function App() {
     <div >
       <React.StrictMode>
         <Router>
-        <Header title={title}/>
           <Switch>
             <GuestRoute path='/' exact component={Register} showError={updateErrorMessage} updateTitle={updateTitle}/>
             <GuestRoute path='/login' exact component={Login} showError={updateErrorMessage} updateTitle={updateTitle}/>

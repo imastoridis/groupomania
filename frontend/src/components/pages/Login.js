@@ -1,17 +1,18 @@
-//LOGIN 
+//Imports
+
 import React, { useState, useEffect } from 'react';
 import Header from '../headers/Header';
 import Footer from '../headers/Footer';
-//import { Link } from "react-router-dom";
 import axios from 'axios'
-//import AsyncStorage from '@react-native-community/async-storage';
 import Cookies from 'js-cookie'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+
+/** Login function **/
 
 function Login(props) {
-
     useEffect(() => {
-        
+
     }, [])
 
     const [state, setState] = useState({
@@ -21,6 +22,8 @@ function Login(props) {
         successMessage: null
     })
 
+
+    //Handlechange
     const handleChange = (e) => {
         const { id, value } = e.target
         setState(prevState => ({
@@ -29,26 +32,7 @@ function Login(props) {
         }))
     }
 
-/*
-    const storeData = async (value) => {
-        try {
-          await AsyncStorage.setItem('token', value)
-        } catch (e) {
-          // saving error
-        }
-      }
-
-    const getData = async () => {
-        try {
-            const value = await AsyncStorage.getItem('token')
-            if (value !== null) {
-                // value previously stored
-            }
-        } catch (e) {
-            // error reading value
-        }
-    }
-*/
+    //HandleSubmitClick - 
     const handleSubmitClick = (e) => {
         e.preventDefault();
         const payload = {
@@ -62,17 +46,9 @@ function Login(props) {
                         ...prevState,
                         'successMessage': 'Login successful. Redirecting to home page..'
                     }))
-
-                    /*console.log(response)
-                    console.log(response.data.token)
-                    AsyncStorage.setItem('token', response.data.token)*/
                     props.setLogin(response.data);
                     Cookies.set('token', response.data.token);
-                    //Cookies.set('userId', response.data.userId)
-                    console.log(response)
-                   
-                    redirectToHome();
-                    //props.showError(null)
+                    props.history.push('/messages')
                 }
                 else if (response.data.code === 204) {
                     props.showError("Username and password do not match");
@@ -88,14 +64,8 @@ function Login(props) {
 
 
     }
-    const redirectToHome = () => {
-        //props.updateTitle('dashboard')
-        props.history.push('/messages/new');
-    }
-    const redirectToRegister = () => {
-        //props.history.push('/register');
-        props.updateTitle('Register');
-    }
+
+
     return (
         <div className="App">
             <section id="main-container">
@@ -124,7 +94,7 @@ function Login(props) {
                                         type="text"
                                         name="password"
                                         id="password"
-                                        placeholder="Mot de passe*"
+                                        placeholder="mot de passe*"
                                         required maxLength="50"
 
                                         value={state.password}
@@ -140,8 +110,10 @@ function Login(props) {
                                         {state.successMessage}
                                     </div>
                                     <div className="registerMessage">
-                                        <span>Dont have an account? </span>
-                                        <span className="loginText" onClick={() => redirectToRegister()}>Register</span>
+                                        <span>Vous n'avez pas encore de compte? </span>
+                                        <Link to={'/'}>
+                                            <span className="loginText" >Inscrivez-vous</span>
+                                        </Link>
                                     </div>
                                 </form>
                             </div>
@@ -156,10 +128,12 @@ function Login(props) {
 
 const mapDispatchToProps = dispatch => {
     return {
-      setLogin: user => dispatch({ type: "SET_LOGIN", payload: user })
+        setLogin: user => dispatch({ type: "SET_LOGIN", payload: user })
     };
-  };
-  export default connect(
+};
+
+
+export default connect(
     null,
     mapDispatchToProps
-  )(Login);
+)(Login);

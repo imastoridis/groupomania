@@ -4,16 +4,30 @@ import './index.css';
 import App from './App';
 import store from '../src/store/index'
 import { Provider } from 'react-redux'
+import axios from "axios";
+import Cookies from "js-cookie";
 
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+const render = () => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  );
+}
 
 
+let token = Cookies.get("token");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  axios.post("http://localhost:8080/api/users/me").then(res => {
+    store.dispatch({ type: "SET_LOGIN", payload: res.data });
+    render();
+  });
+} else {
+  render();
+}
 
 
 

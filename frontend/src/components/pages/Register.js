@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+//Imports
+
+import React, { useState } from 'react';
 import Header from '../headers/Header';
 import Footer from '../headers/Footer';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
-import AsyncStorage from '@react-native-community/async-storage';
 
+/**Register function **/
 
 function Register(props) {
     const [state, setState] = useState({
@@ -15,8 +17,7 @@ function Register(props) {
         successMessage: null
     })
 
-   
-    
+    //HandleChange
     const handleChange = (e) => {
         const { id, value } = e.target
         setState(prevState => ({
@@ -25,16 +26,8 @@ function Register(props) {
         }))
     }
 
-    /*const storeData = async (value) => {
-        try {
-          await AsyncStorage.setItem('@storage_Key', value)
-        } catch (e) {
-          // saving error
-        }
-      }*/
-
-      
-    const sendDetailsToServer = () => {
+    //HandleSubmitClick - Creates new user, stores it in DB and redirects to Login page
+    const handleSubmitClick = (e) => {
         /*if(state.email.length && state.password.length) {
             props.showError(null);}*/
         const payload = {
@@ -49,7 +42,7 @@ function Register(props) {
                         ...prevState,
                         'successMessage': 'Registration successful. Redirecting to home page..'
                     }))
-                    redirectToHome();
+                    props.history.push('/login')
                     props.showError(null)
                 } else {
                     props.showError("Some error ocurred");
@@ -62,25 +55,10 @@ function Register(props) {
         /*} else {
             props.showError('Please enter valid username and password')    
         }*/
-
-    }
-    const redirectToHome = () => {
-        //props.updateTitle('Home')
-        props.history.push('/messages');
-    }
-    const redirectToLogin = () => {
-        //props.updateTitle('Login')
-        props.history.push('/login');
-    }
-    const handleSubmitClick = (e) => {
         e.preventDefault();
-        sendDetailsToServer()
-        /* if(state.password === state.confirmPassword) {
-                
-         } else {
-             props.showError('Passwords do not match');
-         }*/
     }
+
+
     return (
         <div className="App">
             <section id="main-container">
@@ -97,7 +75,7 @@ function Register(props) {
                                         type="username"
                                         name="username"
                                         id="username"
-                                        placeholder="username"
+                                        placeholder="username*"
                                         value={state.username}
                                         onChange={handleChange}
                                         required
@@ -107,7 +85,7 @@ function Register(props) {
                                         type="email"
                                         name="email"
                                         id="email"
-                                        placeholder="Email"
+                                        placeholder="email*"
                                         value={state.email}
                                         onChange={handleChange}
                                         required
@@ -117,24 +95,24 @@ function Register(props) {
                                         type="password"
                                         name="password"
                                         id="password"
-                                        placeholder="Password"
+                                        placeholder="mot de passe*"
                                         value={state.password}
                                         onChange={handleChange}
                                         required
                                     />
 
                                     <div className="form__button">
-
                                         <button type="submit" onClick={handleSubmitClick} id="submit" className="btn-style">VALIDER</button>
-
                                     </div>
                                 </form>
                                 <div className="alert alert-success mt-2" style={{ display: state.successMessage ? 'block' : 'none' }} role="alert">
                                     {state.successMessage}
                                 </div>
                                 <div className="mt-2">
-                                    <span>Already have an account? </span>
-                                    <span className="loginText" onClick={() => redirectToLogin()}>Login here</span>
+                                    <span>Vous avez déjà un compte? </span>
+                                    <Link to={'/login'}>
+                                        <span className="loginText" >Connectez-vous</span>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

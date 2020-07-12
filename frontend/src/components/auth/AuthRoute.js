@@ -1,12 +1,13 @@
+//Imports
+
 import {Route, Redirect} from 'react-router-dom'
 import React from 'react'
-import Cookies from 'js-cookie'
 import {connect} from 'react-redux'
 
 
 const AuthRoute = ({ component: Component, ...rest }) => {
 //const token = Cookies.get('token')
-    console.log({...rest})
+    //console.log({...rest})
     return (
       <Route
         {...rest}

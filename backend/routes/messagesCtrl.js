@@ -5,7 +5,7 @@ var jwtUtils = require('../utils/jwt.utils');
 
 // Constants
 const TITLE_LIMIT = 2;
-const CONTENT_LIMIT = 4;
+const CONTENT_LIMIT = 2;
 const ITEMS_LIMIT = 50;
 
 // Routes

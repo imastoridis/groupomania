@@ -1,17 +1,17 @@
+//Imports
+
 import React, { useState, useEffect } from 'react';
-import Header from '../headers/Header';
 import Footer from '../headers/Footer';
-//import { Link } from "react-router-dom";
 import axios from 'axios'
 import Cookies from 'js-cookie'
-var jwtUtils = require('../../utils/jwt.utils')
+import { useHistory } from "react-router-dom";
+import Header from '../headers/Header';
+
+/** New message creation function**/
 
 function NewMessage() {
-
     useEffect(() => {
-        getCookies()
     }, []);
-
 
     const [state, setState] = useState({
         title: "",
@@ -19,27 +19,13 @@ function NewMessage() {
         newMessageError: null
     })
 
+    // Variables
+    let history = useHistory();
+    const token = Cookies.get('token')
+    const [messages, setMessages] = useState([]);
+    const [error, setError] = useState(null);
 
-
-    /* this.handleSubmit = this.handleSubmit.bind(this);
-     this.handleChange = this.handleChange.bind(this);*/
-
-    const getCookies = () => {
-        Cookies.get('token')
-        console.log(Cookies.get('token'))
-        Cookies.get('userId')
-        console.log(Cookies.get('userId'))
-        Cookies.get('token1')
-        console.log(Cookies.get('token1'))
-    }
-
-
-    /*const handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }*/
-
+    //HandleChange
     const handleChange = (e) => {
         const { id, value } = e.target
         setState(prevState => ({
@@ -48,49 +34,36 @@ function NewMessage() {
         }))
     }
 
-    const [messages, setMessages] = useState([]);
-
-    const [error, setError] = useState(null);
-
-    const cookieId = Cookies.get('token')
-    const cookieIdBack = Cookies.get('token1')
-
+    //HandleSubmit - creates new message, adds it to DB and redirects to dashboard
     const handleSubmit = (e) => {
         e.preventDefault();
         const payload = {
             "title": state.title,
             "content": state.content,
         }
-        if (cookieId === cookieIdBack) {
-            axios.post("http://localhost:8080/api/messages/new", payload)
-                .then(function (response) {
 
-                    if (response.status === 201) {
-                        const messages = response.data.json();
-                        setMessages(messages)
-                        console.log(messages)
-
-
-                        //redirectToHome();
-                        //props.showError(null)
-                    }
-                    else if (response.data.code === 204) {
-                        console.log(error);
-                    }
-                    else {
-                        //props.showError("Username does not exists");
-                        console.log(response)
-                    }
-                })
-                .catch(function (error) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+        axios.post("http://localhost:8080/api/messages/new", payload)
+            .then(function (response) {
+                console.log(response)
+                if (response.status === 201) {
+                    setMessages(response.data)
+                    history.push('/messages')
+                }
+                else if (response.data.code === 204) {
                     console.log(error);
-                });
-
-        }
-
+                }
+                else {
+                    //props.showError("Username does not exists");
+                    console.log(response)
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
-
+    //Message form
     if (error) {
         return <div><h3 className="error">{"Un problème technique ne permet pas d'accéder au service que vous désirez. Merci de réessayer ultérieurement"}</h3> </div>;
     } else {

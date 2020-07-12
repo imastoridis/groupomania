@@ -1,3 +1,5 @@
+//Imports
+
 import React, { useState, useEffect } from 'react';
 import Header from '../headers/Header';
 import Footer from '../headers/Footer';
@@ -26,9 +28,8 @@ function MessageTile() {
         try {
             const data = await fetch('http://localhost:8080/api/messages') //Fetches all messages from API
             const messages = await data.json();
-            const value = await AsyncStorage.getItem('token')
             setMessages(messages) //Sets the data in "messages"
-            console.log(value)
+            //console.log(value)
         } catch (error) {
             setError(error);
         }
@@ -41,7 +42,7 @@ function MessageTile() {
 
             <div className="App">
                 <section id="main-container">
-                
+                <Header/>
                 {messages.map(message =>
                     <div className="messageBox" key={message.id}>
                         <div className="messageBox-upper">

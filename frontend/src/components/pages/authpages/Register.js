@@ -1,8 +1,8 @@
 //Imports
 
 import React, { useState } from 'react';
-import Header from '../headers/Header';
-import Footer from '../headers/Footer';
+import Header from '../../headers/Header';
+import Footer from '../../headers/Footer';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { withRouter } from "react-router-dom";

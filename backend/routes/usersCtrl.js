@@ -4,6 +4,7 @@ var bcrypt = require('bcrypt')
 var jwtUtils = require('../utils/jwt.utils')
 var models = require('../models')
 var asyncLib = require('async')
+const { json } = require('body-parser')
 
 //Constants
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -180,12 +181,14 @@ module.exports = {
 
         // Params
         var bio = req.body.bio;
+        var username = req.body.username
+        var email = req.body.email
 
         asyncLib.waterfall([
             //Find user and get attributes i want to modify
             function (done) {
                 models.User.findOne({
-                    attributes: ['id', 'bio'],
+                    attributes: ['id', 'bio', 'username'],
                     where: { id: userId }
                 })
                     .then(function (userFound) {
@@ -199,7 +202,9 @@ module.exports = {
             function (userFound, done) {
                 if (userFound) {
                     userFound.update({
-                        bio: (bio ? bio : userFound.bio) //If body.bio is valid i modify it, else i put the body.bio
+                        bio: (bio ? bio : userFound.bio), //If body.bio is valid i modify it, else i put the body.bio
+                        username: (username ? username : userFound.username),
+                        email: (email ? email : userFound.email)
                     })
                         .then(function () {
                             done(userFound);

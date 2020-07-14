@@ -1,9 +1,11 @@
   
 // Imports
+require('dotenv').config()
 var express      = require('express');
 var usersCtrl    = require('./routes/usersCtrl');
 var messagesCtrl = require('./routes/messagesCtrl');
 var likesCtrl    = require('./routes/likesCtrl');
+
 
 // Router
 exports.router = (function() {
@@ -16,11 +18,6 @@ exports.router = (function() {
     res.header('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization, client-security-token');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    
-   
-    /*if (req.method === 'OPTIONS') {
-      res.status(200);
-     }*/ 
   next();
   });
 
@@ -34,6 +31,7 @@ exports.router = (function() {
   // Messages routes
   apiRouter.route('/messages/new/').post(messagesCtrl.createMessage);
   apiRouter.route('/messages/').get(messagesCtrl.listMessages);
+  apiRouter.route('/messages/:id').get(messagesCtrl.listOneMessage);
 
   // Likes
   apiRouter.route('/messages/:messageId/vote/like').post(likesCtrl.likePost);

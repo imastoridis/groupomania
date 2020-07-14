@@ -1,3 +1,5 @@
+//Imports
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -6,7 +8,27 @@ import store from '../src/store/index'
 import { Provider } from 'react-redux'
 import axios from "axios";
 import Cookies from "js-cookie";
+import jwt from 'jsonwebtoken'
 
+//require('dotenv').config() to fix
+
+const JWT_SIGN_SECRET = 'qsf5578QSdfsqfQSSQFsqdfghkjqs7680sqf';
+let token = Cookies.get("token");
+
+if (token) {
+  jwt.verify(token, JWT_SIGN_SECRET, (err, decoded) => {
+    if (err) {
+      Cookies.remove("token");
+      token = null;
+    } else {
+      if (decoded.iss !== "http://localhost:8080/api/users/login") {
+        Cookies.remove("token");
+        token = null;
+      }
+    }
+    console.log(decoded)
+  });
+}
 
 const render = () => {
   ReactDOM.render(
@@ -17,8 +39,6 @@ const render = () => {
   );
 }
 
-
-let token = Cookies.get("token");
 if (token) {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   axios.post("http://localhost:8080/api/users/me").then(res => {
@@ -34,27 +54,3 @@ if (token) {
 
 
 
-
-
-/*
-ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <Switch>
-        <Route path='/' exact component={HomePage}/>
-        <Route path='/messages' exact component={MessageTile}/>
-        <Route path='/messages/new' component={NewMessage} />
-        <Route path='/login' exact component={Login }/>
-        <Route path='/userprofile' component={UserProfile}/>
-      </Switch>
-    </Router>
-
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
-*/

@@ -2,14 +2,15 @@
 // Imports
 var jwt = require('jsonwebtoken');
 
-const JWT_SIGN_SECRET = '<JWT_SIGN_TOKEN>'; //***dotenv?? */
+const JWT_SIGN_SECRET = process.env.JWT_SECRET; 
 
 // Exported functions
 module.exports = {
     generateTokenForUser: function (userData) {
         return jwt.sign({
             userId: userData.id,
-            isAdmin: userData.isAdmin
+            isAdmin: userData.isAdmin, 
+            iss : 'http://localhost:8080/api/users/login'
         },
             JWT_SIGN_SECRET,
             {

@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../headers/Header';
-import Footer from '../headers/Footer';
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-
-
-function UserProfile() {
+function UserProfileInfo() {
     useEffect(() => {
         getUserData()
         //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -19,8 +16,8 @@ function UserProfile() {
     })
 
     const [userInfo, setUserData] = useState([]);
-    //const [error, setError] = useState(null);
-    const getUserData = (e) => {
+    
+    const getUserData = e => {
         //e.preventDefault();
         const userData = {
             "id": state.id,
@@ -37,41 +34,30 @@ function UserProfile() {
                     'successMessage': 'Login successful. Redirecting to home page..'
                 }))
                 const userInfo = [response.data]
-                console.log(userInfo)
+                //console.log(userInfo)
                 setUserData(userInfo)
-
-            }
-
-            )
+            })
             .catch(function (error) {
                 console.log(error);
             });
-
-
     }
 
     return (
-        <div className="App">
-            <section id="main-container">
-                <Header />
-                <main>
-                    {userInfo.map(user =>
-                        <section id="message-list" className="" key={user.id}>
-                            <p>profile</p>
-                            <div>Username : {user.username}</div>
-                            <div>Email : {user.email}</div>
-                            <div>Bio : {user.bio}</div>
-                            <div></div>
-                        </section>
 
+        <section className="App">
+            <main id="main-container">
+                {userInfo.map(user =>
+                    <section id="message-list" className="" key={user.id}>
+                        <p>profile</p>
+                        <div>Username : {user.username}</div>
+                        <div>Email : {user.email}</div>
+                        <div>Bio : {user.bio}</div>
 
-                    )}
-
-                </main>
-                <Footer />
-            </section>
-        </div>
+                    </section>
+                )}
+            </main>
+        </section>
     )
 }
 
-export default UserProfile;
+export default UserProfileInfo

@@ -1,8 +1,8 @@
 //Imports
 
 import React, { useState, useEffect } from 'react';
-import Header from '../headers/Header';
-import Footer from '../headers/Footer';
+import Header from '../../headers/Header';
+import Footer from '../../headers/Footer';
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { connect } from 'react-redux'

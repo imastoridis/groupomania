@@ -1,11 +1,11 @@
 //Imports
 
 import React, { useState, useEffect } from 'react';
-import Footer from '../headers/Footer';
+import Footer from '../../headers/Footer';
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useHistory } from "react-router-dom";
-import Header from '../headers/Header';
+import Header from '../../headers/Header';
 
 /** New message creation function**/
 

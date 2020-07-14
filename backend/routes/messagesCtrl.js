@@ -10,7 +10,8 @@ const ITEMS_LIMIT = 50;
 
 // Routes
 module.exports = {
-    //Create new message
+
+    //Creates new message
     createMessage: function (req, res) {
         // Getting auth header
         var headerAuth = req.headers['authorization'];
@@ -65,6 +66,8 @@ module.exports = {
             }
         });
     },
+
+    //Lists all messages on dashboard
     listMessages: function (req, res) {
         var fields = req.query.fields;
         var limit = parseInt(req.query.limit);
@@ -94,5 +97,21 @@ module.exports = {
             console.log(err);
             res.status(500).json({ "error": "invalid fields" });
         });
+    },
+
+    //Gets one message after clicking on dashboard
+    listOneMessage: function (req, res) {
+        models.Message.findByPk(req.params.id)
+            .then(function (messages) {
+                if (messages) {
+                    res.status(200).json(messages);
+                } else {
+                    res.status(404).json({ "error": "no messages found" });
+                }
+            }).catch(function (err) {
+                console.log(err);
+                res.status(500).json({ "error": "invalid fields" });
+            });
     }
 }
+

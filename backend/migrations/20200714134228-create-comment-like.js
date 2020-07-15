@@ -1,18 +1,18 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Likes', {
+    return queryInterface.createTable('CommentLikes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      messageId: {
+      commentId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Messages',
+          model: 'Comments',
           key: 'id'
         }
       },
@@ -39,6 +39,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Likes');
+    return queryInterface.dropTable('CommentLikes');
   }
 };

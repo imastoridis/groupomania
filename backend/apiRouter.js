@@ -5,6 +5,7 @@ var express      = require('express');
 var usersCtrl    = require('./routes/usersCtrl');
 var messagesCtrl = require('./routes/messagesCtrl');
 var likesCtrl    = require('./routes/likesCtrl');
+var commentCtrl = require('./routes/commentCtrl')
 
 
 // Router
@@ -32,6 +33,8 @@ exports.router = (function() {
   apiRouter.route('/messages/new/').post(messagesCtrl.createMessage);
   apiRouter.route('/messages/').get(messagesCtrl.listMessages);
   apiRouter.route('/messages/:id').get(messagesCtrl.listOneMessage);
+
+  apiRouter.route('/comment').post(commentCtrl.createComment);
 
   // Likes
   apiRouter.route('/messages/:messageId/vote/like').post(likesCtrl.likePost);

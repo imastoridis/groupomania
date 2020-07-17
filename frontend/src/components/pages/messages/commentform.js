@@ -5,17 +5,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie'
 import { useHistory } from "react-router-dom";
+import Comments from './Comments';
+
 
 
 function CommentForm({ props }) {
     useEffect(() => {
         //let id = req.body.id
         //console.log(id)
+        //mapComments()
     }, []);
 
     const [state, setState] = useState({
         content: "",
-        
+        id: "",
+
         //messageId : {props},
         newMessageError: null
     })
@@ -25,6 +29,7 @@ function CommentForm({ props }) {
     const [comments, setComments] = useState([]);
     const [error, setError] = useState(null);
 
+   
 
     //Handlechange
     const handleChange = (e) => {
@@ -41,7 +46,7 @@ function CommentForm({ props }) {
         e.preventDefault();
         const payload = {
             "content": state.content,
-            //"id":state.id
+            "id": { props }
             //"messageId" : state.messageId
         }
 
@@ -50,8 +55,8 @@ function CommentForm({ props }) {
             .then(function (response) {
                 console.log(response)
                 if (response.status === 201) {
-                    setComments(response.data)
-                    
+                    const comments = response.data
+                    setComments(comments)
 
                     //history.push('/messages')
                 }
@@ -68,24 +73,30 @@ function CommentForm({ props }) {
             });
     }
     return (
-        <div id="form">
+        <div>
+            <div id="form">
+                <form className="form_input">
+                    <label htmlFor="content"></label>
+                    <input className="form_input-title"
+                        type="text"
+                        name="content"
+                        id="content"
+                        //placeholder="votre commentaire*"
+                        value={state.content}
+                        onChange={handleChange}
+                    />
+                    <div className="form__button">
+                        <button type="submit" onClick={handleSubmit} id="submit" className="btn-style">VALIDER</button>
+                    </div>
+                </form>
+                <div>is : {props}</div>
+            </div>
+            <div>
+                <Comments/>
+            </div>
 
-            <form className="form_input">
-                
-                <label htmlFor="content"></label>
-                <input
-                    type="text"
-                    name="content"
-                    id="content"
-                    placeholder="votre commentaire*"
-                    value={state.content}
-                    onChange={handleChange}
-                />
-                <div className="form__button">
-                    <button type="submit" onClick={handleSubmit} id="submit" className="btn-style">VALIDER</button>
-                </div>
-            </form>
-            <div>is : {props}</div>
+
+
         </div>
     )
 }

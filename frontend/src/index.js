@@ -26,7 +26,7 @@ if (token) {
         token = null;
       }
     }
-    console.log(decoded)
+    //console.log(decoded)
   });
 }
 

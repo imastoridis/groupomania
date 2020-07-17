@@ -34,9 +34,12 @@ exports.router = (function() {
   apiRouter.route('/messages/').get(messagesCtrl.listMessages);
   apiRouter.route('/messages/:id').get(messagesCtrl.listOneMessage);
 
-  apiRouter.route('/comment').post(commentCtrl.createComment);
+  //Comments routes
+  apiRouter.route('/comment/').post(commentCtrl.createComment);
+  apiRouter.route('/comment/').get(commentCtrl.listComments);
+  apiRouter.route('/comment/:id').get(commentCtrl.listOneComment);
 
-  // Likes
+  // Likes routes
   apiRouter.route('/messages/:messageId/vote/like').post(likesCtrl.likePost);
   apiRouter.route('/messages/:messageId/vote/dislike').post(likesCtrl.dislikePost);
 

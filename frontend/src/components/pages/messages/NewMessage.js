@@ -75,8 +75,8 @@ function NewMessage() {
                         <section id="message-list" className="">
                             <div id="form">
                                 <form onSubmit={handleSubmit} className="form_input">
-                                    <label htmlFor="title"></label>
-                                    <input
+                                    <label   htmlFor="title"></label>
+                                    <input 
                                         type="text"
                                         name="title"
                                         id="title"
@@ -88,7 +88,7 @@ function NewMessage() {
 
                                     />
                                     <label htmlFor="content"></label>
-                                    <input
+                                    <input className="form_input-title"
                                         type="content"
                                         name="content"
                                         id="content"

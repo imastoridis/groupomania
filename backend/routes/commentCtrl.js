@@ -20,6 +20,7 @@ module.exports = {
         var content = req.body.content;
         var messageId = 1
 
+
         if (content == null) {
             return res.status(400).json({ 'error': 'missing parameters' });
         }
@@ -27,7 +28,7 @@ module.exports = {
         if (content.length <= CONTENT_LIMIT) {
             return res.status(400).json({ 'error': 'invalid parameters' });
         }
-        
+
         //Waterfall for comment creation
         asyncLib.waterfall([
 
@@ -73,10 +74,8 @@ module.exports = {
                     })
                     .catch(function (err) {
                         return res.status(500).json({ 'error': 'unable to verify user 3' });
-
                     })
             },
-
         ],
             //Posts comment
             function (newComment) {
@@ -91,6 +90,7 @@ module.exports = {
 
     //Lists all Comment on message page
     listComments: function (req, res) {
+       
         var fields = req.query.fields;
         var limit = parseInt(req.query.limit);
         var offset = parseInt(req.query.offset);
@@ -100,8 +100,9 @@ module.exports = {
             limit = ITEMS_LIMIT;
         }
         //Verification that messages are not empty 
-        models.Message.findAll({
-            order: [(order != null) ? order.split(':') : ['title', 'ASC']],
+        models.Comment.findAll({
+            
+            order: [(order != null) ? order.split(':') : ['content', 'ASC']],
             attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
             limit: (!isNaN(limit)) ? limit : null,
             offset: (!isNaN(offset)) ? offset : null,
@@ -109,9 +110,12 @@ module.exports = {
                 model: models.User,
                 attributes: ['username']
             }]
-        }).then(function (messages) {
-            if (messages) {
-                res.status(200).json(messages);
+            
+        }).then(function (comments) {
+            
+            if (comments) {
+                
+                res.status(200).json(comments);
             } else {
                 res.status(404).json({ "error": "no messages found" });
             }
@@ -119,14 +123,17 @@ module.exports = {
             console.log(err);
             res.status(500).json({ "error": "invalid fields" });
         });
+        
     },
 
     //Gets one Comment after clicking on dashboard
     listOneComment: function (req, res) {
-        models.Message.findByPk(req.params.id)
-            .then(function (messages) {
-                if (messages) {
-                    res.status(200).json(messages);
+        console.log(req.params.messageId)
+        models.Comment.findByPk(req.params.id)
+  
+            .then(function (comments) {
+                if (comments) {
+                    res.status(200).json(comments);
                 } else {
                     res.status(404).json({ "error": "no messages found" });
                 }

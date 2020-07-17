@@ -1,11 +1,12 @@
 //Imports
 
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../../headers/Header';
 import Footer from '../../headers/Footer';
 import axios from 'axios';
-import CommentForm from './commentform';
+import CommentForm from './Commentform';
 import Cookies from 'js-cookie'
+
 
 // Displays one message after clicking on dashboard
 function Message({ match }) {
@@ -24,6 +25,10 @@ function Message({ match }) {
         userId: "",
         
     })
+
+
+
+
     const [props, setName] = useState(match.params.id)
     const [messages, setFetchMessage] = useState([]);
     const [error, setError] = useState(null);
@@ -45,7 +50,10 @@ function Message({ match }) {
                 const messages = response.data
                 setFetchMessage(messages)
                 
-                //console.log(messages)
+                /*const newContext = React.createContext({ messId: match.params.id });
+                const value = useContext(newContext);
+                console.log(value)*/
+
         
             })
             .catch(function (error) {
@@ -64,16 +72,18 @@ function Message({ match }) {
                 <section id="main-container">
                     <Header />
                     <div className="messageBox" key={messages.id}>
-                        <div className="messageBox-upper">
+                        <div className="messageBox-up">
                             <div>Photo</div>
-                            <div>Username : {messages.title}</div>
+                            <div>Title : {messages.title}</div>
                             <div>{messages.createdAt}</div>
                         </div>
                         <div>
                             <h2>{messages.title}</h2>
+                            
                             <div>{messages.content}</div>
                         </div>
-                        <div>{messages.likes}</div>
+                        <br></br>
+                        <div>Likes : {messages.likes}</div>
                     </div>
                     <CommentForm props={props} />
                     <Footer />

@@ -4,38 +4,28 @@ import React, { useState, useEffect } from 'react';
 import Header from '../../headers/Header';
 import Footer from '../../headers/Footer';
 import { Link } from 'react-router-dom'
-import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
+
+
 function Dashboard() {
     useEffect(() => {
         FetchMessages();
-        //getData();
     }, []);
-
-    /*const getData = async () => {
-        try {
-            const value = await AsyncStorage.getItem('token')
-            if (value !== null) {
-                // value previously stored
-            }
-        } catch (e) {
-            // error reading value
-        }
-    }*/
 
     /* Constants */
 
     const [messages, setMessages] = useState([]);
 
     const [error, setError] = useState(null);
-
     //Set the state
+
     const [state, setState] = useState({
         id: "",
         title: "",
         content: "",
         likes: "",
         userId: ""
+
     })
 
     //Gets all the messages
@@ -53,6 +43,7 @@ function Dashboard() {
             .then(function (response) {
                 const messages = response.data
                 setMessages(messages) //Sets the data in "messages"
+
             })
             .catch(function (error) {
                 setError(error);
@@ -65,22 +56,26 @@ function Dashboard() {
         return (
 
             <div className="App">
-                <section id="main-container">
+                <section id="main-container" >
                     <Header />
                     {messages.map(message =>
 
-                        <div className="messageBox" >
-                            <Link to={`/messages/${message.id}`} key={message.id}>
-                                <div className="messageBox-upper">
+                        <div className="messageBox" key={message.id}>
+                            <Link to={`/messages/${message.id}`} >
+                                <div className="messageBox-up" >
                                     <div>Photo</div>
-                                    <div>Username : {message.Users.username}</div>
+                                    <div>{message.title}</div>
+
                                     <div>{message.createdAt}</div>
                                 </div>
-                                <div>
-                                    <h2>{message.title}</h2>
+                                <div className="messageBox-middle">
+
                                     <div>{message.content}</div>
                                 </div>
-                                <div>{message.likes}</div>
+                                <div className="messageBox-down">
+                                    <div>Likes : {message.likes}</div>
+                                    <div>Username : {message.Users.username}</div>
+                                </div>
                             </Link>
                         </div>
 

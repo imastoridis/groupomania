@@ -134,13 +134,34 @@ footer {
   margin: auto;
   background-color: 	#FFFAFA;
   margin-bottom: 40px;
-  box-shadow: 10px 10px 10px 5px black;
+  box-shadow: 2px 2px 2px 2px black;
   opacity: 0.95;
 }
 
-.messageBox-upper{
+a {
+  color: black;
+  text-decoration: none; /* no underline */
+}
+.messageBox-up{
   display: flex;
   justify-content: space-around;
+  flex-direction: row;
+  padding: 10px;
+  font-weight: bold;
+}
+.messageBox-middle{
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.messageBox-down{
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  padding: 10px;
+  font-style: italic;
 }
 .product__specs {
   width: 100%;
@@ -151,7 +172,7 @@ footer {
 
 #message-list {
   text-align: center;
-  margin: 10px;
+  margin: 50px;
   margin-top: 40px;
 }
 
@@ -162,6 +183,7 @@ footer {
   flex-direction: column;
   align-items: center;
   width: 100%;
+
 }
 
 .form__button{
@@ -172,12 +194,21 @@ footer {
 }
 
 #form input {
+  width: 100%;
+  height: 2rem;
+  border: solid #eeeeee 2px;
+  margin: 2rem 0 0 0;
+
+}
+
+.form_input-title {
   width: 90%;
   height: 2rem;
   border: solid #eeeeee 2px;
   margin: 2rem 0 0 0;
+  padding-bottom: 70px;
+  
 }
-
 #textForm {
   text-align: center;
   display: flex;

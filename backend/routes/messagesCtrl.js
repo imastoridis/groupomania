@@ -73,6 +73,7 @@ module.exports = {
         var limit = parseInt(req.query.limit);
         var offset = parseInt(req.query.offset);
         var order = req.query.order;
+
         //Limits on number of messages per page
         if (limit > ITEMS_LIMIT) {
             limit = ITEMS_LIMIT;

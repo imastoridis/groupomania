@@ -2,14 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
-
+import Cookies from 'js-cookie'
+import Paper from '@material-ui/core/Paper';
 
 function Comments({ match }) {
 
     useEffect(() => {
         fetchComments();
-
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -26,7 +25,7 @@ function Comments({ match }) {
         UserId: ""
     })
 
-
+    var cookie = Cookies.get('tokenId')
     //const [props, setName] = useState(match.params.id)
     const [comments, setComments] = useState([]);
 
@@ -44,21 +43,16 @@ function Comments({ match }) {
 
         axios.get(`http://localhost:8080/api/comment/`, commentData) //Fetches all messages from API
             .then(function (response) {
-                const comments = response.data
-                setComments(comments)
-                
-                
-                // console.log(response.data)
-                /*let i = 0
+                let i = -1
                 while (i < response.data.length) {
                     i++
-                    if (response.data[i].MessageId = 2) {
-                        const comments = response.data[i]
+                    if (response.data[i].MessageId == cookie) {
+                        var commentsAll = comments.push(response.data[i])
                         setComments(comments)
-                        //continue
+                    } else {
+                        continue
                     }
-
-                }*/
+                }
 
                 /*
                     console.log(response.data.length)
@@ -94,31 +88,39 @@ function Comments({ match }) {
             .catch(function (error) {
                 setError(error);
             });
+
     }
 
     return (
-        <div>
+        <div >
             {comments.map(comment =>
                 <div className="App" key={comment.id}>
                     <section id="main-container">
-                        <div className="messageBox" >
-                            <div className="messageBox-up">
-                                <div>Photo</div>
-                                <div>UserId : {comment.UserId}</div>
-                                <div>{comment.createdAt}</div>
+                        <Paper elevation={4} className="messageBox" >
+                            <div >
+                                <div className="messageBox__up">
+                                    <div className="messageBox__up-photo">
+                                        <div >Photo</div>
+                                    </div>
+                                    <div className="messageBox__up-username">
+                                        <div className="messageBox__fields">UserId : {comment.UserId}</div>
+                                        <div className="messageBox__fields">{comment.createdAt}</div>
+                                    </div>
+
+                                </div>
+                                <div className="messageBox__middle">
+                                    <h3 className="messageBox__fields">{comment.content}</h3>
+                                </div>
+                                <div className="messageBox__down">
+                                    <div>Likes : {comment.likes} </div>
+                                    <div>MessageId : {comment.MessageId}</div>
+                                </div>
                             </div>
-                            <div className="messageBox-middle">
-                                <div>{comment.content}</div>
-                            </div>
-                            <div className="messageBox-down">
-                                <div>Likes : {comment.likes} </div>
-                                <div>MessageId : {comment.MessageId}</div>
-                            </div>
-                        </div>
+                        </Paper>
+                        <div className="space-between-messages"></div>
                     </section>
                 </div>
-            )
-            }
+            )}
 
         </div>
 

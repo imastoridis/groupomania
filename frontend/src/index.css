@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font-family: 'Roboto', sans-serif;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -26,7 +27,7 @@ img {
 }
 
 #main-container {
-  background-color:#f5f5f5;
+  background-color:white;
   /*background-image: url(./images/img-backgr.jpg);*/
   font-family: 'Abel', sans-serif;
   width: 100%;
@@ -127,14 +128,14 @@ footer {
 
 /* Messages */
 .messageBox {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   display: flex;
   flex-direction: column;
-  width: 50%;
-  justify-content: center;
+  width: 60%;
   margin: auto;
-  background-color: 	#FFFAFA;
-  margin-bottom: 40px;
-  box-shadow: 2px 2px 2px 2px black;
+  background-color: 	white;
+  /*box-shadow: 0.5px 0.5px 0.5px 0.5px grey;*/
   opacity: 0.95;
 }
 
@@ -142,27 +143,53 @@ a {
   color: black;
   text-decoration: none; /* no underline */
 }
-.messageBox-up{
+.messageBox__up{
   display: flex;
-  justify-content: space-around;
   flex-direction: row;
-  padding: 10px;
-  font-weight: bold;
+  padding-bottom: 10px;
+  font-weight: 400;
 }
-.messageBox-middle{
+
+.messageBox__up-photo{
+  display: flex;
+  width: 30%; 
+}
+
+.messageBox__up-username{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.messageBox__fields{
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 400;
+}
+
+.messageBox__middle{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 10px;
+  font-weight: 400;
+}
+
+.messageBox__down{
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
   padding: 10px;
 }
 
-.messageBox-down{
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: row;
-  padding: 10px;
-  font-style: italic;
+.space-between-messages {
+  background-color: gray;
+  opacity: 20%;
+  padding-bottom: 10px;
+  width:60%;
+  margin: auto;
 }
+
 .product__specs {
   width: 100%;
   margin: auto;
@@ -178,37 +205,94 @@ a {
 
 /*LOGIN/SIGNUP FORM*/
 
-#form {
+.form {
   display: flex;
+  justify-content: flex-end;
   flex-direction: column;
-  align-items: center;
+  margin: auto;
   width: 100%;
-
 }
+
 
 .form__button{
-  width: 80%;
-  justify-content: center;
+  justify-content : flex-end;
+  width: 60%;
   margin: auto;
-  opacity: 0.9;
+  margin-bottom: 25px;
+  margin-top: 25px;
 }
 
-#form input {
-  width: 100%;
-  height: 2rem;
-  border: solid #eeeeee 2px;
-  margin: 2rem 0 0 0;
 
-}
-
-.form_input-title {
-  width: 90%;
-  height: 2rem;
-  border: solid #eeeeee 2px;
-  margin: 2rem 0 0 0;
-  padding-bottom: 70px;
+.form__comment-button{
+  display: flex;
+  flex-direction: column;
+  justify-content : flex-start;
+  padding-top: 5px;
+  padding-bottom: 5px;
   
 }
+
+.form__comment-button-style1{
+  display: flex;
+  justify-content :  center;
+  width: 30%;
+  border: none;
+  background-color: #212931;
+  transition: background-color 200ms ease-in-out;
+  cursor: pointer;
+  color: white;
+  margin: 0rem 5px 0rem 0;
+  border: solid #212931 ;
+  line-height: 1.5rem;
+  border-radius: 7px;  
+}
+
+.form__comment-button-style:hover {
+  background-color: #FFFAFA;
+  color: black;
+  border: solid #212931 ;
+}
+.form__input{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.form__input-title {
+  display: flex;
+  width: 99%;
+  margin: auto;
+  font-family: 'Roboto', sans-serif;
+ 
+}
+
+.form__comment-button-style{
+  display: flex;
+  justify-content : center;
+  margin: auto;
+  width: 20%;
+  border: none;
+  height: auto;
+  background-color: #212931;
+  transition: background-color 200ms ease-in-out;
+  cursor: pointer;
+  color: white;
+  border: solid #212931 ;
+  margin: 0rem 5px 0rem 0;
+  line-height: 1.5rem;
+  border-radius: 7px;
+  
+}
+.IconLabelButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+
+/*
 #textForm {
   text-align: center;
   display: flex;
@@ -217,12 +301,12 @@ a {
 }
 
 #form textarea {
-  width: 90%;
+  width: 100%;
   margin: 2rem 0 0 0;
   border: solid #eeeeee 2px;
   font-family: 'Abel', sans-serif;
 }
-
+*/
 /* BUTTON */
 .btn {
   text-align: center;
@@ -236,9 +320,9 @@ a {
   background-color: #212931;
   transition: background-color 200ms ease-in-out;
   cursor: pointer;
-  width: 70%;
   color: white;
   border: solid #212931 ;
+  border-radius: 7px
 }
 
 .btn-style:hover {
@@ -247,6 +331,3 @@ a {
   border: solid #212931 ;
 }
 
-.btn-style__product-page{
-  width: 50%;
-}

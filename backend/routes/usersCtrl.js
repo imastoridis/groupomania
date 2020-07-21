@@ -173,7 +173,7 @@ module.exports = {
                 res.status(500).json({ 'error': 'cannot fetch user' });
             });
     },
-    //Modification du profil (bio)
+    //Updates profil (bio)
     updateUserProfile: function (req, res) {
         // Getting auth header
         var headerAuth = req.headers['authorization'];

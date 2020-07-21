@@ -102,15 +102,17 @@ function Comments({ match }) {
                                     <div className="messageBox__up-photo">
                                         <div >Photo</div>
                                     </div>
+
                                     <div className="messageBox__up-username">
                                         <div className="messageBox__fields">UserId : {comment.UserId}</div>
                                         <div className="messageBox__fields">{comment.createdAt}</div>
                                     </div>
-
                                 </div>
+                                <hr />
                                 <div className="messageBox__middle">
                                     <h3 className="messageBox__fields">{comment.content}</h3>
                                 </div>
+                                <hr />
                                 <div className="messageBox__down">
                                     <div>Likes : {comment.likes} </div>
                                     <div>MessageId : {comment.MessageId}</div>

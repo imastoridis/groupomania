@@ -11,6 +11,7 @@ import GuestRoute from './components/auth/GuestRoute'
 import AuthRoute from './components/auth/AuthRoute';
 import UserProfileUpdate from './components/pages/userprofile/UserProfileUpdate';
 import Message from './components/pages/messages/Message';
+import MessageModify from './components/pages/messages/MessageModify';
 
 //import AlertComponent from '../src/components/AlertComponent'
 
@@ -33,6 +34,7 @@ function App() {
             <AuthRoute path='/update' component={UserProfileUpdate} />
             <AuthRoute path='/userprofile' component={UserProfile} />
             <AuthRoute exact path='/messages/:id' component={Message} />
+            <AuthRoute exact path='/modify/:id' component={MessageModify} />
           </Switch>
         </Router>
 

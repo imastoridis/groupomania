@@ -102,7 +102,7 @@ function CommentForm({ props }) {
 
 
                 </form>
-                <Divider/>
+                <Divider />
             </div>
 
         )

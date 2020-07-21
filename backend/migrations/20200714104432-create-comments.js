@@ -1,4 +1,7 @@
 'use strict';
+var moment = require('moment'); 
+const { DataTypes } = require("sequelize/types");
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Comments', {
@@ -39,7 +42,10 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATEONLY,
+        get() {
+          return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY h:mm:ss');
+      }
       },
       updatedAt: {
         allowNull: false,

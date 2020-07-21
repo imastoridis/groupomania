@@ -8,8 +8,12 @@ import CommentForm from './Commentform';
 import Cookies from 'js-cookie'
 import Paper from '@material-ui/core/Paper';
 import IconLabelButtons from '../../../materialui/IconLabelButtons';
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
 import Comments from './Comments';
-import { Divider } from '@material-ui/core';
+import { Link } from 'react-router-dom'
+import DeleteIcon from '@material-ui/icons/Delete';
+import { useHistory } from "react-router-dom";
 
 // Displays one message after clicking on dashboard
 function Message({ match }) {
@@ -29,13 +33,16 @@ function Message({ match }) {
 
     })
 
-
+    //Declarations
+    let history = useHistory();
     const [showText, setShowText] = useState(false);
-    const propId = match.params.id
     const [props, setName] = useState(match.params.id)
     const [messages, setFetchMessage] = useState([]);
     const [error, setError] = useState(null);
+    const token = Cookies.get('token')
+    const propId = match.params.id
     Cookies.set('tokenId', props);
+
     //Fetches one message 
     const fetchMessage = () => {
 
@@ -56,6 +63,20 @@ function Message({ match }) {
             })
             .catch(function (error) {
                 setError(error);
+            });
+    }
+
+    //Deletes message
+    const deleteMessage = () => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+        axios.delete(`http://localhost:8080/api/messages/${match.params.id}`)
+            .then(function (response) {
+
+                window.location.reload()
+                history.push('/messages') //DOESNT WORK
+            })
+            .catch(function (error) {
+                console.log(error);
             });
     }
 
@@ -80,7 +101,7 @@ function Message({ match }) {
                                     <div className="messageBox__fields">{messages.createdAt}</div>
                                 </div>
                             </div>
-                            <hr/>
+                            <hr />
                             <div className="messageBox__middle">
                                 <h2 className="messageBox__fields">Title : {messages.title}</h2>
                                 <h3 className="messageBox__fields">{messages.content}</h3>
@@ -90,12 +111,34 @@ function Message({ match }) {
                                 <div>Likes : {messages.likes}</div>
                                 <div>Messages : number</div>
                             </div>
-                            <hr/>
+                            <hr />
                             <div>
                                 <IconLabelButtons />
-                             
+                                <Link to={`/modify/${messages.id}`}>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        size="large"
+
+                                        startIcon={<SaveIcon />}
+                                    >
+                                        Modify
+                                     </Button>
+
+                                </Link >
                             </div>
-                           
+                            <div>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+
+                                    startIcon={<DeleteIcon />}
+                                    onClick={deleteMessage}
+                                >
+                                    Delete
+                                    </Button>
+                            </div>
+
                         </div>
                     </Paper>
                     <div className="form__button">

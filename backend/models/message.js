@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Message.associate = function(models) {
     // associations can be defined here
-    models.Message.hasMany(models.Comment)
+    models.Message.hasMany(models.Comment, { onDelete: 'cascade' })
   };
   return Message;
 };

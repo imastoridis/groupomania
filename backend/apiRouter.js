@@ -32,7 +32,9 @@ exports.router = (function() {
   // Messages routes
   apiRouter.route('/messages/new/').post(messagesCtrl.createMessage);
   apiRouter.route('/messages/').get(messagesCtrl.listMessages);
+  apiRouter.route('/messages/:id').delete(messagesCtrl.deleteOneMessage);
   apiRouter.route('/messages/:id').get(messagesCtrl.listOneMessage);
+  apiRouter.route('/messages/:id').put(messagesCtrl.modifyMessage);
 
   //Comments routes
   apiRouter.route('/comment/').post(commentCtrl.createComment);

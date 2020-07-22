@@ -48,6 +48,7 @@ function Login(props) {
                     }))
                     props.setLogin(response.data);
                     Cookies.set('token', response.data.token);
+                    Cookies.set('userId', response.data.userId);
                     props.history.push('/messages')
                 }
                 else if (response.data.code === 204) {
@@ -61,10 +62,7 @@ function Login(props) {
             .catch(function (error) {
                 console.log(error);
             });
-
-
     }
-
 
     return (
         <div className="App">
@@ -100,11 +98,8 @@ function Login(props) {
                                         value={state.password}
                                         onChange={handleChange}
                                     />
-
                                     <div className="form__button">
-
                                         <button type="submit" onClick={handleSubmitClick} id="submit" className="btn-style">VALIDER</button>
-
                                     </div>
                                     <div className="alert alert-success mt-2" style={{ display: state.successMessage ? 'block' : 'none' }} role="alert">
                                         {state.successMessage}

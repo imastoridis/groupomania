@@ -9,7 +9,7 @@ import Header from '../../headers/Header';
 
 /** New message creation function**/
 
-function NewMessage() {
+function MessageNew() {
     useEffect(() => {
     }, []);
 
@@ -44,8 +44,7 @@ function NewMessage() {
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
         axios.post("http://localhost:8080/api/messages/new", payload)
-            .then(function (response) {
-                console.log(response)
+            .then(response=> {
                 if (response.status === 201) {
                     setMessages(response.data)
                     history.push('/messages')
@@ -75,26 +74,24 @@ function NewMessage() {
                         <section id="message-list" className="">
                             <div id="form">
                                 <form onSubmit={handleSubmit} className="form_input">
-                                    <label htmlFor="title"></label>
-                                    <input
+                                    <label   htmlFor="title"></label>
+                                    <input 
                                         type="text"
                                         name="title"
                                         id="title"
                                         placeholder="Titre*"
                                         required maxLength="50"
-                                        pattern="[^0-9]*"
                                         value={state.title}
                                         onChange={handleChange}
 
                                     />
                                     <label htmlFor="content"></label>
-                                    <input
+                                    <input className="form_input-title"
                                         type="content"
                                         name="content"
                                         id="content"
                                         placeholder="Message*"
                                         required maxLength="50"
-                                        pattern="[^0-9]*"
                                         value={state.content}
                                         onChange={handleChange}
 
@@ -114,4 +111,4 @@ function NewMessage() {
         )
     }
 }
-export default NewMessage;
+export default MessageNew;

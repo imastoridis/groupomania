@@ -14,7 +14,11 @@ module.exports = {
       },
       username: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        references: {
+          model: 'Users',
+          key: 'username'
+        }
       },
       password: {
         allowNull: false,

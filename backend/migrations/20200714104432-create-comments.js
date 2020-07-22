@@ -1,7 +1,10 @@
 'use strict';
+var moment = require('moment'); 
+const { DataTypes } = require("sequelize/types");
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Messages', {
+    return queryInterface.createTable('Comments', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,12 +15,17 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',//This goes into messages when click
+          model: 'Users',
           key:'id'
         }
       },
-      title: {allowNull: false,
-        type: Sequelize.STRING
+      messageId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Messages',
+          key:'id'
+        }
       },
       content: {
         allowNull: false,
@@ -30,10 +38,11 @@ module.exports = {
       likes: {
         allowNull: false,
         type: Sequelize.INTEGER
+        
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: DataTypes.DATEONLY,
         get() {
           return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY h:mm:ss');
       }
@@ -45,6 +54,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Messages');
+    return queryInterface.dropTable('Comments');
   }
 };

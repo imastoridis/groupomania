@@ -1,8 +1,9 @@
+//Imports
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-function UserProfileInfo() {
+//Fetches and display profile info of user
+function UserProfileInfo(props) {
     useEffect(() => {
         getUserData()
         //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,13 +29,11 @@ function UserProfileInfo() {
 
         axios.get("http://localhost:8080/api/users/me", userData)
             .then(function (response) {
-                //console.log(response)
                 setState(prevState => ({
                     ...prevState,
                     'successMessage': 'Login successful. Redirecting to home page..'
                 }))
                 const userInfo = [response.data]
-                //console.log(userInfo)
                 setUserData(userInfo)
             })
             .catch(function (error) {
@@ -43,7 +42,6 @@ function UserProfileInfo() {
     }
 
     return (
-
         <section className="App">
             <main id="main-container">
                 {userInfo.map(user =>
@@ -52,7 +50,6 @@ function UserProfileInfo() {
                         <div>Username : {user.username}</div>
                         <div>Email : {user.email}</div>
                         <div>Bio : {user.bio}</div>
-
                     </section>
                 )}
             </main>

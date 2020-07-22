@@ -1,8 +1,8 @@
 //Imports
 
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, useParams } from 'react-router-dom';
-import NewMessage from './components/pages/messages/NewMessage';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import MessageNew from './components/pages/messages/MessageNew';
 import UserProfile from './components/pages/userprofile/UserProfile';
 import Dashboard from './components/pages/messages/Dashboard';
 import Login from './components/pages/authpages/Login';
@@ -11,6 +11,8 @@ import GuestRoute from './components/auth/GuestRoute'
 import AuthRoute from './components/auth/AuthRoute';
 import UserProfileUpdate from './components/pages/userprofile/UserProfileUpdate';
 import Message from './components/pages/messages/Message';
+import MessageModify from './components/pages/messages/MessageModify';
+import CommentModify from './components/pages/messages/CommentModify';
 
 //import AlertComponent from '../src/components/AlertComponent'
 
@@ -29,10 +31,12 @@ function App() {
             <GuestRoute path='/register' exact component={Register} showError={updateErrorMessage} updateTitle={updateTitle} />
             <GuestRoute path='/login' exact component={Login} showError={updateErrorMessage} updateTitle={updateTitle} />
             <AuthRoute path='/messages' exact component={Dashboard} showError={updateErrorMessage} updateTitle={updateTitle} />
-            <AuthRoute path='/messages/new' component={NewMessage} />
+            <AuthRoute path='/messages/new' component={MessageNew} />
             <AuthRoute path='/update' component={UserProfileUpdate} />
             <AuthRoute path='/userprofile' component={UserProfile} />
             <AuthRoute exact path='/messages/:id' component={Message} />
+            <AuthRoute exact path='/modify/:id' component={MessageModify} />
+            <AuthRoute exact path='/modifycomment/:id' component={CommentModify} />
           </Switch>
         </Router>
 

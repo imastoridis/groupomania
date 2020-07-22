@@ -19,7 +19,7 @@ module.exports = {
         console.log(messageId)
 
         if (messageId <= 0) {
-            return res.status(400).json({ 'error': 'identifiant non valide' });
+            return res.status(400).json({ 'error': 'invalid parameters' });
         }
 
         asyncLib.waterfall([
@@ -61,6 +61,7 @@ module.exports = {
                         }
                     })
                         .then(function (userAlreadyLikedFound) { 
+                            console.log(userAlreadyLikedFound)  //null
                             done(null, messageFound, userFound, userAlreadyLikedFound);
                             
                         })

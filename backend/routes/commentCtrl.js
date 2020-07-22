@@ -5,7 +5,6 @@ var jwtUtils = require('../utils/jwt.utils');
 var Cookies = require('js-cookie')
 
 // Constants
-const CONTENT_LIMIT = 2;
 const ITEMS_LIMIT = 50;
 
 // Routes
@@ -20,13 +19,8 @@ module.exports = {
         var messageId = req.body.MessageId////////////PROBLEM?
         var content = req.body.content;
 
-
         if (content == null) {
             return res.status(400).json({ 'error': 'missing parameters 1' });
-        }
-
-        if (content.length <= CONTENT_LIMIT) {
-            return res.status(400).json({ 'error': 'invalid parameters 2' });
         }
 
         //Waterfall for comment creation
@@ -37,7 +31,7 @@ module.exports = {
                 models.User.findOne({
                     where: { id: userId }
                 })
-                    .then(function (userFound) {
+                    .then(userFound => {
                         done(null, userFound);
                     })
                     .catch(function (err) {
@@ -51,7 +45,7 @@ module.exports = {
                     models.Message.findOne({
                         where: { id: messageId }
                     })
-                        .then(function (messageFound) {
+                        .then(messageFound => {
                             done(null, messageFound, userFound);
                         })
                 } else {
@@ -68,10 +62,10 @@ module.exports = {
                     UserId: userFound.id,
                     MessageId: messageFound.id
                 })
-                    .then(function (newComment) {
+                    .then(newComment => {
                         done(newComment);
                     })
-                    .catch(function (err) {
+                    .catch(err => {
                         return res.status(500).json({ 'error': 'unable to verify user 3' });
                     })
             },
@@ -139,6 +133,78 @@ module.exports = {
                 console.log(err);
                 res.status(500).json({ "error": "invalid fields" });
             });
+    },
+    /** Updates one message **/
+    modifyComment: function (req, res) {
+        // Getting auth header
+        var headerAuth = req.headers['authorization']; ///DELETE
+
+        // Params
+        var content = req.body.content;
+
+        if (content == null) {
+            return res.status(400).json({ 'error': 'Rien à publier' });
+        }
+
+        asyncLib.waterfall([
+            //Finds Message by messageId
+            function (done) {
+                models.Comment.findByPk(req.params.id)
+                    .then(messageFound => {
+                        done(null, messageFound);
+                    })
+                    .catch(err => {
+                        return res.status(500).json({ 'error': 'Message non authentifié' });
+                    });
+            },
+            //If message exists, update attributes
+            function (messageFound, done) {
+                if (messageFound) {
+                    messageFound.update({
+                        content: (content ? content : messageFound.content)
+                    })
+                        .then(() => {
+                            done(messageFound);
+                        })
+                        .catch(err => {
+                            res.status(500).json({ 'error': 'Modification du message non possible' });
+                        });
+                } else {
+                    res.status(404).json({ 'error': 'Message non trouvé' });
+                }
+            },
+        ],
+            //Response and updates message
+            function (messageFound) {
+                if (messageFound) {
+                    return res.status(201).json(messageFound);
+                } else {
+                    return res.status(500).json({ 'error': 'Message non trouvé' });
+                }
+            });
+    },
+
+    /** Deletes one comment **/
+    deleteOneComment: function (req, res) {
+        var messageId = req.params.id
+        asyncLib.waterfall([
+
+            //Deletes likes of comment and then deletes the comment
+            function (done) {
+                models.Like.destroy({
+                    where: { commentId: messageId }
+                })
+                    .then(commentFound => {
+                        models.Comment.destroy({
+                            where: { id: messageId }
+                        })
+                        return res.status(201).json(commentFound)
+                    })
+                    .catch(err => {
+                        return res.status(500).json({ 'error': 'Pas possible de supprimer le message' })
+                    })
+            }
+        ])
     }
 }
 

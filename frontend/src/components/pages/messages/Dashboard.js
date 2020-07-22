@@ -6,21 +6,17 @@ import Footer from '../../headers/Footer';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import Paper from '@material-ui/core/Paper';
-import IconLabelButtons from '../../../materialui/IconLabelButtons';
+import { connect } from "react-redux";
 
-function Dashboard() {
+//Fetches and displays all messages on the dashboard
+function Dashboard(params) {
     useEffect(() => {
-        FetchMessages();
-
+        FetchMessages(params);
+        console.log(params)
     }, []);
 
-    /* Constants */
 
-    const [messages, setMessages] = useState([]);
-
-    const [error, setError] = useState(null);
     //Set the state
-
     const [state, setState] = useState({
         id: "",
         title: "",
@@ -31,6 +27,9 @@ function Dashboard() {
 
     })
 
+    //Declarations
+    const [messages, setMessages] = useState([]);
+    const [error, setError] = useState(null);
 
     //Gets all the messages
     const FetchMessages = (e) => {
@@ -43,12 +42,23 @@ function Dashboard() {
             'createdAt': state.createdAt,
             'username': state.username
         }
-
+//[0].Users[0].username
         axios.get("http://localhost:8080/api/messages", messageData) //Fetches all messages from API
             .then(function (response) {
                 const messages = response.data
-                //console.log(response.data)
                 setMessages(messages) //Sets the data in "messages"
+                console.log(messages)
+
+                const arrayToObject = (array, keyField) =>
+                array.reduce((obj, item) => {
+                  obj[item[keyField]] = item
+                  return obj
+                }, {})
+
+             const messages1 = arrayToObject(messages, "id")
+             console.log(messages1)
+
+
             })
             .catch(function (error) {
                 setError(error);
@@ -104,6 +114,14 @@ function Dashboard() {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        loggedIn: state.auth.loggedIn
+    };
+};
 
-export default Dashboard
+
+export default connect(
+    mapStateToProps,
+)(Dashboard);
 

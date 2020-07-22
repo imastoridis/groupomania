@@ -44,7 +44,7 @@ function MessageNew() {
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
         axios.post("http://localhost:8080/api/messages/new", payload)
-            .then(function (response) {
+            .then(response=> {
                 if (response.status === 201) {
                     setMessages(response.data)
                     history.push('/messages')

@@ -1,5 +1,3 @@
-//Imports
-
 import React, { useState, useEffect } from 'react';
 import Header from '../../headers/Header';
 import Footer from '../../headers/Footer';
@@ -8,7 +6,7 @@ import Cookies from 'js-cookie'
 import Message from './Message';
 import { Link, useHistory } from "react-router-dom";
 
-function MessageModify({ match }) {
+function CommentModify({ match }) {
     useEffect(() => {
 
     }, [match.params.id])
@@ -24,6 +22,7 @@ function MessageModify({ match }) {
     const [messages, setFetchMessage] = useState([]);
     const [error, setError] = useState(null);
     const token = Cookies.get('token')
+    const messageId = Cookies.get('messageId')
     let history = useHistory();
 
     //HandleChange on forl
@@ -40,15 +39,13 @@ function MessageModify({ match }) {
         e.preventDefault();
         const messageByIdata = {
             "id": state.id,
-            "title": state.title,
             "content": state.content,
         };
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-        axios.put(`http://localhost:8080/api/messages/${match.params.id}`, messageByIdata)
+        axios.put(`http://localhost:8080/api/comment/${match.params.id}`, messageByIdata)
             .then(response => {
-                history.push(`/messages/${match.params.id}`)
-                //console.log(match.params.id)
+                history.push(`/messages/${messageId}`)
                 console.log(response)
             })
             .catch(function (error) {
@@ -70,16 +67,6 @@ function MessageModify({ match }) {
                             <div id="message-list" className="">
                                 <div id="form">
                                     <form onSubmit={handleSubmit} className="form_input">
-                                        <label htmlFor="title"></label>
-                                        <input
-                                            type="text"
-                                            name="title"
-                                            id="title"
-                                            placeholder="Titre*"
-                                            maxLength="50"
-                                            value={state.title}
-                                            onChange={handleChange}
-                                        />
                                         <label htmlFor="content"></label>
                                         <input className="form_input-title"
                                             type="content"
@@ -106,9 +93,8 @@ function MessageModify({ match }) {
                     </section>
                 </div>
             </div>
-
         )
 
     }
 }
-export default MessageModify
+export default CommentModify

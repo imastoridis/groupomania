@@ -99,8 +99,7 @@ function CommentForm({ props }) {
                             id="submit"
                             className="form__comment-button-style">Valider</button>
                     </div>
-
-
+                   
                 </form>
                 <Divider />
             </div>

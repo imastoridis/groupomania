@@ -1,6 +1,5 @@
 //Imports
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import Header from '../../headers/Header';
 import Footer from '../../headers/Footer';
 import Comments from './Comments';
@@ -10,23 +9,21 @@ import { Link, useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 import Paper from '@material-ui/core/Paper';
-import IconLabelButtons from '../../../materialui/IconLabelButtons';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
-
 // Displays one message after clicking on dashboard
 function Message({ match }) {
-
     useEffect(() => {
         fetchMessage()
+        parseJwt()
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [match.params.id])
 
-    const [state, setState] = useState({
+    const [state] = useState({
         id: "",
         title: "",
         content: "",
@@ -35,16 +32,27 @@ function Message({ match }) {
         username: ""
 
     })
+    //Gets current id from token to verify later against userId from message
+    const parseJwt = (token) => {
+        try {
+            return JSON.parse(atob(token.split('.')[1]));
+        } catch (e) {
+            return null;
+        }
+    };
+
 
     //Declarations
     let history = useHistory();
     const [showText, setShowText] = useState(false);
-    const [props, setName] = useState(match.params.id)
+    const [props] = useState(match.params.id)
     const [messages, setFetchMessage] = useState([]);
     const [error, setError] = useState(null);
+
+    Cookies.set('messageId', props);
     const token = Cookies.get('token')
+    const userIdToken = JSON.parse(atob(token.split('.')[1]));
     const propId = match.params.id
-    Cookies.set('tokenId', props);
 
     //Fetches one message 
     const fetchMessage = () => {
@@ -74,13 +82,13 @@ function Message({ match }) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
         axios.delete(`http://localhost:8080/api/messages/${match.params.id}`)
             .then(function (response) {
+                console.log(response)
                 history.push('/messages')
             })
             .catch(function (error) {
                 console.log(error);
             });
     }
-
 
     if (error) {
         return <div><h3 className="error">{"Un problème technique ne permet pas d'accéder au service que vous désirez. Merci de réessayer ultérieurement"}</h3> </div>;
@@ -104,52 +112,62 @@ function Message({ match }) {
                             </div>
                             <hr />
                             <div className="messageBox__middle">
-                                <h2 className="messageBox__fields">Title : {messages.title}</h2>
+                                <h2 className="messageBox__fields">{messages.title}</h2>
                                 <h3 className="messageBox__fields">{messages.content}</h3>
                             </div>
-                            <br></br>
+                            <hr />
                             <div className="messageBox__down">
                                 <div>Likes : {messages.likes}</div>
                                 <div>Messages : number</div>
                             </div>
-                            <hr />
-                            <div>
-                                <IconLabelButtons />
-                                <Link to={`/modify/${messages.id}`}>
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        size="large"
-                                        startIcon={<SaveIcon />}>
-                                        Modify
-                                     </Button>
-                                </Link >
-                            </div>
-                            <div>
-                                <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    startIcon={<DeleteIcon />}
-                                    onClick={deleteMessage}>
-                                    Delete
-                                    </Button>
-                            </div>
-                            <div>
-                                <Button
-                                    //variant="contained"
-                                    color="Primary"
-                                    startIcon={<ThumbUpIcon />}
-                                    onClick={deleteMessage}>
-                                    </Button>
-                            </div>
-                            <div>
-                                <Button
-                                    //variant="contained"
-                                    color="secondary"
-                                    startIcon={<ThumbDownIcon />}
-                                    onClick={deleteMessage}>
-                                    </Button>
-                            </div>
+                            
+
+                            {userIdToken.userId === messages.UserId ? (
+                                <Fragment>
+                                    < div className="buttons" >
+                                        <div>
+
+                                            <Link to={`/modify/${messages.id}`}>
+                                                <Button
+                                                    variant="contained"
+                                                    color="primary"
+                                                    size="large"
+                                                    startIcon={<SaveIcon />}>
+                                                    Modify
+                                                  </Button>
+                                            </Link >
+                                        </div>
+                                        <div>
+                                            <Button
+                                                variant="contained"
+                                                color="secondary"
+                                                startIcon={<DeleteIcon />}
+                                                onClick={deleteMessage}>
+                                                Delete
+                                             </Button>
+                                        </div>
+                                        <div>
+                                            <Button
+                                                //variant="contained"
+                                                color="primary"
+                                                startIcon={<ThumbUpIcon />}
+                                                onClick={deleteMessage}>
+                                            </Button>
+                                        </div>
+                                        <div>
+                                            <Button
+                                                //variant="contained"
+                                                color="secondary"
+                                                startIcon={<ThumbDownIcon />}
+                                                onClick={deleteMessage}>
+                                            </Button>
+                                        </div>
+                                    </div >
+                                </Fragment>
+                            ) : (
+                                    <Fragment>
+                                    </Fragment>
+                                )}
                         </div>
                     </Paper>
                     <div className="form__button">

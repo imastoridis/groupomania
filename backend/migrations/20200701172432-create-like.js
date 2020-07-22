@@ -26,7 +26,11 @@ module.exports = {
       },
       isLike: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Likes',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

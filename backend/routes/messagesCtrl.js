@@ -78,10 +78,10 @@ module.exports = {
         }
         //Verification that messages are not empty 
         models.Message.findAll({
-            order: [(order != null) ? order.split(':') : ['title', 'ASC']],
+            /*order: [(order != null) ? order.split(':') : ['title', 'ASC']],
             attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
             limit: (!isNaN(limit)) ? limit : null,
-            offset: (!isNaN(offset)) ? offset : null,
+            offset: (!isNaN(offset)) ? offset : null,*/
             include: [{
                 model: models.User,
                 attributes: ['username']
@@ -117,15 +117,16 @@ module.exports = {
     modifyMessage: function (req, res) {
         // Getting auth header
         var headerAuth = req.headers['authorization'];
+        console.log(headerAuth)
         var userId = jwtUtils.getUserId(headerAuth);
 
         // Params
         var title = req.body.title;
         var content = req.body.content;
 
-        if (title == null || content == null) {
+        /*if (title == null || content == null) {
             return res.status(400).json({ 'error': 'Rien à publier' });
-        }
+        }*/
 
         asyncLib.waterfall([
             //Finds Message by messageId

@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import Header from '../../../components/headers/Header';
 import Footer from '../../../components/headers/Footer';
 import axios from 'axios'
@@ -7,6 +7,7 @@ import UserProfileInfo from './UserProfileInfo';
 //User can update his profil info
 function UserProfileUpdate() {
 
+    //Set state
     const [state, setState] = useState({
         id: "",
         email: "",
@@ -14,7 +15,7 @@ function UserProfileUpdate() {
         bio: ""
     })
 
-    //const [userInfo, setUserData] = useState([]);
+    //HandleInput for form
     const handleInput = (e) => {
         const { id, value } = e.target
         setState(prevState => ({
@@ -22,7 +23,7 @@ function UserProfileUpdate() {
             [id]: value
         }))
     }
-
+    //Updates the profile 
     const handleForm = e => {
         e.preventDefault();
         const data = {
@@ -31,13 +32,11 @@ function UserProfileUpdate() {
             "username": state.username,
             "bio": state.bio,
         };
-
         axios
             .put("http://localhost:8080/api/users/me", data)
             .then(res => {
                 console.log(res);
                 window.location.reload(false);
-                // this.props.updateUser(res.data.user);
             })
             .catch(e => this.setState({ errors: e.response.data }));
     };
@@ -48,7 +47,6 @@ function UserProfileUpdate() {
             <UserProfileInfo />
             <section id="form">
                 <p id="textForm">Changez</p>
-
                 <form onSubmit={handleForm} className="form__input" >
                     <label htmlFor="username" ></label>
                     <input
@@ -57,10 +55,8 @@ function UserProfileUpdate() {
                         id="username"
                         placeholder="username"
                         maxLength="50"
-
                         value={state.username}
                         onChange={handleInput} />
-
                     <label htmlFor="email"></label>
                     <input
                         type="email"
@@ -79,7 +75,6 @@ function UserProfileUpdate() {
                         maxLength="100"
                         value={state.bio}
                         onChange={handleInput} />
-
                     <div className="form__button">
                         <button type="submit" id="submit" className="btn-style">VALIDER</button>
                     </div>
@@ -87,9 +82,7 @@ function UserProfileUpdate() {
             </section>
             <Footer />
         </div>
-
     )
-
 }
 
 export default UserProfileUpdate

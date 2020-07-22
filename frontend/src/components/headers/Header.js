@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import logo from '..//../images/icon-left-font-monochrome-white.jpg'
+import logo from '../../images/icon-left-font-monochrome-white.png'
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Cookies from "js-cookie";
@@ -15,7 +15,7 @@ function Header(props) {
             <nav className="navbar">
                 <ul className="nav__list-ul">
                     {!props.loggedIn ? (
-                        //If user logged out
+                        //If user logged out show login/register tabs
                         <Fragment>
                             <li className="nav__list-li logo">
                                 <Link to={'/'} >
@@ -34,7 +34,7 @@ function Header(props) {
                             </li>
                         </Fragment>
                     ) : (
-                            //If user logged in
+                            //If user logged in hide login/register tabs
                             <ul className="nav__list-ul">
                                 <li className="nav__list-li logo">
                                     <Link to={'/'} >

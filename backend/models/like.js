@@ -17,10 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     isLike: DataTypes.INTEGER
   }, {});
-  
-  Like.associate = function(models) {
+
+  Like.associate = function (models) {
     // associations between tables
-//Many to many association with a join table
+    //Many to many association with a join table
     models.User.belongsToMany(models.Message, {
       through: models.Like,
       foreignKey: 'userId',
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: 'userId',
     });
 
-     models.Like.belongsTo(models.User, {
+    models.Like.belongsTo(models.User, {
       foreignKey: 'userId',
       as: 'user',
     });
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
       as: 'message',
     });
 
-    
+
   };
   return Like;
 };

@@ -12,11 +12,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',//This goes into messages when click
-          key:'id'
+          model: 'Users',
+          key: 'id'
         }
       },
-      title: {allowNull: false,
+      title: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       content: {
@@ -36,7 +37,7 @@ module.exports = {
         type: Sequelize.DATE,
         get() {
           return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY h:mm:ss');
-      }
+        }
       },
       updatedAt: {
         allowNull: false,

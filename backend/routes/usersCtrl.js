@@ -20,13 +20,13 @@ module.exports = {
         var username = req.body.username
         var password = req.body.password
         var bio = req.body.bio
-        console.log(email)
-        //Verify that all fields are not empty
+
+        //Verification that all fields are not empty
         if (email == null || username == null || password == null) {
             return res.status(400).json({ 'error': 'missing parameters' })
         }
 
-        //Verify that inputs are correct (lenght, password strenght)
+        //Verification that inputs are correct (lenght, password strenght)
         if (username.lenght >= 13 || username.lenght <= 4) {
             return res.status(400).json({ 'error': "Le nom d'utilisateur doit être compris entre 4 et 13 caractères" })
         }
@@ -47,11 +47,11 @@ module.exports = {
                     attributes: ['email'],
                     where: { email: email }
                 })
-                    .then(function (userFound) {
+                    .then(userFound => {
                         done(null, userFound); //done (callback) so we execute next function, we put params we need for next function
                     })
-                    .catch(function (err) {
-                        return res.status(500).json({ 'error': 'unable to verify user' });
+                    .catch(err => {
+                        return res.status(500).json({ 'error': 'Authentification utilisateur non possible' });
                     });
             },
             //If user doesn't exist we hash the password; else 409 error      
@@ -61,7 +61,7 @@ module.exports = {
                         done(null, userFound, bcryptedPassword);
                     });
                 } else {
-                    return res.status(409).json({ 'error': 'user already exist' });
+                    return res.status(409).json({ 'error': 'Utilsateur existe déjà' });
                 }
             },
             //Creates new user 
@@ -73,11 +73,11 @@ module.exports = {
                     bio: bio,
                     isAdmin: 0
                 })
-                    .then(function (newUser) {
+                    .then(newUser => {
                         done(newUser);
                     })
-                    .catch(function (err) {
-                        return res.status(500).json({ 'error': 'cannot add user' });
+                    .catch(err => {
+                        return res.status(500).json({ 'error': "Ajout de d'utilisateur non possible" });
                     });
             }
         ], function (newUser) {
@@ -87,7 +87,7 @@ module.exports = {
                     'userId': newUser.id
                 });
             } else {
-                return res.status(500).json({ 'error': 'cannot add user' });
+                return res.status(500).json({ 'error': "Ajout de d'utilisateur non possible" });
             }
         });
     },
@@ -98,9 +98,9 @@ module.exports = {
         var email = req.body.email
         var password = req.body.password
 
-        //Verify mail regex and password lenght
+        //Verification mail regex and password lenght
         if (email == null || password == null) {
-            return res.status(400).json({ 'error': 'missing parameters' })
+            return res.status(400).json({ 'error': 'Parametres manquants' })
         }
 
         //Functions waterfall for user login
@@ -110,21 +110,21 @@ module.exports = {
                 models.User.findOne({
                     where: { email: email }
                 })
-                    .then(function (userFound) {
+                    .then(userFound => {
                         done(null, userFound);
                     })
                     .catch(function (err) {
-                        return res.status(500).json({ 'error': 'unable to verify user' });
+                        return res.status(500).json({ 'error': 'Authentification utilisateur non possible' });
                     });
             },
-            //If user found, compares DB password with input
+            //If user found, compares DB password with user input
             function (userFound, done) {
                 if (userFound) {
                     bcrypt.compare(password, userFound.password, function (errBycrypt, resBycrypt) {
                         done(null, userFound, resBycrypt);
                     });
                 } else {
-                    return res.status(404).json({ 'error': 'user not exist in DB' });
+                    return res.status(404).json({ 'error': 'Utilisateur inéxistant' });
                 }
             },
             //If password ok the login, else error
@@ -132,7 +132,7 @@ module.exports = {
                 if (resBycrypt) {
                     done(userFound);
                 } else {
-                    return res.status(403).json({ 'error': 'invalid password' });
+                    return res.status(403).json({ 'error': 'mot de passe invalide' });
                 }
             }
         ],
@@ -144,7 +144,7 @@ module.exports = {
                         'token': jwtUtils.generateTokenForUser(userFound)
                     });
                 } else {
-                    return res.status(500).json({ 'error': 'cannot log on user' });
+                    return res.status(500).json({ 'error': 'Login impossible' });
                 }
             }
         );
@@ -156,7 +156,7 @@ module.exports = {
         var userId = jwtUtils.getUserId(headerAuth);
 
         if (userId < 0) //If TOKEN is not valid
-            return res.status(400).json({ 'error': 'wrong token' });
+            return res.status(400).json({ 'error': 'token éroné' });
         //Find a user (by userID) and get specific attributes
         models.User.findOne({
             attributes: ['id', 'email', 'username', 'bio'],
@@ -166,11 +166,11 @@ module.exports = {
                 if (user) {
                     res.status(201).json(user);
                 } else {
-                    res.status(404).json({ 'error': 'user not found 1' });
+                    res.status(404).json({ 'error': 'Utilisateur non trouvé' });
                 }
             })
-            .catch(function (err) {
-                res.status(500).json({ 'error': 'cannot fetch user' });
+            .catch(err => {
+                res.status(500).json({ 'error': "Récupération de l'utilisateur impossible" });
             });
     },
     //Updates profil (bio)
@@ -191,11 +191,11 @@ module.exports = {
                     attributes: ['id', 'bio', 'username'],
                     where: { id: userId }
                 })
-                    .then(function (userFound) {
+                    .then(userFound => {
                         done(null, userFound);
                     })
                     .catch(function (err) {
-                        return res.status(500).json({ 'error': 'unable to verify user' });
+                        return res.status(500).json({ 'error': 'Authentification utilisateur non possible' });
                     });
             },
             //If user exists, update attribute
@@ -206,14 +206,14 @@ module.exports = {
                         username: (username ? username : userFound.username),
                         email: (email ? email : userFound.email)
                     })
-                        .then(function () {
+                        .then(() => {
                             done(userFound);
                         })
                         .catch(function (err) {
-                            res.status(500).json({ 'error': 'cannot update user' });
+                            res.status(500).json({ 'error': 'Modification impossible' });
                         });
                 } else {
-                    res.status(404).json({ 'error': 'user not found 2' });
+                    res.status(404).json({ 'error': 'Utilisateur non trouvé' });
                 }
             },
         ],
@@ -222,7 +222,7 @@ module.exports = {
                 if (userFound) {
                     return res.status(201).json(userFound);
                 } else {
-                    return res.status(500).json({ 'error': 'cannot update user profile' });
+                    return res.status(500).json({ 'error': 'Modification du profil impossible' });
                 }
             }
         );

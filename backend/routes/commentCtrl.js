@@ -2,10 +2,7 @@
 var models = require('../models');
 var asyncLib = require('async');
 var jwtUtils = require('../utils/jwt.utils');
-var Cookies = require('js-cookie')
 
-// Constants
-const ITEMS_LIMIT = 50;
 
 // Routes
 module.exports = {
@@ -81,48 +78,25 @@ module.exports = {
             });
     },
 
-    //Lists all Comment on message page
+    //Lists all Comments on message page
     listComments: function (req, res) {
 
         var fields = req.query.fields;
         var limit = parseInt(req.query.limit);
         var offset = parseInt(req.query.offset);
         var order = req.query.order;
-        //Limits on number of messages per page
-        if (limit > ITEMS_LIMIT) {
-            limit = ITEMS_LIMIT;
-        }
+
         //Verification that messages are not empty 
         models.Comment.findAll({
-
-            order: [(order != null) ? order.split(':') : ['content', 'ASC']],
+            /*order: [(order != null) ? order.split(':') : ['content', 'ASC']],
             attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
             limit: (!isNaN(limit)) ? limit : null,
-            offset: (!isNaN(offset)) ? offset : null,
+            offset: (!isNaN(offset)) ? offset : null,*/
             include: [{
                 model: models.User,
                 attributes: ['username']
             }]
-
-        }).then(function (comments) {
-
-            if (comments) {
-
-                res.status(200).json(comments);
-            } else {
-                res.status(404).json({ "error": "no messages found" });
-            }
-        }).catch(function (err) {
-            console.log(err);
-            res.status(500).json({ "error": "invalid fields" });
-        });
-
-    },
-
-    //Gets one Comment after clicking on dashboard
-    listOneComment: function (req, res) {
-        //console.log((req.params.id))
-        models.Comment.findByPk(req.params.id)
+        })
             .then(function (comments) {
                 if (comments) {
                     res.status(200).json(comments);
@@ -134,11 +108,24 @@ module.exports = {
                 res.status(500).json({ "error": "invalid fields" });
             });
     },
-    /** Updates one message **/
-    modifyComment: function (req, res) {
-        // Getting auth header
-        var headerAuth = req.headers['authorization']; ///DELETE
 
+    //Gets one Comment after clicking on dashboard
+    listOneComment: function (req, res) {
+        models.Comment.findByPk(req.params.id)
+            .then(function (comments) {
+                if (comments) {
+                    res.status(200).json(comments);
+                } else {
+                    res.status(404).json({ "error": "no messages found" });
+                }
+            })
+            .catch(function (err) {
+                console.log(err);
+                res.status(500).json({ "error": "invalid fields" });
+            });
+    },
+    // Updates one message 
+    modifyComment: function (req, res) {
         // Params
         var content = req.body.content;
 

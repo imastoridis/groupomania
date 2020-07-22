@@ -10,7 +10,6 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import jwt from 'jsonwebtoken'
 
-//require('dotenv').config() to fix
 
 const JWT_SIGN_SECRET = 'qsf5578QSdfsqfQSSQFsqdfghkjqs7680sqf';
 let token = Cookies.get("token");
@@ -26,7 +25,6 @@ if (token) {
         token = null;
       }
     }
-    //console.log(decoded)
   });
 }
 

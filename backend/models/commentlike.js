@@ -30,7 +30,6 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: 'userId',
     });
 
-
     models.CommentLike.belongsTo(models.User, {
       foreignKey: 'userId',
       as: 'user',
@@ -40,7 +39,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'commentId',
       as: 'comment',
     });
-
 
   };
   return CommentLike;

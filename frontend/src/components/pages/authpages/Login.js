@@ -12,9 +12,8 @@ import { Link } from 'react-router-dom'
 
 function Login(props) {
     useEffect(() => {
-
     }, [])
-
+    //Set state
     const [state, setState] = useState({
         email: "",
         password: "",
@@ -23,7 +22,7 @@ function Login(props) {
     })
 
 
-    //Handlechange
+    //Handlechange for form
     const handleChange = (e) => {
         const { id, value } = e.target
         setState(prevState => ({
@@ -32,7 +31,7 @@ function Login(props) {
         }))
     }
 
-    //HandleSubmitClick - 
+    // Login onClick 
     const handleSubmitClick = (e) => {
         e.preventDefault();
         const payload = {
@@ -55,7 +54,6 @@ function Login(props) {
                     props.showError("Username and password do not match");
                 }
                 else {
-                    //props.showError("Username does not exists");
                     console.log(response)
                 }
             })
@@ -83,18 +81,16 @@ function Login(props) {
                                         id="email"
                                         placeholder="email*"
                                         required maxLength="50"
-                                        //pattern="[^0-9]*"
                                         value={state.email}
                                         onChange={handleChange}
                                     />
                                     <label htmlFor="password"></label>
                                     <input
-                                        type="text"
+                                        type="password"
                                         name="password"
                                         id="password"
                                         placeholder="mot de passe*"
                                         required maxLength="50"
-
                                         value={state.password}
                                         onChange={handleChange}
                                     />

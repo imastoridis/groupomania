@@ -4,10 +4,9 @@ import Footer from '../../../components/headers/Footer';
 import UserProfileInfo from './UserProfileInfo';
 import { Link } from 'react-router-dom'
 
+/* Displays user profile */
 function UserProfile() {
-
     return (
-
         <div className="App">
             <Header />
             <UserProfileInfo />
@@ -16,7 +15,6 @@ function UserProfile() {
             </Link>
             <Footer />
         </div>
-
     )
 }
 

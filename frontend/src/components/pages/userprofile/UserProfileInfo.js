@@ -9,6 +9,7 @@ function UserProfileInfo(props) {
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    //Set state
     const [state, setState] = useState({
         id: "",
         email: "",
@@ -16,17 +17,17 @@ function UserProfileInfo(props) {
         bio: ""
     })
 
+    //Declarations
     const [userInfo, setUserData] = useState([]);
     
+    //Fetches user info
     const getUserData = e => {
-        //e.preventDefault();
         const userData = {
             "id": state.id,
             "email": state.email,
             "username": state.username,
             "bio": state.bio,
         }
-
         axios.get("http://localhost:8080/api/users/me", userData)
             .then(function (response) {
                 setState(prevState => ({
@@ -46,7 +47,7 @@ function UserProfileInfo(props) {
             <main id="main-container">
                 {userInfo.map(user =>
                     <section id="message-list" className="" key={user.id}>
-                        <p>profile</p>
+                        <p>PROFIL</p>
                         <div>Username : {user.username}</div>
                         <div>Email : {user.email}</div>
                         <div>Bio : {user.bio}</div>

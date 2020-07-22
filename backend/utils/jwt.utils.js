@@ -2,19 +2,19 @@
 // Imports
 var jwt = require('jsonwebtoken');
 
-const JWT_SIGN_SECRET = process.env.JWT_SECRET; 
+const JWT_SIGN_SECRET = 'qsf5578QSdfsqfQSSQFsqdfghkjqs7680sqf';
 
 // Exported functions
 module.exports = {
     generateTokenForUser: function (userData) {
         return jwt.sign({
             userId: userData.id,
-            isAdmin: userData.isAdmin, 
-            iss : 'http://localhost:8080/api/users/login'
+            isAdmin: userData.isAdmin,
+            iss: 'http://localhost:8080/api/users/login'
         },
             JWT_SIGN_SECRET,
             {
-                expiresIn: '1h'
+                expiresIn: '5h'
             })
     },
     parseAuthorization: function (authorization) {

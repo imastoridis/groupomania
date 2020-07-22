@@ -60,10 +60,10 @@ module.exports = {
                             messageId: messageId
                         }
                     })
-                        .then(function (userAlreadyLikedFound) { 
+                        .then(function (userAlreadyLikedFound) {
                             console.log(userAlreadyLikedFound)  //null
                             done(null, messageFound, userFound, userAlreadyLikedFound);
-                            
+
                         })
                         .catch(function (err) {
                             return res.status(500).json({ 'error': 'unable to verify if user has already liked' });
@@ -75,7 +75,7 @@ module.exports = {
             //Checks if user has already liked a message
             function (messageFound, userFound, userAlreadyLikedFound, done) {
                 if (!userAlreadyLikedFound) {
-                    messageFound.addUser(userFound, { isLike: LIKED }) 
+                    messageFound.addUser(userFound, { isLike: LIKED })
                         .then(function (alreadyLikeFound) {
                             done(null, messageFound, userFound);
                         })

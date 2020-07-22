@@ -1,31 +1,29 @@
+//Imports
+
 import React, { useState, useEffect } from 'react';
 import Header from '../../headers/Header';
 import Footer from '../../headers/Footer';
 import axios from 'axios';
 import Cookies from 'js-cookie'
-import Message from './Message';
 import { Link, useHistory } from "react-router-dom";
 
 function CommentModify({ match }) {
     useEffect(() => {
-
     }, [match.params.id])
 
-    //State
+    //Set state
     const [state, setState] = useState({
         id: match.params.id,
         title: "",
         content: "",
     })
 
-    //Const
-    const [messages, setFetchMessage] = useState([]);
+    // Declarations
     const [error, setError] = useState(null);
-    const token = Cookies.get('token')
     const messageId = Cookies.get('messageId')
     let history = useHistory();
 
-    //HandleChange on forl
+    //HandleChange on form
     const handleChange = (e) => {
         const { id, value } = e.target
         setState(prevState => ({
@@ -34,26 +32,21 @@ function CommentModify({ match }) {
         }))
     }
 
-    //Modifies the message and redirects to the message
+    //Modifies the comment and redirects to the message
     const handleSubmit = e => {
         e.preventDefault();
         const messageByIdata = {
             "id": state.id,
             "content": state.content,
         };
-
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
         axios.put(`http://localhost:8080/api/comment/${match.params.id}`, messageByIdata)
             .then(response => {
                 history.push(`/messages/${messageId}`)
-                console.log(response)
             })
             .catch(function (error) {
                 setError(error);
             });
     };
-
-
 
     if (error) {
         return <div><h3 className="error">{"Un problème technique ne permet pas d'accéder au service que vous désirez. Merci de réessayer ultérieurement"}</h3> </div>;
@@ -94,7 +87,6 @@ function CommentModify({ match }) {
                 </div>
             </div>
         )
-
     }
 }
 export default CommentModify

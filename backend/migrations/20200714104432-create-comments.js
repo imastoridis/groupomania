@@ -1,5 +1,5 @@
 'use strict';
-var moment = require('moment'); 
+var moment = require('moment');
 const { DataTypes } = require("sequelize/types");
 
 module.exports = {
@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
-          key:'id'
+          key: 'id'
         }
       },
       messageId: {
@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: 'Messages',
-          key:'id'
+          key: 'id'
         }
       },
       content: {
@@ -38,14 +38,14 @@ module.exports = {
       likes: {
         allowNull: false,
         type: Sequelize.INTEGER
-        
+
       },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATEONLY,
         get() {
           return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY h:mm:ss');
-      }
+        }
       },
       updatedAt: {
         allowNull: false,

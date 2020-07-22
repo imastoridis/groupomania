@@ -15,9 +15,8 @@ function Dashboard(params) {
         console.log(params)
     }, []);
 
-
     //Set the state
-    const [state, setState] = useState({
+    const [state] = useState({
         id: "",
         title: "",
         content: "",
@@ -42,36 +41,23 @@ function Dashboard(params) {
             'createdAt': state.createdAt,
             'username': state.username
         }
-//[0].Users[0].username
+        //[0].Users[0].username
         axios.get("http://localhost:8080/api/messages", messageData) //Fetches all messages from API
             .then(function (response) {
                 const messages = response.data
                 setMessages(messages) //Sets the data in "messages"
                 console.log(messages)
-
-                const arrayToObject = (array, keyField) =>
-                array.reduce((obj, item) => {
-                  obj[item[keyField]] = item
-                  return obj
-                }, {})
-
-             const messages1 = arrayToObject(messages, "id")
-             console.log(messages1)
-
-
             })
             .catch(function (error) {
                 setError(error);
             });
     }
 
-
-    // {messages.map(message => (message.Users).map(username =>
+    // {messages.map(message => (message.Users).map(username => 
     if (error) {
         return <div><h3 className="error">{"Un problème technique ne permet pas d'accéder au service que vous désirez. Merci de réessayer ultérieurement"}</h3> </div>;
     } else {
         return (
-
             <div className="App">
                 <section id="main-container" >
                     <Header />
@@ -84,31 +70,30 @@ function Dashboard(params) {
                                             <div className="messageBox__up-photo">
                                                 <div>Photo</div>
                                             </div>
-                                            <div className="messageBox__up-username">
-                                                <div className="messageBox__fields">Username :</div>
+                                            <div className="messageBox__up-username" >
+                                                {messages.map(message => (message.Users).map(username =>
+                                                    <div className="messageBox__fields" key={username}>Username: {username.username}</div>
+                                                ))}
                                                 <div className="messageBox__fields">{message.createdAt}</div>
                                             </div>
-
                                         </div>
+                                        <hr />
                                         <div className="messageBox__middle">
                                             <h2 className="messageBox__fields">{message.title}</h2>
                                             <h3 className="messageBox__fields">{message.content}</h3>
                                         </div>
+                                        <hr />
                                         <div className="messageBox__down">
                                             <div>Likes : {message.likes}</div>
                                         </div>
                                     </Link>
-
                                 </div>
                             </Paper>
                             <div className="space-between-messages"></div>
                         </div>
                     )}
-
                     <Footer />
                 </section>
-
-
             </div>
         )
     }

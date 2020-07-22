@@ -1,10 +1,10 @@
 //Imports
 
-import {Route, Redirect} from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
-
+//Route for user logged in
 const GuestRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
@@ -13,13 +13,13 @@ const GuestRoute = ({ component: Component, ...rest }) => {
         !rest.loggedIn ? (
           <Component {...props} />
         ) : (
-          <Redirect
-            to={{
-              pathname: "/messages",
-              state: { from: props.location }
-            }}
-          />
-        )
+            <Redirect
+              to={{
+                pathname: "/messages",
+                state: { from: props.location }
+              }}
+            />
+          )
       }
     />
   );
@@ -31,27 +31,3 @@ const mapStateToProps = state => {
   };
 };
 export default connect(mapStateToProps)(GuestRoute);
-/*
-const GuestRoute = ({ component: Component, ...rest }) => {
-const token = Cookies.get('token')
-
-    return (
-      <Route
-        {...rest}
-        render={props =>
-          !token ? (
-            <Component {...props} />
-          ) : (
-            <Redirect
-              to={{
-                pathname: "/messages",
-                state: { from: props.location }
-              }}
-            />
-          )
-        }
-      />
-    );
-  }
-
-  export default GuestRoute*/

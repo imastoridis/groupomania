@@ -1,6 +1,6 @@
 //Imports
 
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import MessageNew from './components/pages/messages/MessageNew';
 import UserProfile from './components/pages/userprofile/UserProfile';
@@ -19,18 +19,16 @@ import CommentModify from './components/pages/messages/CommentModify';
 // Router Routes
 
 function App() {
-  const [title, updateTitle] = useState(null);
-  const [errorMessage, updateErrorMessage] = useState(null);
 
   return (
     <div >
       <React.StrictMode>
         <Router>
           <Switch>
-            <GuestRoute path='/' exact component={Register} showError={updateErrorMessage} updateTitle={updateTitle} />
-            <GuestRoute path='/register' exact component={Register} showError={updateErrorMessage} updateTitle={updateTitle} />
-            <GuestRoute path='/login' exact component={Login} showError={updateErrorMessage} updateTitle={updateTitle} />
-            <AuthRoute path='/messages' exact component={Dashboard} showError={updateErrorMessage} updateTitle={updateTitle} />
+            <GuestRoute path='/' exact component={Register} />
+            <GuestRoute path='/register' exact component={Register} />
+            <GuestRoute path='/login' exact component={Login} />
+            <AuthRoute path='/messages' exact component={Dashboard} />
             <AuthRoute path='/messages/new' component={MessageNew} />
             <AuthRoute path='/update' component={UserProfileUpdate} />
             <AuthRoute path='/userprofile' component={UserProfile} />
@@ -39,7 +37,6 @@ function App() {
             <AuthRoute exact path='/modifycomment/:id' component={CommentModify} />
           </Switch>
         </Router>
-
       </React.StrictMode>,
     </div>
   );

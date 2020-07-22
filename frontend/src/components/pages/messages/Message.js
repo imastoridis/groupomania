@@ -19,7 +19,6 @@ import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 function Message({ match }) {
     useEffect(() => {
         fetchMessage()
-        parseJwt()
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [match.params.id])
 
@@ -32,15 +31,6 @@ function Message({ match }) {
         username: ""
 
     })
-    //Gets current id from token to verify later against userId from message
-    const parseJwt = (token) => {
-        try {
-            return JSON.parse(atob(token.split('.')[1]));
-        } catch (e) {
-            return null;
-        }
-    };
-
 
     //Declarations
     let history = useHistory();
@@ -93,9 +83,7 @@ function Message({ match }) {
     if (error) {
         return <div><h3 className="error">{"Un problème technique ne permet pas d'accéder au service que vous désirez. Merci de réessayer ultérieurement"}</h3> </div>;
     } else {
-
         return (
-
             <div className="App">
                 <section id="main-container">
                     <Header />
@@ -120,13 +108,11 @@ function Message({ match }) {
                                 <div>Likes : {messages.likes}</div>
                                 <div>Messages : number</div>
                             </div>
-                            
-
                             {userIdToken.userId === messages.UserId ? (
+                                //If user wrote the message, shows modify/delete buttons
                                 <Fragment>
                                     < div className="buttons" >
                                         <div>
-
                                             <Link to={`/modify/${messages.id}`}>
                                                 <Button
                                                     variant="contained"
@@ -178,7 +164,6 @@ function Message({ match }) {
                                 className="form__comment-button-style1">Laisser un commentaire</button>
                             {showText && <div><CommentForm props={propId} /></div>}
                         </div>
-
                     </div>
                     <div>
                         <Comments />

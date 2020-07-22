@@ -11,6 +11,7 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import { Link } from 'react-router-dom'
 
+/* Displays the comments under the message */
 function Comments() {
     useEffect(() => {
         fetchComments();
@@ -34,7 +35,7 @@ function Comments() {
     const userIdToken = JSON.parse(atob(token.split('.')[1]));
 
 
-    //Fetches all messages from API
+    //Fetches all comments from API
     const fetchComments = (e) => {
         const commentData = {
             "id": state.id,
@@ -76,7 +77,7 @@ function Comments() {
                 console.log(error);
             });
     }
-// {messages.map(message => (message.Users).map(username =>
+    // {messages.map(message => (message.Users).map(username =>
     return (
         <div >
             {comments.map(comment =>
@@ -89,7 +90,7 @@ function Comments() {
                                         <div >Photo</div>
                                     </div>
                                     <div className="messageBox__up-username">
-                                        <div className="messageBox__fields">UserId : {comment.UserId}</div>
+                                        <div className="messageBox__fields">Username : {comment.UserId}</div>
                                         <div className="messageBox__fields">{comment.createdAt}</div>
                                     </div>
                                 </div>
@@ -104,6 +105,7 @@ function Comments() {
                                 </div>
                             </div>
                             {userIdToken.userId === comment.userId ? (
+                                //If user wrote the comment, shows modify/delete buttons
                                 <Fragment>
                                     <div className="buttons">
                                         <div >
@@ -147,7 +149,6 @@ function Comments() {
                                     <Fragment>
                                     </Fragment>
                                 )}
-
                         </Paper>
                         <div className="space-between-messages"></div>
                     </section>

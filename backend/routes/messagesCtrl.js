@@ -3,11 +3,6 @@ var models = require('../models');
 var asyncLib = require('async');
 var jwtUtils = require('../utils/jwt.utils');
 
-// Constants
-const ITEMS_LIMIT = 50;
-
-
-
 // Routes
 module.exports = {
 
@@ -61,7 +56,7 @@ module.exports = {
                     return res.status(201).json(newMessage);
                 } else {
                     return res.status(500).json({ 'error': 'message non publié' });
-                }s
+                } s
             });
     },
 
@@ -72,10 +67,6 @@ module.exports = {
         var offset = parseInt(req.query.offset);
         var order = req.query.order;
 
-        //Limits on number of messages per page
-        if (limit > ITEMS_LIMIT) {
-            limit = ITEMS_LIMIT;
-        }
         //Verification that messages are not empty 
         models.Message.findAll({
             /*order: [(order != null) ? order.split(':') : ['title', 'ASC']],
@@ -86,16 +77,18 @@ module.exports = {
                 model: models.User,
                 attributes: ['username']
             }]
-        }).then(messages => {
-            if (messages) {
-                res.status(200).json(messages);
-            } else {
-                res.status(404).json({ "error": "Pas de messages trouvés" });
-            }
-        }).catch(err => {
-            console.log(err);
-            res.status(500).json({ "error": "invalid fields" });
-        });
+        })
+            .then(messages => {
+                if (messages) {
+                    res.status(200).json(messages);
+                } else {
+                    res.status(404).json({ "error": "Pas de messages trouvés" });
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({ "error": "invalid fields" });
+            });
     },
 
     /** Gets one message after clicking on dashboard **/
@@ -107,7 +100,8 @@ module.exports = {
                 } else {
                     res.status(404).json({ "error": "Pas de message trouvé" });
                 }
-            }).catch(err => {
+            })
+            .catch(err => {
                 console.log(err);
                 res.status(500).json({ "error": "invalid fields" });
             });
@@ -115,18 +109,10 @@ module.exports = {
 
     /** Updates one message **/
     modifyMessage: function (req, res) {
-        // Getting auth header
-        var headerAuth = req.headers['authorization'];
-        console.log(headerAuth)
-        var userId = jwtUtils.getUserId(headerAuth);
 
         // Params
         var title = req.body.title;
         var content = req.body.content;
-
-        /*if (title == null || content == null) {
-            return res.status(400).json({ 'error': 'Rien à publier' });
-        }*/
 
         asyncLib.waterfall([
             //Finds Message by messageId
@@ -169,9 +155,7 @@ module.exports = {
 
     /** Deletes one message **/
     deleteOneMessage: function (req, res) {
-        // Getting auth header
-        var headerAuth = req.headers['authorization']; //To delete??
-        var userId = jwtUtils.getUserId(headerAuth);
+        //Params
         var messageId = req.params.id
 
         asyncLib.waterfall([

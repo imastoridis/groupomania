@@ -10,6 +10,8 @@ import { withRouter } from "react-router-dom";
 /**Register function **/
 
 function Register(props) {
+
+    //Set state
     const [state, setState] = useState({
         email: "",
         password: "",
@@ -17,7 +19,7 @@ function Register(props) {
         successMessage: null
     })
 
-    //HandleChange
+    //HandleChange for form
     const handleChange = (e) => {
         const { id, value } = e.target
         setState(prevState => ({
@@ -43,21 +45,15 @@ function Register(props) {
                         'successMessage': 'Registration successful. Redirecting to home page..'
                     }))
                     props.history.push('/login')
-                    props.showError(null)
                 } else {
-                    props.showError("Some error ocurred");
                     console.log(response)
                 }
             })
             .catch(function (error) {
                 console.log(error);
             });
-        /*} else {
-            props.showError('Please enter valid username and password')    
-        }*/
         e.preventDefault();
     }
-
 
     return (
         <div className="App">
@@ -90,7 +86,6 @@ function Register(props) {
                                         onChange={handleChange}
                                         required
                                     />
-
                                     <input
                                         type="password"
                                         name="password"
@@ -100,7 +95,6 @@ function Register(props) {
                                         onChange={handleChange}
                                         required
                                     />
-
                                     <div className="form__button">
                                         <button type="submit" onClick={handleSubmitClick} id="submit" className="btn-style">VALIDER</button>
                                     </div>

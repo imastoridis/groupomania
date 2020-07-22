@@ -3,17 +3,20 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../headers/Header';
 import Footer from '../../headers/Footer';
+import Comments from './Comments';
 import axios from 'axios';
 import CommentForm from './Commentform';
+import { Link, useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
+
 import Paper from '@material-ui/core/Paper';
 import IconLabelButtons from '../../../materialui/IconLabelButtons';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
-import Comments from './Comments';
-import { Link } from 'react-router-dom'
 import DeleteIcon from '@material-ui/icons/Delete';
-import { useHistory } from "react-router-dom";
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+
 
 // Displays one message after clicking on dashboard
 function Message({ match }) {
@@ -71,9 +74,7 @@ function Message({ match }) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
         axios.delete(`http://localhost:8080/api/messages/${match.params.id}`)
             .then(function (response) {
-
-                window.location.reload()
-                history.push('/messages') //DOESNT WORK
+                history.push('/messages')
             })
             .catch(function (error) {
                 console.log(error);
@@ -119,26 +120,36 @@ function Message({ match }) {
                                         variant="contained"
                                         color="primary"
                                         size="large"
-
-                                        startIcon={<SaveIcon />}
-                                    >
+                                        startIcon={<SaveIcon />}>
                                         Modify
                                      </Button>
-
                                 </Link >
                             </div>
                             <div>
                                 <Button
                                     variant="contained"
                                     color="secondary"
-
                                     startIcon={<DeleteIcon />}
-                                    onClick={deleteMessage}
-                                >
+                                    onClick={deleteMessage}>
                                     Delete
                                     </Button>
                             </div>
-
+                            <div>
+                                <Button
+                                    //variant="contained"
+                                    color="Primary"
+                                    startIcon={<ThumbUpIcon />}
+                                    onClick={deleteMessage}>
+                                    </Button>
+                            </div>
+                            <div>
+                                <Button
+                                    //variant="contained"
+                                    color="secondary"
+                                    startIcon={<ThumbDownIcon />}
+                                    onClick={deleteMessage}>
+                                    </Button>
+                            </div>
                         </div>
                     </Paper>
                     <div className="form__button">

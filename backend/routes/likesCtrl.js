@@ -16,13 +16,14 @@ module.exports = {
 
         // Params,
         var messageId = parseInt(req.params.messageId);
+        console.log(messageId)
 
         if (messageId <= 0) {
-            return res.status(400).json({ 'error': 'invalid parameters' });
+            return res.status(400).json({ 'error': 'identifiant non valide' });
         }
 
         asyncLib.waterfall([
-            // Checks that id of message exists
+            // Finds the message
             function (done) {
                 models.Message.findOne({
                     where: { id: messageId }
@@ -34,13 +35,13 @@ module.exports = {
                         return res.status(500).json({ 'error': 'unable to verify message' });
                     });
             },
-            //Checks that message was found
+            //Finds the user associated to that message
             function (messageFound, done) {
                 if (messageFound) {
                     models.User.findOne({
                         where: { id: userId }
                     })
-                        .then(function (userFound) { //Finds user and stores it here
+                        .then(function (userFound) {
                             done(null, messageFound, userFound);
                         })
                         .catch(function (err) {
@@ -50,7 +51,7 @@ module.exports = {
                     res.status(404).json({ 'error': 'post already liked' });
                 }
             },
-            //Checks if user was found
+            //Checks in Likes if there is a message with userId and messageId
             function (messageFound, userFound, done) {
                 if (userFound) {
                     models.Like.findOne({ //Checks in like table if there is already a message with userId(if user has already liked a mess.)
@@ -59,7 +60,7 @@ module.exports = {
                             messageId: messageId
                         }
                     })
-                        .then(function (userAlreadyLikedFound) { //Info from check is stored here
+                        .then(function (userAlreadyLikedFound) { 
                             done(null, messageFound, userFound, userAlreadyLikedFound);
                             
                         })
@@ -73,11 +74,12 @@ module.exports = {
             //Checks if user has already liked a message
             function (messageFound, userFound, userAlreadyLikedFound, done) {
                 if (!userAlreadyLikedFound) {
-                    messageFound.addUser(userFound, { isLike: LIKED }) //Adds the like in table
+                    messageFound.addUser(userFound, { isLike: LIKED }) 
                         .then(function (alreadyLikeFound) {
                             done(null, messageFound, userFound);
                         })
                         .catch(function (err) {
+                            console.log(userFound.isLike)
                             return res.status(500).json({ 'error': 'unable to set user reaction 1' });
                         });
                 } else {

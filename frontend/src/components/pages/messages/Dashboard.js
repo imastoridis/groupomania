@@ -56,7 +56,7 @@ function Dashboard() {
     }
 
 
-// {messages.map(message => (message.Users).map(username =>
+    // {messages.map(message => (message.Users).map(username =>
     if (error) {
         return <div><h3 className="error">{"Un problème technique ne permet pas d'accéder au service que vous désirez. Merci de réessayer ultérieurement"}</h3> </div>;
     } else {
@@ -65,10 +65,10 @@ function Dashboard() {
             <div className="App">
                 <section id="main-container" >
                     <Header />
-                    {messages.map(message  =>
-                        <div >
+                    {messages.map(message =>
+                        <div key={message.id}>
                             <Paper elevation={4} className="messageBox" >
-                                <div key={message.id}>
+                                <div>
                                     <Link to={`/messages/${message.id}`} >
                                         <div className="messageBox__up" >
                                             <div className="messageBox__up-photo">
@@ -88,7 +88,7 @@ function Dashboard() {
                                             <div>Likes : {message.likes}</div>
                                         </div>
                                     </Link>
-                        
+
                                 </div>
                             </Paper>
                             <div className="space-between-messages"></div>

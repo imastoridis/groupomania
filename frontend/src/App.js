@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, useParams } from 'react-router-dom';
-import NewMessage from './components/pages/messages/NewMessage';
+import MessageNew from './components/pages/messages/MessageNew';
 import UserProfile from './components/pages/userprofile/UserProfile';
 import Dashboard from './components/pages/messages/Dashboard';
 import Login from './components/pages/authpages/Login';
@@ -30,7 +30,7 @@ function App() {
             <GuestRoute path='/register' exact component={Register} showError={updateErrorMessage} updateTitle={updateTitle} />
             <GuestRoute path='/login' exact component={Login} showError={updateErrorMessage} updateTitle={updateTitle} />
             <AuthRoute path='/messages' exact component={Dashboard} showError={updateErrorMessage} updateTitle={updateTitle} />
-            <AuthRoute path='/messages/new' component={NewMessage} />
+            <AuthRoute path='/messages/new' component={MessageNew} />
             <AuthRoute path='/update' component={UserProfileUpdate} />
             <AuthRoute path='/userprofile' component={UserProfile} />
             <AuthRoute exact path='/messages/:id' component={Message} />

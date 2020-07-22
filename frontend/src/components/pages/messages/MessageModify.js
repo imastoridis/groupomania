@@ -6,7 +6,7 @@ import Footer from '../../headers/Footer';
 import axios from 'axios';
 import Cookies from 'js-cookie'
 import Message from './Message';
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function MessageModify({ match }) {
     useEffect(() => {
@@ -56,6 +56,8 @@ function MessageModify({ match }) {
             });
     };
 
+
+
     if (error) {
         return <div><h3 className="error">{"Un problème technique ne permet pas d'accéder au service que vous désirez. Merci de réessayer ultérieurement"}</h3> </div>;
     } else {
@@ -75,7 +77,6 @@ function MessageModify({ match }) {
                                             id="title"
                                             placeholder="Titre*"
                                             required maxLength="50"
-                                            pattern="[^0-9]*"
                                             value={state.title}
                                             onChange={handleChange}
                                         />
@@ -86,13 +87,17 @@ function MessageModify({ match }) {
                                             id="content"
                                             placeholder="Message*"
                                             maxLength="50"
-                                            pattern="[^0-9]*"
                                             value={state.content}
                                             onChange={handleChange}
                                         />
                                         <div className="form__button">
                                             <button type="submit" id="submit" className="btn-style">VALIDER</button>
                                         </div>
+                                        <Link to={`/messages/${match.params.id}`}>
+                                            <div className="form__button">
+                                                <button type="submit" className="btn-style">ANNULER</button>
+                                            </div>
+                                        </Link>
                                     </form>
                                 </div>
                             </div>

@@ -9,7 +9,7 @@ import Header from '../../headers/Header';
 
 /** New message creation function**/
 
-function NewMessage() {
+function MessageNew() {
     useEffect(() => {
     }, []);
 
@@ -45,7 +45,6 @@ function NewMessage() {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
         axios.post("http://localhost:8080/api/messages/new", payload)
             .then(function (response) {
-                console.log(response)
                 if (response.status === 201) {
                     setMessages(response.data)
                     history.push('/messages')
@@ -82,7 +81,6 @@ function NewMessage() {
                                         id="title"
                                         placeholder="Titre*"
                                         required maxLength="50"
-                                        pattern="[^0-9]*"
                                         value={state.title}
                                         onChange={handleChange}
 
@@ -94,7 +92,6 @@ function NewMessage() {
                                         id="content"
                                         placeholder="Message*"
                                         required maxLength="50"
-                                        pattern="[^0-9]*"
                                         value={state.content}
                                         onChange={handleChange}
 
@@ -114,4 +111,4 @@ function NewMessage() {
         )
     }
 }
-export default NewMessage;
+export default MessageNew;

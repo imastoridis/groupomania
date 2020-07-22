@@ -4,8 +4,6 @@ var asyncLib = require('async');
 var jwtUtils = require('../utils/jwt.utils');
 
 // Constants
-const TITLE_LIMIT = 2;
-const CONTENT_LIMIT = 2;
 const ITEMS_LIMIT = 50;
 
 
@@ -13,9 +11,9 @@ const ITEMS_LIMIT = 50;
 // Routes
 module.exports = {
 
-    //Creates new message
+    /**  Creates new message **/
     createMessage: function (req, res) {
-        // Getting auth header
+        // Getting auth header and userId
         var headerAuth = req.headers['authorization'];
         var userId = jwtUtils.getUserId(headerAuth);
 
@@ -24,27 +22,23 @@ module.exports = {
         var content = req.body.content;
 
         if (title == null || content == null) {
-            return res.status(400).json({ 'error': 'missing parameters' });
+            return res.status(400).json({ 'error': 'Rien à publier' });
         }
 
-        if (title.length <= TITLE_LIMIT || content.length <= CONTENT_LIMIT) {
-            return res.status(400).json({ 'error': 'invalid parameters' });
-        }
-        //
         asyncLib.waterfall([
             //Finds user by userID
             function (done) {
                 models.User.findOne({
                     where: { id: userId }
                 })
-                    .then(function (userFound) {
+                    .then(userFound => {
                         done(null, userFound);
                     })
-                    .catch(function (err) {
-                        return res.status(500).json({ 'error': 'unable to verify user' });
+                    .catch(err => {
+                        return res.status(500).json({ 'error': 'Utilisateur non authentifié' });
                     });
             },
-            //Check that user is valid
+            //Creates new message
             function (userFound, done) {
                 if (userFound) {
                     models.Message.create({
@@ -53,23 +47,25 @@ module.exports = {
                         likes: 0,
                         UserId: userFound.id
                     })
-                        .then(function (newMessage) {
+                        .then(newMessage => {
                             done(newMessage);
                         });
                 } else {
-                    res.status(404).json({ 'error': 'user not found' });
+                    res.status(404).json({ 'error': 'message non crée' });
                 }
             },
-        ], function (newMessage) {
-            if (newMessage) {
-                return res.status(201).json(newMessage);
-            } else {
-                return res.status(500).json({ 'error': 'cannot post message' });
-            }
-        });
+        ],
+            //Response
+            function (newMessage) {
+                if (newMessage) {
+                    return res.status(201).json(newMessage);
+                } else {
+                    return res.status(500).json({ 'error': 'message non publié' });
+                }s
+            });
     },
 
-    //Lists all messages on dashboard
+    /** Lists all messages on dashboard **/
     listMessages: function (req, res) {
         var fields = req.query.fields;
         var limit = parseInt(req.query.limit);
@@ -90,188 +86,119 @@ module.exports = {
                 model: models.User,
                 attributes: ['username']
             }]
-        }).then(function (messages) {
+        }).then(messages => {
             if (messages) {
                 res.status(200).json(messages);
             } else {
-                res.status(404).json({ "error": "no messages found" });
+                res.status(404).json({ "error": "Pas de messages trouvés" });
             }
-        }).catch(function (err) {
+        }).catch(err => {
             console.log(err);
             res.status(500).json({ "error": "invalid fields" });
         });
     },
 
-    //Gets one message after clicking on dashboard
+    /** Gets one message after clicking on dashboard **/
     listOneMessage: function (req, res) {
         models.Message.findByPk(req.params.id)
-            .then(function (messages) {
+            .then(messages => {
                 if (messages) {
                     res.status(200).json(messages);
                 } else {
-                    res.status(404).json({ "error": "no messages found" });
+                    res.status(404).json({ "error": "Pas de message trouvé" });
                 }
-            }).catch(function (err) {
+            }).catch(err => {
                 console.log(err);
                 res.status(500).json({ "error": "invalid fields" });
             });
     },
 
-    //Updates one message
-
+    /** Updates one message **/
     modifyMessage: function (req, res) {
         // Getting auth header
         var headerAuth = req.headers['authorization'];
         var userId = jwtUtils.getUserId(headerAuth);
-        var messageId = req.config
 
         // Params
         var title = req.body.title;
         var content = req.body.content;
 
         if (title == null || content == null) {
-            return res.status(400).json({ 'error': 'missing parameters' });
+            return res.status(400).json({ 'error': 'Rien à publier' });
         }
-
-        if (title.length <= TITLE_LIMIT || content.length <= CONTENT_LIMIT) {
-            return res.status(400).json({ 'error': 'invalid parameters' });
-        }
-
 
         asyncLib.waterfall([
-            //Find Message and get attributes i want to modify
+            //Finds Message by messageId
             function (done) {
                 models.Message.findByPk(req.params.id)
-                    /*({
-                        //attributes: ['id', 'title', 'content'],
-                        //where: { id: messageId }
-                        
-                    })*/
-                    .then(function (messageFound) {
+                    .then(messageFound => {
                         done(null, messageFound);
                     })
-                    .catch(function (err) {
-                        return res.status(500).json({ 'error': 'unable to verify message' });
+                    .catch(err => {
+                        return res.status(500).json({ 'error': 'Message non authentifié' });
                     });
             },
-            //If user exists, update attribute
+            //If message exists, update attributes
             function (messageFound, done) {
                 if (messageFound) {
                     messageFound.update({
-                        title: (title ? title : messageFound.title), //If body.title is valid i modify it, else i put the body.title
+                        title: (title ? title : messageFound.title),
                         content: (content ? content : messageFound.content)
                     })
-                        .then(function () {
+                        .then(() => {
                             done(messageFound);
                         })
-                        .catch(function (err) {
-                            res.status(500).json({ 'error': 'cannot update message' });
+                        .catch(err => {
+                            res.status(500).json({ 'error': 'Modification du message non possible' });
                         });
                 } else {
-                    res.status(404).json({ 'error': 'message not found 2' });
+                    res.status(404).json({ 'error': 'Message non trouvé' });
                 }
             },
         ],
-            //If user exists, res 201 and updates
+            //Response and updates message
             function (messageFound) {
                 if (messageFound) {
                     return res.status(201).json(messageFound);
                 } else {
-                    return res.status(500).json({ 'error': 'cannot update message' });
+                    return res.status(500).json({ 'error': 'Message non trouvé' });
                 }
-            }
-        );
+            });
     },
 
+    /** Deletes one message **/
     deleteOneMessage: function (req, res) {
         // Getting auth header
-        var headerAuth = req.headers['authorization'];
+        var headerAuth = req.headers['authorization']; //To delete??
         var userId = jwtUtils.getUserId(headerAuth);
         var messageId = req.params.id
-        console.log(messageId)
-        // Params
-        var title = req.body.title;
-        var content = req.body.content;
-
 
         asyncLib.waterfall([
-            //Find Message and get attributes i want to modify
+            //Deletes comments and likes of message and the Deletes the message
             function (done) {
                 models.Comment.destroy({
                     where: { messageId: messageId }
                 })
-                    .then(function (likesFound) {
+                    .then(likesFound => {
                         models.Like.destroy({
                             where: { messageId: messageId }
                         })
                         done(likesFound);
                     })
-                    .catch(function (err) {
-                        return res.status(500).json({ 'error': 'unable to verify like' });
+                    .catch(err => {
+                        return res.status(500).json({ 'error': 'Pas possible de supprimer les commentaires ou les likes' });
                     })
-                    .then(function (commentsFound) {
+                    .then(commentsFound => {
                         models.Message.destroy({
                             where: { id: messageId }
                         })
-                        //console.log(commentsFound)
-                        //done(null, commentsFound);
-                        //commentsFound.destroy();
+                        return res.status(201).json(commentsFound)
                     })
-                    .catch(function (err) {
-                        return res.status(500).json({ 'error': 'unable to verify user' });
+                    .catch(err => {
+                        return res.status(500).json({ 'error': 'Pas possible de supprimer le message' });
                     });
-            }/*,
-            function (commentsFound, done) {
-                if (commentsFound) {
-                    models.Message.findByPk(req.params.id)
-                        .then(function (messageFound) {
-                            console.log(messageFound)
-                            done(null, messageFound,commentsFound)
-                        })
-                        .catch(function (err) {
-                            return res.status(500).json({ 'error': 'unable to verify message' });
-                        });
-                }
-
-            },
-            function (comment) {
-                if (messageFound) {
-                    return res.status(201).json(messageFound);
-                } else {
-                    return res.status(500).json({ 'error': 'cannot update message' });
-                }
             }
-*/
-            //If user exists, update attribute
-            /*function (messageFound, done) {
-                if (messageFound) {
-                    messageFound.destroy(
-                        
-                    )
-                        .then(function () {
-                            done(messageFound);
-                        })
-                        .catch(function (err) {
-                            res.status(500).json({ 'error': 'cannot update message' });
-                        });
-                } else {
-                    res.status(404).json({ 'error': 'message not found 2' });
-                }
-            },*/
-        ],
-            //If user exists, res 201 and updates
-            /*function (messageFound) {
-                if (messageFound) {
-                    return res.status(201).json(messageFound);
-                } else {
-                    return res.status(500).json({ 'error': 'cannot update message' });
-                }
-            }*/
-        );
+        ])
     }
-
-
-
-
 }
 

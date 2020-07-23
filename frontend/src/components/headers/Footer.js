@@ -5,8 +5,8 @@ function Footer() {
     return (
         <div>
             <footer className="footer">
-                <p>Mention légales</p>
-                <p>Contactez nous</p>
+                <p>MENTION LEGALES</p>
+                <p>CONTACTEZ NOUS</p>
             </footer>
         </div>
     )

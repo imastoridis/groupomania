@@ -3,6 +3,7 @@ import logo from '../../images/icon-left-font-monochrome-white.png'
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Cookies from "js-cookie";
+import Button from '@material-ui/core/Button';
 
 function Header(props) {
     const handleLogout = e => {
@@ -23,13 +24,18 @@ function Header(props) {
                                 </Link>
                             </li>
                             <li className="nav__list-li">
-                                <Link to={'/login'} className="navbar__style">
-                                    <h2 className="hover">Connexion</h2>
+                                <Link to={'/login'} >
+                                    <Button className="navbar__style">
+                                        <h2 className="hover navbar__style">Connexion</h2>
+                                    </Button>
                                 </Link>
                             </li>
+                            
                             <li className="nav__list-li">
                                 <Link to={'/register'} className="navbar__style">
-                                    <h2 className="hover">Inscription</h2>
+                                    <Button className="navbar__style">
+                                        <h2 className="hover navbar__style">Inscription</h2>
+                                    </Button>
                                 </Link>
                             </li>
                         </Fragment>
@@ -43,33 +49,37 @@ function Header(props) {
                                 </li>
                                 <li className="nav__list-li">
                                     <Link to={'/messages'} className="navbar__style">
-                                        <h2 className="hover">Tableau de bord</h2>
+                                        <Button className="navbar__style">
+                                            <h2 className="hover navbar__style">Tableau de bord</h2>
+                                        </Button>
                                     </Link>
                                 </li>
                                 <li className="nav__list-li">
                                     <Link to={'/messages/new'} className="navbar__style">
-                                        <h2 className="hover">Nouveau message</h2>
+                                        <Button className="navbar__style">
+                                            <h2 className="hover navbar__style">Nouveau message</h2>
+                                        </Button>
                                     </Link>
                                 </li>
                                 <li className="nav__list-li">
                                     <Link to={'/userprofile'} className="navbar__style">
-                                        <h2 className="hover">Profil</h2>
+                                        <Button className="navbar__style">
+                                            <h2 className="hover navbar__style">Profil</h2>
+                                        </Button>
                                     </Link>
                                 </li>
                                 <li className="nav__list-li">
                                     <Link to={'/login'} className="navbar__style" onClick={handleLogout}>
-                                        <h2 className="hover">Déconnexion</h2>
+                                        <Button className="navbar__style">
+                                            <h2 className="hover navbar__style">Déconnexion</h2>
+                                        </Button>
                                     </Link>
                                 </li>
                             </ul>
                         )}
                 </ul>
             </nav>
-            <header className="header header__img">
-                <div className="header__banner">
-                    <h2 className="header__banner--title"> Bienvenu sur le reseau social de Groupomania! </h2>
-                </div>
-            </header>
+           
         </div>
     )
 }

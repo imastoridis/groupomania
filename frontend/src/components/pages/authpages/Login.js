@@ -7,8 +7,12 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import logo from '../../../images/icon-left-font-monochrome-black.png'
 /** Login function **/
+
 
 function Login(props) {
     useEffect(() => {
@@ -67,35 +71,46 @@ function Login(props) {
             <section id="main-container">
                 <Header />
                 <main>
-                    <section id="message-list" className="">
-                        <div>
-                            <div>
-                                <p>LOGIN</p>
-                            </div>
+                    <Paper elevation={9} className="login-box">
+                        <section id="message-list" >
+                            <img src={logo} alt="logo" className="login-logo"></img>
+                            <Button color="primary">
+                                <p>Connexion</p>
+                            </Button>
                             <div id="form">
                                 <form className="form_input">
-                                    <label htmlFor="email"></label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        id="email"
-                                        placeholder="email*"
-                                        required maxLength="50"
-                                        value={state.email}
-                                        onChange={handleChange}
-                                    />
-                                    <label htmlFor="password"></label>
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        id="password"
-                                        placeholder="mot de passe*"
-                                        required maxLength="50"
-                                        value={state.password}
-                                        onChange={handleChange}
-                                    />
+                                    <div>
+                                        <TextField
+                                            type="email"
+                                            name="email"
+                                            id="email"
+                                            placeholder="email*"
+                                            required maxLength="50"
+                                            value={state.email}
+                                            onChange={handleChange}
+                                            label="email" />
+                                    </div>
+                                    <div>
+                                        <TextField
+                                            type="password"
+                                            name="password"
+                                            id="password"
+                                            placeholder="mot de passe*"
+                                            required maxLength="50"
+                                            value={state.password}
+                                            onChange={handleChange}
+                                            label="mot de passe"
+                                        />
+                                    </div>
                                     <div className="form__button">
-                                        <button type="submit" onClick={handleSubmitClick} id="submit" className="btn-style">VALIDER</button>
+                                        <Button
+                                            variant="outlined"
+                                            color="primary"
+                                            type="submit"
+                                            onClick={handleSubmitClick}
+                                            id="submit"
+                                        >VALIDER
+                                          </Button>
                                     </div>
                                     <div className="alert alert-success mt-2" style={{ display: state.successMessage ? 'block' : 'none' }} role="alert">
                                         {state.successMessage}
@@ -103,13 +118,14 @@ function Login(props) {
                                     <div className="registerMessage">
                                         <span>Vous n'avez pas encore de compte? </span>
                                         <Link to={'/'}>
-                                            <span className="loginText" >Inscrivez-vous</span>
+                                            <Button color="primary">Inscrivez-vous</Button>
                                         </Link>
                                     </div>
                                 </form>
                             </div>
-                        </div>
-                    </section>
+
+                        </section>
+                    </Paper>
                 </main>
                 <Footer />
             </section>

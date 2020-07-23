@@ -6,6 +6,10 @@ import Footer from '../../headers/Footer';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import logo from '../../../images/icon-left-font-monochrome-black.png'
+import TextField from '@material-ui/core/TextField';
 
 /**Register function **/
 
@@ -60,43 +64,52 @@ function Register(props) {
             <section id="main-container">
                 <Header />
                 <main>
-                    <section id="message-list" className="">
-                        <div>
-                            <div>
-                                <p>SIGNUP</p>
-                            </div>
+                    <Paper elevation={9} className="login-box">
+                        <section id="message-list" className="">
+                            <img src={logo} alt="logo" className="login-logo"></img>
+                            <Button color="primary">
+                                <p>Inscription</p>
+                            </Button>
                             <div id="form">
                                 <form className="form_input">
-                                    <input
-                                        type="username"
-                                        name="username"
-                                        id="username"
-                                        placeholder="username*"
-                                        value={state.username}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                    <label htmlFor="email"></label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        id="email"
-                                        placeholder="email*"
-                                        value={state.email}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        id="password"
-                                        placeholder="mot de passe*"
-                                        value={state.password}
-                                        onChange={handleChange}
-                                        required
-                                    />
+                                    <div>
+                                        <TextField
+                                            type="username"
+                                            name="username"
+                                            id="username"
+                                            placeholder="username*"
+                                            value={state.username}
+                                            onChange={handleChange}
+                                            required />
+                                    </div>
+                                    <div>
+                                        <TextField
+                                            type="email"
+                                            name="email"
+                                            id="email"
+                                            placeholder="e-mail*"
+                                            value={state.email}
+                                            onChange={handleChange}
+                                            required />
+                                    </div>
+                                    <div>
+                                        <TextField
+                                            type="password"
+                                            name="password"
+                                            id="password"
+                                            placeholder="mot de passe*"
+                                            value={state.password}
+                                            onChange={handleChange}
+                                            required />
+                                    </div>
                                     <div className="form__button">
-                                        <button type="submit" onClick={handleSubmitClick} id="submit" className="btn-style">VALIDER</button>
+                                        <Button
+                                            type="submit"
+                                            onClick={handleSubmitClick}
+                                            id="submit"
+                                            variant="outlined"
+                                            color="primary">VALIDER
+                                        </Button>
                                     </div>
                                 </form>
                                 <div className="alert alert-success mt-2" style={{ display: state.successMessage ? 'block' : 'none' }} role="alert">
@@ -105,12 +118,12 @@ function Register(props) {
                                 <div className="mt-2">
                                     <span>Vous avez déjà un compte? </span>
                                     <Link to={'/login'}>
-                                        <span className="loginText" >Connectez-vous</span>
+                                        <Button color="primary">Connectez-vous</Button>
                                     </Link>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </Paper>
                 </main>
                 <Footer />
             </section>

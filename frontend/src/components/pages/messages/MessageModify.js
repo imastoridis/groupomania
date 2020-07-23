@@ -66,7 +66,7 @@ function MessageModify({ match }) {
                                             name="title"
                                             id="title"
                                             placeholder="Titre*"
-                                            maxLength="50"
+                                            maxLength="45"
                                             value={state.title}
                                             onChange={handleChange}
                                         />

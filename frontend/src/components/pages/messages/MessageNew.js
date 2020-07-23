@@ -76,7 +76,7 @@ function MessageNew() {
                                         name="title"
                                         id="title"
                                         placeholder="Titre*"
-                                        required maxLength="50"
+                                        required maxLength="45"
                                         value={state.title}
                                         onChange={handleChange}
                                     />

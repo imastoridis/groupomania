@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Header from '../../headers/Header';
-import Footer from '../../headers/Footer';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import Paper from '@material-ui/core/Paper';
@@ -65,8 +64,9 @@ function Dashboard(params) {
                         {messages.map(message =>
                             <div key={message.id} className="message-box" >
                                 <div >
-                                    <Link to={`/messages/${message.id}`} >
-                                        <Paper elevation={6} className="messagBox-flex">
+
+                                    <Paper elevation={6} className="messagBox-flex">
+                                        <Link to={`/messages/${message.id}`} >
                                             <div key={message.id} className="grid-container" >
                                                 <div className="Photo">
                                                     <div>Photo</div>
@@ -89,12 +89,12 @@ function Dashboard(params) {
                                                     <div>Likes : {message.likes}</div>
                                                 </div>
                                             </div>
-                                        </Paper>
-                                    </Link>
+                                        </Link>
+                                    </Paper>
+
                                 </div>
                             </div>
                         )}
-                        <Footer />
                     </main>
                 </section>
             </div >

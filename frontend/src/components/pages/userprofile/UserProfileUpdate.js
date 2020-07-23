@@ -3,6 +3,7 @@ import Header from '../../../components/headers/Header';
 import Footer from '../../../components/headers/Footer';
 import axios from 'axios'
 import UserProfileInfo from './UserProfileInfo';
+import * as Components from '../../../materialui/Imports'
 
 //User can update his profil info
 function UserProfileUpdate() {
@@ -36,7 +37,7 @@ function UserProfileUpdate() {
             .put("http://localhost:8080/api/users/me", data)
             .then(res => {
                 console.log(res);
-                window.location.reload(false);
+                window.location.reload();
             })
             .catch(e => this.setState({ errors: e.response.data }));
     };
@@ -45,41 +46,57 @@ function UserProfileUpdate() {
         <div className="App">
             <Header />
             <UserProfileInfo />
-            <section id="form">
-                <p id="textForm">Changez</p>
-                <form onSubmit={handleForm} className="form__input" >
-                    <label htmlFor="username" ></label>
-                    <input
-                        type="text"
-                        name="username"
-                        id="username"
-                        placeholder="username"
-                        maxLength="50"
-                        value={state.username}
-                        onChange={handleInput} />
-                    <label htmlFor="email"></label>
-                    <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="email"
-                        maxLength="50"
-                        value={state.email}
-                        onChange={handleInput} />
-                    <label htmlFor="bio"></label>
-                    <input
-                        type="bio"
-                        name="bio"
-                        id="bio"
-                        placeholder="bio"
-                        maxLength="100"
-                        value={state.bio}
-                        onChange={handleInput} />
-                    <div className="form__button">
-                        <button type="submit" id="submit" className="btn-style">VALIDER</button>
-                    </div>
-                </form>
-            </section>
+            <main className="message-box">
+                <div className="form ">
+                    <Components.Paper elevation={6} className="messagBox-flex-profil" >
+                        <div className='profil'>
+                            <form onSubmit={handleForm}  >
+                                <div>Username</div>
+                                <Components.TextareaAutosize
+                                    type="text"
+                                    name="username"
+                                    id="username"
+                                    placeholder="username"
+                                    maxLength="10"
+                                    variant="outlined"
+                                    className="form__input-title"
+                                    value={state.username}
+                                    onChange={handleInput} />
+                                <div>Email</div>
+                                <Components.TextareaAutosize
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    placeholder="email"
+                                    maxLength="20"
+                                    variant="outlined"
+                                    className="form__input-title"
+                                    value={state.email}
+                                    onChange={handleInput} />
+                                <div>À propos </div>
+                                <Components.TextareaAutosize
+                                    type="bio"
+                                    name="bio"
+                                    id="bio"
+                                    placeholder="a propos"
+                                    maxLength="100"
+                                    variant="outlined"
+                                    className="form__input-title"
+                                    value={state.bio}
+                                    onChange={handleInput} />
+                                <div className="button">
+                                    <Components.Button
+                                        type="submit"
+                                        id="submit"
+                                        variant="contained"
+                                        color="primary">
+                                        VALIDER</Components.Button>
+                                </div>
+                            </form>
+                        </div>
+                    </Components.Paper>
+                </div>
+            </main>
             <Footer />
         </div>
     )

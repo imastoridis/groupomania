@@ -28,7 +28,7 @@ img {
 
 #main-container {
   background-color:white;
-  font-family: 'Abel', sans-serif;
+  font-family: 'Roboto', sans-serif;
   width: 100%;
   margin: auto;
 
@@ -134,7 +134,7 @@ footer {
   justify-items: stretch;
   justify-content: stretch;
   align-items: stretch;
-  grid-template-columns:30% 10% 50% 10%;
+  grid-template-columns:30% 10% 60% 0%;
   grid-template-rows: 0% 10% 65% 25%;
   width: 100%;
   font-size: 0.70em;
@@ -153,7 +153,6 @@ footer {
 }
 .messagBox-flex{
   display: flex;
-  background-color:blue;
   justify-content: center;
   align-items: center;
   margin: auto;
@@ -186,7 +185,6 @@ font-weight: normal;
 
 .Other { grid-area: Other;
   display: flex;
-  align-items: flex-end;
  }
 
 
@@ -438,7 +436,7 @@ Media querries
     justify-content: stretch;
     align-items: stretch;
     grid-template-columns:20% 10% 60% 10%;
-    grid-template-rows: 20% 10% 45% 25%;
+    grid-template-rows: 15% 10% 65% 10%;
     width: 100%;
     font-size: 1.5em;
     grid-template-areas: "Photo Title Title Title" "Username Createdat Createdat Createdat" ". Comments Comments Comments" ". Other Other Other";
@@ -451,7 +449,7 @@ Media querries
     justify-items: stretch;
     justify-content: stretch;
     align-items: stretch;
-    grid-template-columns:30% 10% 50% 10%;
+    grid-template-columns:20% 10% 60% 10%;
     grid-template-rows: 0% 10% 65% 25%;
     width: 100%;
     font-size: 1.5em;
@@ -494,6 +492,7 @@ Media querries
   
   .Other { grid-area: Other;
     display: flex;
+    justify-content: space-evenly;
     align-items: flex-end;
    }
   
@@ -516,8 +515,33 @@ Media querries
     margin: 50px;
     margin-top: 40px;
   }
-  
+  /* PROFILE */
 
+  .profil{
+    padding-bottom: 65px;
+    padding-top: 65px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profil-data{
+    width: 60%;
+  }
+
+  .button{
+    margin-top: 25px;
+  }
+
+  .messagBox-flex-profil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 25px;
+    width: 50%;
+  }
   /*LOGIN/SIGNUP FORM*/
   
   .form {

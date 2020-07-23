@@ -1,7 +1,6 @@
 //Imports
 import React, { useState, useEffect, Fragment } from 'react';
 import Header from '../../headers/Header';
-import Footer from '../../headers/Footer';
 import Comments from './Comments';
 import CommentForm from './Commentform';
 import axios from 'axios';
@@ -157,7 +156,7 @@ function Message({ match }) {
                     </div>
 
                 </section >
-                <Footer />
+               
             </div >
         )
     }

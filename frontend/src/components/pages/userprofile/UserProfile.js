@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../../../components/headers/Header';
 import Footer from '../../../components/headers/Footer';
 import UserProfileInfo from './UserProfileInfo';
-import { Link } from 'react-router-dom'
+
 
 /* Displays user profile */
 function UserProfile() {
@@ -10,9 +10,6 @@ function UserProfile() {
         <div className="App">
             <Header />
             <UserProfileInfo />
-            <Link to={"/update"}>
-                <h2>Modifiez votre profil</h2>
-            </Link>
             <Footer />
         </div>
     )

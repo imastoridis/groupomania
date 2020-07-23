@@ -7,6 +7,8 @@ import axios from 'axios';
 import Cookies from 'js-cookie'
 import { Link, useHistory } from "react-router-dom";
 
+import * as Components from '../../../materialui/Imports'
+
 function CommentModify({ match }) {
     useEffect(() => {
     }, [match.params.id])
@@ -57,29 +59,47 @@ function CommentModify({ match }) {
                     <section id="main-container">
                         <Header />
                         <main>
-                            <div id="message-list" className="">
-                                <div id="form">
-                                    <form onSubmit={handleSubmit} className="form_input">
-                                        <label htmlFor="content"></label>
-                                        <input className="form_input-title"
-                                            type="content"
-                                            name="content"
-                                            id="content"
-                                            placeholder="Message*"
-                                            value={state.content}
-                                            onChange={handleChange}
-                                        />
-                                        <div className="form__button">
-                                            <button type="submit" id="submit" className="btn-style">VALIDER</button>
-                                        </div>
-                                        <Link to={`/messages/${match.params.id}`}>
-                                            <div className="form__button">
-                                                <button type="submit" className="btn-style">ANNULER</button>
+                        <Components.Paper elevation={6} className="form-container">
+                                <div className="form">
+                                    <Components.Button color="primary">
+                                        <p>Modifier votre message</p>
+                                    </Components.Button>
+                                    <div className='form-flex'>
+                                        <form onSubmit={handleSubmit} className="form__input">
+                                            <div>Commentaire</div>
+                                            <Components.TextareaAutosize
+                                                className="form__input-title"
+                                                rowsMin={10}
+                                                type="content"
+                                                name="content"
+                                                id="content"
+                                                placeholder="Message*"
+                                                value={state.content}
+                                                onChange={handleChange}
+                                            />
+                                            <div className='button-flex'>
+                                                <div >
+                                                    <Components.Button
+                                                        type="submit"
+                                                        id="submit"
+                                                        variant="contained"
+                                                        color="primary"
+                                                    >VALIDER</Components.Button>
+                                                </div>
+                                                <div >
+                                                    <Link to={`/messages/${messageId}`}>
+                                                        <Components.Button
+                                                            type="submit"
+                                                            variant="contained"
+                                                            color="primary"
+                                                        >ANNULER</Components.Button>
+                                                    </Link>
+                                                </div>
                                             </div>
-                                        </Link>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
+                            </Components.Paper>
                         </main>
                         <Footer />
                     </section>

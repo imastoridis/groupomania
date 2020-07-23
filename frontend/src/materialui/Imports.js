@@ -9,6 +9,10 @@ import TextField from '@material-ui/core/TextField';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 
 export  {
     DeleteIcon,
@@ -21,6 +25,12 @@ export  {
     TextField,
     TextareaAutosize,
     Divider,
-    Box
+    Box,
+    Typography,
+    Card,
+    CardContent,
+    CardActions
+
+
 }
 

@@ -3,8 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import Footer from '../../headers/Footer';
 import axios from 'axios'
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import Header from '../../headers/Header';
+
+import * as Components from '../../../materialui/Imports'
 
 /** New message creation function**/
 
@@ -67,35 +69,60 @@ function MessageNew() {
                 <section id="main-container">
                     <Header />
                     <main>
-                        <section id="message-list" className="">
-                            <div id="form">
-                                <form onSubmit={handleSubmit} className="form_input">
-                                    <label htmlFor="title"></label>
-                                    <input
-                                        type="text"
-                                        name="title"
-                                        id="title"
-                                        placeholder="Titre*"
-                                        required maxLength="45"
-                                        value={state.title}
-                                        onChange={handleChange}
-                                    />
-                                    <label htmlFor="content"></label>
-                                    <input className="form_input-title"
-                                        type="content"
-                                        name="content"
-                                        id="content"
-                                        placeholder="Message*"
-                                        required maxLength="50"
-                                        value={state.content}
-                                        onChange={handleChange}
-                                    />
-                                    <div className="form__button">
-                                        <button type="submit" id="submit" className="btn-style">VALIDER</button>
-                                    </div>
-                                </form>
+                        <Components.Paper elevation={6} className="form-container">
+                            <div className="form">
+                                <Components.Box bgcolor="primary.main" color="primary.contrastText">
+                                    <p>NOUVEAU MESSAGE</p>
+                                </Components.Box>
+                                <div className='form-flex'>
+                                    <form onSubmit={handleSubmit} className="form__input">
+                                        <div>Titre</div>
+                                        <Components.TextareaAutosize
+                                            className="form__input-title"
+                                            rowsMin={3}
+                                            type="text"
+                                            name="title"
+                                            id="title"
+                                            placeholder="Titre*"
+                                            maxLength="28"
+                                            variant="outlined"
+                                            value={state.title}
+                                            onChange={handleChange}
+                                        />
+                                        <div>Message</div>
+                                        <Components.TextareaAutosize
+                                            className="form__input-title"
+                                            rowsMin={10}
+                                            type="content"
+                                            name="content"
+                                            id="content"
+                                            placeholder="Message*"
+                                            value={state.content}
+                                            onChange={handleChange}
+                                        />
+                                        <div className='button-flex'>
+                                            <div >
+                                                <Components.Button
+                                                    type="submit"
+                                                    id="submit"
+                                                    variant="contained"
+                                                    color="primary"
+                                                >VALIDER</Components.Button>
+                                            </div>
+                                            <div >
+                                                <Link to={`/`}>
+                                                    <Components.Button
+                                                        type="submit"
+                                                        variant="contained"
+                                                        color="primary"
+                                                    >ANNULER</Components.Button>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </section>
+                        </Components.Paper>
                     </main>
                     <Footer />
                 </section>

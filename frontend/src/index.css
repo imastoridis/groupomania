@@ -120,8 +120,22 @@ footer {
   justify-items: stretch;
   justify-content: stretch;
   align-items: stretch;
+  grid-template-columns:20% 10% 60% 10%;
+  grid-template-rows: 20% 10% 45% 25%;
+  width: 100%;
+  font-size: 0.70em;
+  grid-template-areas: "Photo Title Title Title" "Username Createdat Createdat Createdat" ". Comments Comments Comments" ". Other Other Other";
+}
+
+
+.grid-container-comment {
+  display: grid;
+  justify-items: left;
+  justify-items: stretch;
+  justify-content: stretch;
+  align-items: stretch;
   grid-template-columns:30% 10% 50% 10%;
-  grid-template-rows: 30% 10% 45% 15%;
+  grid-template-rows: 0% 10% 65% 25%;
   width: 100%;
   font-size: 0.70em;
   grid-template-areas: "Photo Title Title Title" "Username Createdat Createdat Createdat" ". Comments Comments Comments" ". Other Other Other";
@@ -172,7 +186,7 @@ font-weight: normal;
 
 .Other { grid-area: Other;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
  }
 
 
@@ -195,10 +209,7 @@ a {
   margin-top: 40px;
 }
 
-.buttons{
-  display: flex;
-  justify-content: space-evenly;
-}
+
 /*LOGIN/SIGNUP FORM*/
 
 .form {
@@ -288,21 +299,7 @@ a {
 }
 
 
-/*
-#textForm {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-#form textarea {
-  width: 100%;
-  margin: 2rem 0 0 0;
-  border: solid #eeeeee 2px;
-  font-family: 'Abel', sans-serif;
-}
-*/
 /* BUTTON */
 .btn {
   text-align: center;
@@ -326,6 +323,7 @@ a {
   color: black;
   border: solid #212931 ;
 }
+
 
 /***********************************************
 Media querries
@@ -352,33 +350,6 @@ Media querries
 
 /* Desktop Styles */
 @media only screen and (min-width: 961px) {
-  .header {
-    align-items: center;
-    margin-top: 3em;
-  }
-  
-  .header__banner {
-    text-align: center;
-    width: 90%;
-    justify-content: center;
-    margin: auto;
-  }
-  
-  .header__banner--title {
-    font-size: 1.6rem;
-    font-weight: 900;
-    letter-spacing: 1px;
-    color: #1976D2;
-    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-  }
-  
-  .header__banner--subtitle {
-    font-size: 1.5rem;
-    line-height: 1;
-    letter-spacing: -1px;
-    color: #fff;
-    overflow-y: hidden;
-  }
   
   .navbar {
     background-color: #1976D2;
@@ -389,11 +360,11 @@ Media querries
     display: flex;
     justify-content: space-evenly;
   }
-  
+
   .nav__list-ul {
     list-style: none;
-  
     display: flex;
+    flex-direction: row;
     width: 100%;
     justify-content: space-around;
   }
@@ -438,7 +409,7 @@ Media querries
   footer {
     background-color: #1976D2;
     color: #f5f5f5;
-   padding: 15px;
+    margin-top: 50px;
     display: flex;
     justify-content: space-around!important;
     flex-direction: row!important;
@@ -455,72 +426,80 @@ Media querries
     display: flex;
     width: 40%;
     margin: auto;
-  
     margin-top: 90px;
   }
   
   /* Messages */
-  .messageBox {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    display: flex;
-    flex-direction: column;
-    width: 60%;
-    margin: auto;
-    background-color: 	white;
-    /*box-shadow: 0.5px 0.5px 0.5px 0.5px grey;*/
-    opacity: 0.95;
+
+  .grid-container {
+    display: grid;
+    justify-items: left;
+    justify-items: stretch;
+    justify-content: stretch;
+    align-items: stretch;
+    grid-template-columns:20% 10% 60% 10%;
+    grid-template-rows: 20% 10% 45% 25%;
+    width: 100%;
+    font-size: 1.5em;
+    grid-template-areas: "Photo Title Title Title" "Username Createdat Createdat Createdat" ". Comments Comments Comments" ". Other Other Other";
   }
+  
+  
+  .grid-container-comment {
+    display: grid;
+    justify-items: left;
+    justify-items: stretch;
+    justify-content: stretch;
+    align-items: stretch;
+    grid-template-columns:30% 10% 50% 10%;
+    grid-template-rows: 0% 10% 65% 25%;
+    width: 100%;
+    font-size: 1.5em;
+    grid-template-areas: "Photo Title Title Title" "Username Createdat Createdat Createdat" ". Comments Comments Comments" ". Other Other Other";
+  }
+  
+
+  .messagBox-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 15px;
+    width: 70%;
+
+  }
+  .Photo { grid-area: Photo; }
+  
+  .Username { grid-area: Username;
+    font-size: 0.65rem; 
+  }
+  
+  .Comments { grid-area: Comments; 
+  font-size: 1.2rem;
+  font-weight: normal;
+  }
+  
+  .Createdat { grid-area: Createdat;
+    font-size: 0.70rem; 
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .Title { grid-area: Title;
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+    
+  }
+  
+  .Other { grid-area: Other;
+    display: flex;
+    align-items: flex-end;
+   }
   
   a {
     color: black;
     text-decoration: none; /* no underline */
-  }
-  .messageBox__up{
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 10px;
-    font-weight: 400;
-  }
-  
-  .messageBox__up-photo{
-    display: flex;
-    width: 30%; 
-  }
-  
-  .messageBox__up-username{
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-  }
-  
-  .messageBox__fields{
-    display: flex;
-    justify-content: flex-start;
-    font-weight: 400;
-  }
-  
-  .messageBox__middle{
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    padding: 10px;
-    font-weight: 400;
-  }
-  
-  .messageBox__down{
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
-    padding: 10px;
-  }
-  
-  .space-between-messages {
-    background-color: gray;
-    opacity: 20%;
-    padding-bottom: 10px;
-    width:60%;
-    margin: auto;
   }
   
   .product__specs {
@@ -530,7 +509,7 @@ Media querries
     color: #221812;
   }
   
-  #message-list {
+  .message-list {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -538,91 +517,52 @@ Media querries
     margin-top: 40px;
   }
   
-  .buttons{
-    display: flex;
-    justify-content: space-evenly;
-  }
+
   /*LOGIN/SIGNUP FORM*/
   
   .form {
     display: flex;
-    justify-content: flex-end;
     flex-direction: column;
     margin: auto;
     width: 100%;
+    text-align: center;
+    margin: 50px;
+    margin-top: 40px;
+ 
   }
   
-  
-  .form__button{
-    justify-content : flex-end;
-    width: 60%;
+  .form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: auto;
-    margin-bottom: 25px;
-    margin-top: 25px;
+    margin-top: 55px;
+    width: 50%;
   }
-  
-  
-  .form__comment-button{
-    display: flex;
-    flex-direction: column;
-    justify-content : flex-start;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    
-  }
-  
-  .form__comment-button-style1{
-    display: flex;
-    justify-content :  center;
-    width: 30%;
-    border: none;
-    background-color: #212931;
-    transition: background-color 200ms ease-in-out;
-    cursor: pointer;
-    color: white;
-    margin: 0rem 5px 0rem 0;
-    border: solid #212931 ;
-    line-height: 1.5rem;
-    border-radius: 7px;  
-  }
-  
-  .form__comment-button-style:hover {
-    background-color: #FFFAFA;
-    color: black;
-    border: solid #212931 ;
-  }
+
   .form__input{
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    width: 100%;
+    justify-content: center;
+    width: 70%;
+    margin-top: 25px;
+  
+  }
+
+  .form-flex{
+    display: flex;
+    justify-content: center;
   }
   
   .form__input-title {
     display: flex;
-    width: 99%;
+    margin-top: 25px;
     margin: auto;
     font-family: 'Roboto', sans-serif;
    
   }
-  
-  .form__comment-button-style{
-    display: flex;
-    justify-content : center;
-    margin: auto;
-    width: 20%;
-    border: none;
-    height: auto;
-    background-color: #212931;
-    transition: background-color 200ms ease-in-out;
-    cursor: pointer;
-    color: white;
-    border: solid #212931 ;
-    margin: 0rem 5px 0rem 0;
-    line-height: 1.5rem;
-    border-radius: 7px;
-    
-  }
+
+
   .IconLabelButtons{
     display: flex;
     flex-direction: row;
@@ -631,44 +571,12 @@ Media querries
   }
   
   
-  /*
-  #textForm {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  #form textarea {
-    width: 100%;
-    margin: 2rem 0 0 0;
-    border: solid #eeeeee 2px;
-    font-family: 'Abel', sans-serif;
-  }
-  */
   /* BUTTON */
-  .btn {
-    text-align: center;
-  }
-  .btn-style {
-    width: 50%;
-    border: none;
-    height: auto;
-    margin: 1rem 0 2rem 0;
-    line-height: 1.5rem;
-    background-color: #212931;
-    transition: background-color 200ms ease-in-out;
-    cursor: pointer;
-    color: white;
-    border: solid #212931 ;
-    border-radius: 7px
-  }
-  
-  .btn-style:hover {
-    background-color: #FFFAFA;
-    color: black;
-    border: solid #212931 ;
-  }
 
+  .button-flex {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-evenly;
+  }
 
 }

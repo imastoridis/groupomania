@@ -66,7 +66,6 @@ function CommentModify({ match }) {
                                             name="content"
                                             id="content"
                                             placeholder="Message*"
-                                            maxLength="50"
                                             value={state.content}
                                             onChange={handleChange}
                                         />

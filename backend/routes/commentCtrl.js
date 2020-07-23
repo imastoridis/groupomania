@@ -154,7 +154,7 @@ module.exports = {
                             done(messageFound);
                         })
                         .catch(err => {
-                            res.status(500).json({ 'error': 'Modification du message non possible' });
+                            res.status(500).json({ 'error': 'Modification du message impossible' });
                         });
                 } else {
                     res.status(404).json({ 'error': 'Message non trouvé' });

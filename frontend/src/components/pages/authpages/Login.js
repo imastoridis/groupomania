@@ -7,9 +7,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
+import * as Components from '../../../materialui/Imports'
 import logo from '../../../images/icon-left-font-monochrome-black.png'
 /** Login function **/
 
@@ -71,16 +69,16 @@ function Login(props) {
             <section id="main-container">
                 <Header />
                 <main>
-                    <Paper elevation={9} className="login-box">
-                        <section id="message-list" >
+                    <Components.Paper elevation={9} className="login-box">
+                        <section className="message-list" >
                             <img src={logo} alt="logo" className="login-logo"></img>
-                            <Button color="primary">
+                            <Components.Button color="primary">
                                 <p>Connexion</p>
-                            </Button>
-                            <div id="form">
+                            </Components.Button>
+                            <div >
                                 <form className="form_input">
                                     <div>
-                                        <TextField
+                                        <Components.TextField
                                             type="email"
                                             name="email"
                                             id="email"
@@ -91,7 +89,7 @@ function Login(props) {
                                             label="email" />
                                     </div>
                                     <div>
-                                        <TextField
+                                        <Components.TextField
                                             type="password"
                                             name="password"
                                             id="password"
@@ -103,14 +101,14 @@ function Login(props) {
                                         />
                                     </div>
                                     <div className="form__button">
-                                        <Button
+                                        <Components.Button
                                             variant="outlined"
                                             color="primary"
                                             type="submit"
                                             onClick={handleSubmitClick}
                                             id="submit"
                                         >VALIDER
-                                          </Button>
+                                          </Components.Button>
                                     </div>
                                     <div className="alert alert-success mt-2" style={{ display: state.successMessage ? 'block' : 'none' }} role="alert">
                                         {state.successMessage}
@@ -118,14 +116,14 @@ function Login(props) {
                                     <div className="registerMessage">
                                         <span>Vous n'avez pas encore de compte? </span>
                                         <Link to={'/'}>
-                                            <Button color="primary">Inscrivez-vous</Button>
+                                            <Components.Button color="primary">Inscrivez-vous</Components.Button>
                                         </Link>
                                     </div>
                                 </form>
                             </div>
 
                         </section>
-                    </Paper>
+                    </Components.Paper>
                 </main>
                 <Footer />
             </section>

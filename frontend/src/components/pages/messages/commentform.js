@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Divider from '@material-ui/core/Divider';
-
+import Button from '@material-ui/core/Button';
 
 /** Comment form. It displays with button click on Message Component */
 function CommentForm({ props }) {
@@ -80,10 +80,13 @@ function CommentForm({ props }) {
                         />
                     </div>
                     <div className="form__comment-button">
-                        <button type="submit"
+                        <Button 
+                        type="submit"
+                        variant="contained"
+                        color="primary"
                             onClick={handleSubmit}
                             id="submit"
-                            className="form__comment-button-style">Valider</button>
+                            className="form__comment-button-style">Valider</Button>
                     </div>
                 </form>
                 <Divider />

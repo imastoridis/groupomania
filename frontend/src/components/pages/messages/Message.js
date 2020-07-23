@@ -3,17 +3,12 @@ import React, { useState, useEffect, Fragment } from 'react';
 import Header from '../../headers/Header';
 import Footer from '../../headers/Footer';
 import Comments from './Comments';
-import axios from 'axios';
 import CommentForm from './Commentform';
+import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import SaveIcon from '@material-ui/icons/Save';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import * as Components from '../../../materialui/Imports'
 
 // Displays one message after clicking on dashboard
 function Message({ match }) {
@@ -80,97 +75,90 @@ function Message({ match }) {
             });
     }
 
+
+    /*{messages.map(message => (message.Users).map(username =>
+        <div className="" key={username}>Username: {username.username}</div>
+    ))}*/
     if (error) {
         return <div><h3 className="error">{"Un problème technique ne permet pas d'accéder au service que vous désirez. Merci de réessayer ultérieurement"}</h3> </div>;
     } else {
         return (
-            <div className="App">
-                <section id="main-container">
+            <div>
+                <section>
                     <Header />
-                    <Paper elevation={4} className="messageBox" >
-                        <div key={messages.id}>
-                            <div className="messageBox__up">
-                                <div className="messageBox_up-photo">
-                                    <div>Photo</div>
-                                </div>
-                                <div className="messageBox_up-username">
-                                    <div className="messageBox__fields">Username : {messages.username}</div>
-                                    <div className="messageBox__fields">{messages.createdAt}</div>
-                                </div>
-                            </div>
-                            <hr />
-                            <div className="messageBox__middle">
-                                <h2 className="messageBox__fields">{messages.title}</h2>
-                                <h3 className="messageBox__fields">{messages.content}</h3>
-                            </div>
-                            <hr />
-                            <div className="messageBox__down">
-                                <div>Likes : {messages.likes}</div>
-                                <div>Messages : number</div>
-                            </div>
-                            {userIdToken.userId === messages.UserId ? (
-                                //If user wrote the message, shows modify/delete buttons
-                                <Fragment>
-                                    < div className="buttons" >
-                                        <div>
-                                            <Link to={`/modify/${messages.id}`}>
-                                                <Button
-                                                    variant="contained"
+                    <main>
+                        <div key={messages.id} className="message-box" >
+                            <Components.Paper elevation={6} className="messagBox-flex">
+                                <div className="grid-container" >
+                                    <div className="Photo">
+                                        <div>Photo</div>
+                                    </div>
+                                    <div className="Username">
+                                    </div>
+                                    <div className="Comments">
+                                        <h3 className="">{messages.content}</h3>
+                                    </div>
+                                    <div className="Createdat">
+                                        <div className="">{messages.createdAt}</div>
+                                    </div>
+                                    <div className="Title">
+                                        <h2 className="">{messages.title}</h2>
+                                    </div>
+                                    <div className="Other">
+                                        {userIdToken.userId === messages.UserId ? (
+                                            //If user wrote the message, shows modify/delete buttons
+                                            <Fragment>
+                                                <Link to={`/modify/${messages.id}`}>
+                                                    <Components.IconButton
+                                                        color="primary"                                                        >
+                                                        <Components.CreateIcon />
+                                                    </Components.IconButton>
+                                                </Link >
+                                                <Components.IconButton
+                                                    color="secondary"
+                                                    onClick={deleteMessage}>
+                                                    <Components.DeleteIcon />
+                                                </Components.IconButton>
+                                                <Components.IconButton
                                                     color="primary"
-                                                    size="large"
-                                                    startIcon={<SaveIcon />}>
-                                                    Modify
-                                                  </Button>
-                                            </Link >
-                                        </div>
-                                        <div>
-                                            <Button
-                                                variant="contained"
-                                                color="secondary"
-                                                startIcon={<DeleteIcon />}
-                                                onClick={deleteMessage}>
-                                                Delete
-                                             </Button>
-                                        </div>
-                                        <div>
-                                            <Button
-                                                //variant="contained"
-                                                color="primary"
-                                                startIcon={<ThumbUpIcon />}
-                                                onClick={deleteMessage}>
-                                            </Button>
-                                        </div>
-                                        <div>
-                                            <Button
-                                                //variant="contained"
-                                                color="secondary"
-                                                startIcon={<ThumbDownIcon />}
-                                                onClick={deleteMessage}>
-                                            </Button>
-                                        </div>
-                                    </div >
-                                </Fragment>
-                            ) : (
-                                    <Fragment>
-                                    </Fragment>
-                                )}
+                                                    onClick={deleteMessage}>
+                                                    <Components.ThumbUpIcon />
+                                                </Components.IconButton>
+                                                <Components.IconButton
+                                                    color="secondary"
+                                                    onClick={deleteMessage}>
+                                                    <Components.ThumbDownIcon />
+                                                </Components.IconButton>
+                                            </Fragment>
+                                        ) : (
+                                                <Fragment>
+                                                </Fragment>
+                                            )}
+                                        <div>Likes : {messages.likes}</div>
+                                    </div>
+                                </div>
+                            </Components.Paper>
                         </div>
-                    </Paper>
+                    </main>
                     <div className="form__button">
                         <div className="form__comment-button">
-                            <button type="submit"
+                            <Components.Button
+                                variant="contained"
+                                type="submit"
+                                color="primary"
                                 onClick={() => setShowText(!showText)}
                                 id="submit"
-                                className="form__comment-button-style1">Laisser un commentaire</button>
+                                className="form__comment-button-style1">Laisser un commentaire</Components.Button>
                             {showText && <div><CommentForm props={propId} /></div>}
                         </div>
                     </div>
                     <div>
                         <Comments />
                     </div>
-                    <Footer />
-                </section>
-            </div>
+
+                </section >
+                <Footer />
+            </div >
         )
     }
 }

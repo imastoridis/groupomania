@@ -3,12 +3,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie'
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import SaveIcon from '@material-ui/icons/Save';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+
+import * as Components from '../../../materialui/Imports'
 import { Link } from 'react-router-dom'
 
 /* Displays the comments under the message */
@@ -80,82 +76,76 @@ function Comments() {
     // {messages.map(message => (message.Users).map(username =>
     return (
         <div >
-            {comments.map(comment =>
-                <div className="App" key={comment.id}>
-                    <section id="main-container">
-                        <Paper elevation={4} className="messageBox" >
-                            <div >
-                                <div className="messageBox__up">
-                                    <div className="messageBox__up-photo">
-                                        <div >Photo</div>
+            <section>
+                <main>
+                    {comments.map(comment =>
+                        <div key={comment.id} className="message-box" >
+                            <Components.Paper elevation={6} className="messagBox-flex">
+                                <div key={comment.id} className="grid-container-comment" >
+                                    <div className="Photo">
+                                        <div>Photo</div>
                                     </div>
-                                    <div className="messageBox__up-username">
-                                        <div className="messageBox__fields">Username : {comment.UserId}</div>
-                                        <div className="messageBox__fields">{comment.createdAt}</div>
+                                    <div className="Username">
+                                        {comments.map(comment => (comment.Users).map(username =>
+                                            <div className="" key={username}>Username: {username.username}</div>
+                                        ))}
                                     </div>
-                                </div>
-                                <hr />
-                                <div className="messageBox__middle">
-                                    <h3 className="messageBox__fields">{comment.content}</h3>
-                                </div>
-                                <hr />
-                                <div className="messageBox__down">
-                                    <div>Likes : {comment.likes} </div>
-                                    <div>MessageId : {comment.MessageId}</div>
-                                </div>
-                            </div>
-                            {userIdToken.userId === comment.userId ? (
-                                //If user wrote the comment, shows modify/delete buttons
-                                <Fragment>
-                                    <div className="buttons">
-                                        <div >
-                                            <Link to={`/modifycomment/${comment.id}`}>
-                                                <Button
+                                    <div className="Comments">
+                                        <h3 className="">{comment.content}</h3>
+                                    </div>
+                                    <div className="Createdat">
+                                        <div className="">{comment.createdAt}</div>
+                                    </div>
+                                    <div className="Title">
+                                        <h2 className="">{comment.title}</h2>
+                                    </div>
+                                    <div className="Other">
+                                        {userIdToken.userId === comment.userId ? (
+                                            //If user wrote the comment, shows modify/delete buttons
+                                            <Fragment>
+                                                <Link to={`/modifycomment/${comment.id}`}>
+                                                    <Components.IconButton
+                                                        variant="contained"
+                                                        color="primary"
+                                                        size="small"
+                                                    >
+                                                        <Components.CreateIcon />
+                                                    </Components.IconButton>
+                                                </Link >
+                                                <Components.IconButton
                                                     variant="contained"
+                                                    color="secondary"
+                                                    size="small"
+                                                    onClick={e => deleteComment(comment.id)}>
+                                                    <Components.DeleteIcon />
+                                                </Components.IconButton >
+                                                <Components.IconButton
                                                     color="primary"
-                                                    size="large"
-                                                    startIcon={<SaveIcon />}>
-                                                    Modify
-                                                </Button>
-                                            </Link >
-                                        </div>
-                                        <div>
-                                            <Button
-                                                variant="contained"
-                                                color="secondary"
-                                                startIcon={<DeleteIcon />}
-                                                onClick={e => deleteComment(comment.id)}>
-                                                Delete
-                                            </Button>
-                                        </div>
-                                        <div>
-                                            <Button
-                                                //variant="contained"
-                                                color="primary"
-                                                startIcon={<ThumbUpIcon />}>
-                                            </Button>
-                                        </div>
-                                        <div>
-                                            <Button
-                                                //variant="contained"
-                                                color="secondary"
-                                                startIcon={<ThumbDownIcon />}>
-                                            </Button>
-                                        </div>
+                                                    size="small">
+                                                    <Components.ThumbUpIcon />
+                                                </Components.IconButton>
+                                                <Components.IconButton
+                                                    color="secondary"
+                                                    size="small">
+                                                    <Components.ThumbDownIcon />
+                                                </Components.IconButton>
+                                            </Fragment>
+                                        ) : (
+                                                <Fragment>
+                                                </Fragment>
+                                            )}
+                                        <div>Likes : {comment.likes}</div>
                                     </div>
-
-                                </Fragment>
-                            ) : (
-                                    <Fragment>
-                                    </Fragment>
-                                )}
-                        </Paper>
-                        <div className="space-between-messages"></div>
-                    </section>
-                </div>
-            )}
+                                </div>
+                            </Components.Paper>
+                        </div>
+                    )}
+                </main>
+            </section>
         </div>
     )
+
 }
+
 
 export default Comments

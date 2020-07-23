@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   var Comment = sequelize.define('Comment', {
     userId: DataTypes.INTEGER,
-    content: DataTypes.STRING,
+    content: DataTypes.TEXT,
     attachment: DataTypes.STRING,
     likes: DataTypes.INTEGER
   }, {

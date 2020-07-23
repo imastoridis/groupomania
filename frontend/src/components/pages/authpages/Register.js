@@ -6,10 +6,9 @@ import Footer from '../../headers/Footer';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
+import * as Components from '../../../materialui/Imports'
 import logo from '../../../images/icon-left-font-monochrome-black.png'
-import TextField from '@material-ui/core/TextField';
+
 
 /**Register function **/
 
@@ -64,16 +63,16 @@ function Register(props) {
             <section id="main-container">
                 <Header />
                 <main>
-                    <Paper elevation={9} className="login-box">
+                    <Components.Paper elevation={9} className="login-box">
                         <section id="message-list" className="">
                             <img src={logo} alt="logo" className="login-logo"></img>
-                            <Button color="primary">
+                            <Components.Button color="primary">
                                 <p>Inscription</p>
-                            </Button>
+                            </Components.Button>
                             <div id="form">
                                 <form className="form_input">
                                     <div>
-                                        <TextField
+                                        <Components.TextField
                                             type="username"
                                             name="username"
                                             id="username"
@@ -83,7 +82,7 @@ function Register(props) {
                                             required />
                                     </div>
                                     <div>
-                                        <TextField
+                                        <Components.TextField
                                             type="email"
                                             name="email"
                                             id="email"
@@ -93,7 +92,7 @@ function Register(props) {
                                             required />
                                     </div>
                                     <div>
-                                        <TextField
+                                        <Components.TextField
                                             type="password"
                                             name="password"
                                             id="password"
@@ -103,13 +102,13 @@ function Register(props) {
                                             required />
                                     </div>
                                     <div className="form__button">
-                                        <Button
+                                        <Components.Button
                                             type="submit"
                                             onClick={handleSubmitClick}
                                             id="submit"
                                             variant="outlined"
                                             color="primary">VALIDER
-                                        </Button>
+                                        </Components.Button>
                                     </div>
                                 </form>
                                 <div className="alert alert-success mt-2" style={{ display: state.successMessage ? 'block' : 'none' }} role="alert">
@@ -118,12 +117,12 @@ function Register(props) {
                                 <div className="mt-2">
                                     <span>Vous avez déjà un compte? </span>
                                     <Link to={'/login'}>
-                                        <Button color="primary">Connectez-vous</Button>
+                                        <Components.Button color="primary">Connectez-vous</Components.Button>
                                     </Link>
                                 </div>
                             </div>
                         </section>
-                    </Paper>
+                    </Components.Paper>
                 </main>
                 <Footer />
             </section>

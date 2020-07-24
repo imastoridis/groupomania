@@ -6,12 +6,10 @@ function Footer() {
     return (
         <div>
             <footer className="footer">
-                <p>MENTION LEGALES</p>
-                <p>CONTACTEZ NOUS</p>
                 <div>
                     <Link to={'/adminlogin'} >
                         <Button className="navbar__style">
-                            <h2 className="hover navbar__style">Connexion</h2>
+                            <h2 className="hover navbar__style">Connexion Admin</h2>
                         </Button>
                     </Link>
                 </div>

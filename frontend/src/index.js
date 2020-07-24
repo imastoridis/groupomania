@@ -40,10 +40,14 @@ const render = () => {
 if (token) {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   axios.post("http://localhost:8080/api/users/me").then(res => {
-    console.log(res)
-    store.dispatch({ type: "SET_LOGIN", payload: res.data });
-    console.log(res.data)
-    render();
+    console.log(res.data.email)
+    if (res.data.email == 'admin@admin.com') {
+      store.dispatch({ type: "SET_LOGIN_ADMIN", payload: res.data });
+      render();
+    } else {
+      store.dispatch({ type: "SET_LOGIN", payload: res.data });
+      render();
+    }
   });
 } else {
   render();

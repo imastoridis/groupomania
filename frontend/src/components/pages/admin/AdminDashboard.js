@@ -30,7 +30,7 @@ function AdminDashboard(params) {
     const [error, setError] = useState(null);
     const stateStore = store.getState()
     let history = useHistory();
-    
+
     //Gets all the messages
     const FetchMessages = (e) => {
         const messageData = {
@@ -54,11 +54,11 @@ function AdminDashboard(params) {
     }
 
     //Deletes message
-    const deleteMessage = () => {
-        axios.delete(`http://localhost:8080/api/messages/${messages.id}`) //To check
+    const deleteMessage = (props) => {
+        axios.delete(`http://localhost:8080/api/messages/${props}`) //To check
             .then(function (response) {
                 console.log(response)
-                history.push('/messages')
+                window.location.reload()
             })
             .catch(function (error) {
                 console.log(error);
@@ -97,14 +97,12 @@ function AdminDashboard(params) {
                                             <div className="Other">
                                                 <Components.IconButton
                                                     color="secondary"
-                                                    onClick={deleteMessage}>
+                                                    onClick={()=> deleteMessage(message.id)}>
                                                     <Components.DeleteIcon />
                                                 </Components.IconButton>
                                             </div>
                                         </div>
-
                                     </Components.Paper>
-
                                 </div>
                             </div>
                         )}
@@ -125,7 +123,6 @@ function AdminDashboard(params) {
                             id="submit">Retour
                     </Components.Button>
                     </Link>
-
                 </div>
             </Components.Paper>
         )

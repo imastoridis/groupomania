@@ -6,7 +6,7 @@ import Footer from '../../headers/Footer';
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { connect } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import * as Components from '../../../materialui/Imports'
 import logo from '../../../images/icon-left-font-monochrome-black.png'
 
@@ -46,7 +46,6 @@ function Login(props) {
             .then(function (response) {
                 var adminData = response.config.data
                 const admin = JSON.parse(adminData)
-                console.log(admin)
                 if (admin.email == 'admin@admin.com' && admin.password == 'admin2') {
                     setState(prevState => ({
                         ...prevState,
@@ -112,13 +111,7 @@ function Login(props) {
                                             id="submit"
                                         >VALIDER
                                           </Components.Button>
-                                    </div>
-                                    <div className="login__input">
-                                        <span>Vous n'avez pas encore de compte? </span>
-                                        <Link to={'/'}>
-                                            <Components.Button color="primary">Inscrivez-vous</Components.Button>
-                                        </Link>
-                                    </div>
+                                    </div>                           
                                 </form>
                             </div>
 
@@ -133,7 +126,7 @@ function Login(props) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setLogin: user => dispatch({ type: "SET_LOGIN_ADMIN", payload: user })
+        setLogin: user => dispatch({ type: "SET_LOGIN_ADMIN", payload: user})
     };
 };
 

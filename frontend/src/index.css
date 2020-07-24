@@ -427,7 +427,6 @@ Media querries
     grid-template-areas: "Photo Title Title Title" "Username Createdat Createdat Createdat" ". Comments Comments Comments" ". Other Other Other";
   }
   
-  
   .grid-container-comment {
     display: grid;
     justify-items: left;
@@ -441,7 +440,6 @@ Media querries
     grid-template-areas: "Photo Title Title Title" "Username Createdat Createdat Createdat" ". Comments Comments Comments" ". Other Other Other";
   }
   
-
   .messagBox-flex{
     display: flex;
     justify-content: center;
@@ -632,5 +630,13 @@ Media querries
 
   .admin-items{
     margin-bottom: 15px;
+  }
+
+  
+  .logo{
+    width: 20%;
+    margin-bottom: 30px;
+  
+
   }
 }

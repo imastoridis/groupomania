@@ -10,6 +10,7 @@ function Header(props) {
         e.preventDefault();
         Cookies.remove("token");
         props.logout();
+        window.location.reload()
     };
     return (
         <div>

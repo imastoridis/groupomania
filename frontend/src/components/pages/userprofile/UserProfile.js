@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from '../../../components/headers/Header';
-import Footer from '../../../components/headers/Footer';
 import UserProfileInfo from './UserProfileInfo';
 
 
@@ -10,7 +9,6 @@ function UserProfile() {
         <div className="App">
             <Header />
             <UserProfileInfo />
-            <Footer />
         </div>
     )
 }

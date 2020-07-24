@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Header from '../../headers/Header';
-import Footer from '../../headers/Footer';
 import axios from 'axios';
 import { Link, useHistory } from "react-router-dom";
 
@@ -90,7 +89,7 @@ function MessageModify({ match }) {
                                                 value={state.content}
                                                 onChange={handleChange}
                                             />
-                                            <div className='button-flex'>
+                                            <div className='form__button-comment2'>
                                                 <div >
                                                     <Components.Button
                                                         type="submit"
@@ -114,7 +113,6 @@ function MessageModify({ match }) {
                                 </div>
                             </Components.Paper>
                         </main>
-                        <Footer />
                     </section>
                 </div>
             </div>

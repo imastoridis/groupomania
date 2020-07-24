@@ -64,13 +64,13 @@ function Register(props) {
                 <Header />
                 <main>
                     <Components.Paper elevation={9} className="login-box">
-                        <section id="message-list" className="">
+                        <section className="message-list">
                             <img src={logo} alt="logo" className="login-logo"></img>
                             <Components.Button color="primary">
                                 <p>Inscription</p>
                             </Components.Button>
-                            <div id="form">
-                                <form className="form_input">
+                            <div>
+                                <form className="login__input">
                                     <div>
                                         <Components.TextField
                                             type="username"
@@ -101,7 +101,7 @@ function Register(props) {
                                             onChange={handleChange}
                                             required />
                                     </div>
-                                    <div className="form__button">
+                                    <div className="login__button">
                                         <Components.Button
                                             type="submit"
                                             onClick={handleSubmitClick}
@@ -111,10 +111,7 @@ function Register(props) {
                                         </Components.Button>
                                     </div>
                                 </form>
-                                <div className="alert alert-success mt-2" style={{ display: state.successMessage ? 'block' : 'none' }} role="alert">
-                                    {state.successMessage}
-                                </div>
-                                <div className="mt-2">
+                                <div className="login__input">
                                     <span>Vous avez déjà un compte? </span>
                                     <Link to={'/login'}>
                                         <Components.Button color="primary">Connectez-vous</Components.Button>

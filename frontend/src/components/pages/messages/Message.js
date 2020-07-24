@@ -6,6 +6,7 @@ import CommentForm from './Commentform';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import moment from 'moment';
 
 import * as Components from '../../../materialui/Imports'
 
@@ -98,7 +99,7 @@ function Message({ match }) {
                                         <h3 className="">{messages.content}</h3>
                                     </div>
                                     <div className="Createdat">
-                                        <div className="">{messages.createdAt}</div>
+                                        <div className="">Crée le : {moment(messages.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss a")}</div>
                                     </div>
                                     <div className="Title">
                                         <h2 className="">{messages.title}</h2>
@@ -133,22 +134,22 @@ function Message({ match }) {
                                                 <Fragment>
                                                 </Fragment>
                                             )}
-                                        <div>Likes : {messages.likes}</div>
                                     </div>
                                 </div>
                             </Components.Paper>
                         </div>
                     </main>
-                    <div className="form__button">
-                        <div className="form__comment-button">
+                    <div className="form__button-comment">
+                        <div className="form__button-newcomment">
                             <Components.Button
                                 variant="contained"
                                 type="submit"
                                 color="primary"
                                 onClick={() => setShowText(!showText)}
                                 id="submit"
-                                className="form__comment-button-style1">Laisser un commentaire</Components.Button>
-                            {showText && <div><CommentForm props={propId} /></div>}
+                            >Laisser un commentaire</Components.Button>
+                            {showText &&
+                                <div className="section2" ><CommentForm props={propId} /></div>}
                         </div>
                     </div>
                     <div>
@@ -156,7 +157,7 @@ function Message({ match }) {
                     </div>
 
                 </section >
-               
+
             </div >
         )
     }

@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import Paper from '@material-ui/core/Paper';
 import { connect } from "react-redux";
+import moment from 'moment';
 
 //Fetches and displays all messages on the dashboard
 function Dashboard(params) {
     useEffect(() => {
         FetchMessages(params);
-        console.log(params)
     }, []);
 
     //Set the state
@@ -24,7 +24,6 @@ function Dashboard(params) {
         username: ""
 
     })
-
     //Declarations
     const [messages, setMessages] = useState([]);
     const [error, setError] = useState(null);
@@ -41,11 +40,10 @@ function Dashboard(params) {
             'username': state.username
         }
         //[0].Users[0].username
-        axios.get("http://localhost:8080/api/messages", messageData) //Fetches all messages from API
+        axios.get("http://localhost:8080/api/messages", messageData)
             .then(function (response) {
                 const messages = response.data
-                setMessages(messages) //Sets the data in "messages"
-                console.log(messages)
+                setMessages(messages) 
             })
             .catch(function (error) {
                 setError(error);
@@ -64,7 +62,6 @@ function Dashboard(params) {
                         {messages.map(message =>
                             <div key={message.id} className="message-box" >
                                 <div >
-
                                     <Paper elevation={6} className="messagBox-flex">
                                         <Link to={`/messages/${message.id}`} >
                                             <div key={message.id} className="grid-container" >
@@ -80,13 +77,12 @@ function Dashboard(params) {
                                                     <h3 className="">{message.content}</h3>
                                                 </div>
                                                 <div className="Createdat">
-                                                    <div className="">{message.createdAt}</div>
+                                                    <div className="">Crée le : {moment(message.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss a")}</div>
                                                 </div>
                                                 <div className="Title">
                                                     <h2 className="">{message.title}</h2>
                                                 </div>
                                                 <div className="Other">
-                                                    <div>Likes : {message.likes}</div>
                                                 </div>
                                             </div>
                                         </Link>

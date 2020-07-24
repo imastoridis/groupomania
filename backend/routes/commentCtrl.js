@@ -80,18 +80,11 @@ module.exports = {
 
     //Lists all Comments on message page
     listComments: function (req, res) {
-
-        var fields = req.query.fields;
-        var limit = parseInt(req.query.limit);
-        var offset = parseInt(req.query.offset);
         var order = req.query.order;
 
         //Verification that messages are not empty 
         models.Comment.findAll({
-            /*order: [(order != null) ? order.split(':') : ['content', 'ASC']],
-            attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
-            limit: (!isNaN(limit)) ? limit : null,
-            offset: (!isNaN(offset)) ? offset : null,*/
+            order: [['createdAt', 'DESC']],
             include: [{
                 model: models.User,
                 attributes: ['username']

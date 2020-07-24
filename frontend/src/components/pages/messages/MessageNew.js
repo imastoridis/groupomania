@@ -71,9 +71,9 @@ function MessageNew() {
                     <main>
                         <Components.Paper elevation={6} className="form-container">
                             <div className="form">
-                                <Components.Box bgcolor="primary.main" color="primary.contrastText">
+                                <Components.Button color="primary" >
                                     <p>NOUVEAU MESSAGE</p>
-                                </Components.Box>
+                                </Components.Button>
                                 <div className='form-flex'>
                                     <form onSubmit={handleSubmit} className="form__input">
                                         <div>Titre</div>
@@ -100,7 +100,7 @@ function MessageNew() {
                                             value={state.content}
                                             onChange={handleChange}
                                         />
-                                        <div className='button-flex'>
+                                        <div className='form__button-comment2'>
                                             <div >
                                                 <Components.Button
                                                     type="submit"

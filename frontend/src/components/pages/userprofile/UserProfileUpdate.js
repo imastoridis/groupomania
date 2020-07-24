@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Header from '../../../components/headers/Header';
-import Footer from '../../../components/headers/Footer';
 import axios from 'axios'
 import UserProfileInfo from './UserProfileInfo';
 import * as Components from '../../../materialui/Imports'
@@ -84,7 +83,7 @@ function UserProfileUpdate() {
                                     className="form__input-title"
                                     value={state.bio}
                                     onChange={handleInput} />
-                                <div className="button">
+                                <div className="form__button-comment">
                                     <Components.Button
                                         type="submit"
                                         id="submit"
@@ -97,7 +96,6 @@ function UserProfileUpdate() {
                     </Components.Paper>
                 </div>
             </main>
-            <Footer />
         </div>
     )
 }

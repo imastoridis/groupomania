@@ -4,7 +4,8 @@ import AllReducers from './reducers/AllReducers'
 const initialStates = {
     auth: {
         loggedIn: false,
-        user: {}
+        user: {},
+        isAdmin : false
     }
 }
 const store = createStore(

@@ -1,13 +1,15 @@
 //Imports
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import * as Components from '../../../materialui/Imports'
+import Cookies from 'js-cookie'
 
 //Fetches and display profile info of user
 function UserProfileInfo(props) {
     useEffect(() => {
         getUserData()
+        Cookies.get('token');
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -21,6 +23,7 @@ function UserProfileInfo(props) {
 
     //Declarations
     const [userInfo, setUserData] = useState([]);
+    let history = useHistory();
 
     //Fetches user info
     const getUserData = e => {
@@ -34,7 +37,6 @@ function UserProfileInfo(props) {
             .then(function (response) {
                 setState(prevState => ({
                     ...prevState,
-                    'successMessage': 'Login successful. Redirecting to home page..'
                 }))
                 const userInfo = [response.data]
                 setUserData(userInfo)
@@ -44,6 +46,20 @@ function UserProfileInfo(props) {
             });
     }
 
+    //Deletes message
+    const deleteUser = () => {
+        axios.delete('http://localhost:8080/api/users/me')
+            .then(function (response) {
+                Cookies.remove('token');
+                window.location.reload()
+                history.push('/')
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+
     return (
         <section className="App">
             <main id="main-container">
@@ -52,8 +68,7 @@ function UserProfileInfo(props) {
                         <div className="form">
                             <Components.Paper elevation={6} className="messagBox-flex-profil">
                                 <div className="profil">
-                                    <Components.Button color="primary"
-                                        variant="contained">
+                                    <Components.Button color="primary">
                                         <h2>VOTRE PROFIL</h2>
                                     </Components.Button>
                                     <div className="profil-data">
@@ -74,21 +89,29 @@ function UserProfileInfo(props) {
                                             </Components.CardContent>
                                         </Components.Card >
                                     </div>
-                                    <Link to={"/update"}  className="button">
+                                    <Link to={"/update"} className="button">
                                         <Components.Button
-                                           
+
                                             type="submit"
                                             variant="contained"
                                             color="primary"
                                         >Modifier votre profil</Components.Button>
                                     </Link>
+                                    <div className="button">
+                                        <Components.Button
+                                            onClick={deleteUser}
+                                            type="submit"
+                                            variant="contained"
+                                            color="secondary"
+                                        >Supprimer votre profil</Components.Button>
+                                    </div>
                                 </div>
                             </Components.Paper>
                         </div>
                     </div>
                 )}
             </main>
-        </section>
+        </section >
     )
 }
 

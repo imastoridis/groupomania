@@ -226,6 +226,52 @@ module.exports = {
                 }
             }
         );
+    },
+
+    deleteUserProfile: function (req, res) {
+        // Getting auth header
+        var headerAuth = req.headers['authorization'];
+        var userId1 = jwtUtils.getUserId(headerAuth);
+        // console.log(userId1)
+        // Params
+        var bio = req.body.bio;
+        var username = req.body.username
+        var email = req.body.email
+        var messageId = req.params.id
+
+        asyncLib.waterfall([
+            function (done) {
+                models.User.findOne({
+                    attributes: ['id', 'bio', 'username'],
+                    where: { id: userId1 }
+                })
+                    .then(userFound => {
+                        models.Like.destroy({
+                            where: { userId: 14 }
+                        })
+                            .then(likeFound => {
+                                models.Comment.destroy({
+                                    where: { userId: userId1 }
+                                })
+                            })
+                            .then(commentFound => {
+                                models.Message.destroy({
+                                    where: { userId: userId1 }
+                                })
+                            })
+                            .then(messageFound => {
+                                models.User.destroy({
+                                    where: { id: userId1 }
+                                })
+                                return res.status(201).json(messageFound);
+                            })
+                            .catch(err => {
+                                return res.status(500).json({ 'error': 'Pas possible de supprimer le message' });
+                            });
+                    })
+            }
+        ])
     }
 }
+
 

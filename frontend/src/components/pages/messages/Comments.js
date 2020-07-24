@@ -3,9 +3,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie'
-
-import * as Components from '../../../materialui/Imports'
 import { Link } from 'react-router-dom'
+import * as Components from '../../../materialui/Imports'
+import moment from 'moment';
 
 /* Displays the comments under the message */
 function Comments() {
@@ -51,7 +51,6 @@ function Comments() {
                     if (response.data[i].MessageId == cookie) { //For username
                         var commentsAll = comments.push(response.data[i])
                         setComments(comments)
-                        console.log(response.data[i])
                     } else {
                         continue
                     }
@@ -68,6 +67,7 @@ function Comments() {
         axios.delete(`http://localhost:8080/api/comment/${e}`)
             .then(function (response) {
                 window.location.reload()
+             
             })
             .catch(function (error) {
                 console.log(error);
@@ -94,7 +94,7 @@ function Comments() {
                                         <h3 className="">{comment.content}</h3>
                                     </div>
                                     <div className="Createdat">
-                                        <div className="">{comment.createdAt}</div>
+                                        <div className="">Crée le : {moment(comment.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss a")}</div>
                                     </div>
                                     <div className="Title">
                                         <h2 className="">{comment.title}</h2>
@@ -107,8 +107,7 @@ function Comments() {
                                                     <Components.IconButton
                                                         variant="contained"
                                                         color="primary"
-                                                        size="small"
-                                                    >
+                                                        size="small">
                                                         <Components.CreateIcon />
                                                     </Components.IconButton>
                                                 </Link >
@@ -134,7 +133,6 @@ function Comments() {
                                                 <Fragment>
                                                 </Fragment>
                                             )}
-                                        <div>Likes : {comment.likes}</div>
                                     </div>
                                 </div>
                             </Components.Paper>

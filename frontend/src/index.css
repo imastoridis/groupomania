@@ -8,11 +8,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 
 html {
   margin: 0;
@@ -52,8 +47,9 @@ img {
   margin-right: 25px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-
 }
 
 .nav__list-li {
@@ -96,6 +92,7 @@ footer {
   justify-content:space-evenly!important;
   flex-direction: row!important;
   opacity: 0.8;
+  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -121,7 +118,7 @@ footer {
   justify-content: stretch;
   align-items: stretch;
   grid-template-columns:20% 10% 60% 10%;
-  grid-template-rows: 20% 10% 45% 25%;
+  grid-template-rows: 10% 10% 55% 25%;
   width: 100%;
   font-size: 0.70em;
   grid-template-areas: "Photo Title Title Title" "Username Createdat Createdat Createdat" ". Comments Comments Comments" ". Other Other Other";
@@ -135,7 +132,7 @@ footer {
   justify-content: stretch;
   align-items: stretch;
   grid-template-columns:30% 10% 60% 0%;
-  grid-template-rows: 0% 10% 65% 25%;
+  grid-template-rows: 0% 10% 75% 15%;
   width: 100%;
   font-size: 0.70em;
   grid-template-areas: "Photo Title Title Title" "Username Createdat Createdat Createdat" ". Comments Comments Comments" ". Other Other Other";
@@ -185,6 +182,8 @@ font-weight: normal;
 
 .Other { grid-area: Other;
   display: flex;
+  align-items: flex-end;
+  align-content: flex-start;
  }
 
 
@@ -192,24 +191,39 @@ a {
   color: black;
   text-decoration: none; /* no underline */
 }
-.product__specs {
-  width: 100%;
-  margin: auto;
-  text-align: center;
-  color: #221812;
-}
 
-#message-list {
+.message-list {
   display: flex;
   flex-direction: column;
-  text-align: center;
-  margin: 50px;
+  margin: auto;
   margin-top: 40px;
+  justify-content: center;
+  align-items: center;
 }
 
 
 /*LOGIN/SIGNUP FORM*/
+.login-box{
+  display: flex;
+  width: 90%;
+  margin: auto;
+  justify-content: center;
+  margin-top: 70px;
+}
 
+.login__input{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  width: 100%;
+  align-items: center;
+}
+
+.login__button{
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
 .form {
   display: flex;
   justify-content: flex-end;
@@ -217,7 +231,6 @@ a {
   margin: auto;
   width: 100%;
 }
-
 
 .form__button{
   justify-content : flex-end;
@@ -227,49 +240,22 @@ a {
   margin-top: 25px;
 }
 
-
-.form__comment-button{
+.form__button-comment{
   display: flex;
-  flex-direction: column;
-  justify-content : flex-start;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  
-}
-
-.form__comment-button-style1{
-  display: flex;
-  justify-content :  center;
-  width: 30%;
-  border: none;
-  background-color: #212931;
-  transition: background-color 200ms ease-in-out;
-  cursor: pointer;
-  color: white;
-  margin: 0rem 5px 0rem 0;
-  border: solid #212931 ;
-  line-height: 1.5rem;
-  border-radius: 7px;  
-}
-
-.form__comment-button-style:hover {
-  background-color: #FFFAFA;
-  color: black;
-  border: solid #212931 ;
-}
-.form__input{
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  justify-content : center;
   width: 100%;
-}
-
-.form__input-title {
-  display: flex;
-  width: 99%;
   margin: auto;
-  font-family: 'Roboto', sans-serif;
- 
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+.form__button-comment2{
+  display: flex;
+  justify-content : center;
+  width: 100%;
+  margin: auto;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  justify-content : space-evenly;
 }
 
 .form__comment-button-style{
@@ -289,60 +275,59 @@ a {
   border-radius: 7px;
   
 }
-.IconLabelButtons{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-bottom: 10px;
-}
-
-
-
-/* BUTTON */
-.btn {
-  text-align: center;
-}
-.btn-style {
-  width: 50%;
-  border: none;
-  height: auto;
-  margin: 1rem 0 2rem 0;
-  line-height: 1.5rem;
-  background-color: #212931;
-  transition: background-color 200ms ease-in-out;
-  cursor: pointer;
-  color: white;
-  border: solid #212931 ;
-  border-radius: 7px
-}
-
-.btn-style:hover {
+.form__comment-button-style:hover {
   background-color: #FFFAFA;
   color: black;
   border: solid #212931 ;
 }
+.form__input{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.form__input-title {
+  display: flex;
+  width: 99%;
+  margin: auto;
+  font-family: 'Roboto', sans-serif;
+ 
+}
+/* PROFIL */
+
+.profil{
+  padding-bottom: 65px;
+
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profil-data{
+  width: 60%;
+}
+
+.button{
+  margin-top: 25px;
+}
+
+
+/* BUTTON */
+
 
 
 /***********************************************
 Media querries
 */
-/* iPhone 5/SE Styles */
-@media only screen and (min-width: 300px) and (max-width: 330px) {
 
-}
-
-/* Mobile Styles */
-@media only screen and (min-width: 330px) and (max-width: 500px) { 
-  .presentation{
-      width: 95%;
-  }
-
-}
-   
 /* Tablet Styles */
 @media only screen and (min-width: 501px) and (max-width: 960px) {
 
-
+  .login-box{
+    margin-bottom: 70px;
+  }
 
 }
 
@@ -552,9 +537,19 @@ Media querries
     text-align: center;
     margin: 50px;
     margin-top: 40px;
+    
  
   }
-  
+  .section{
+   
+    display: flex;
+  }
+  .form__button-newcomment{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
   .form-container{
     display: flex;
     justify-content: center;
@@ -572,7 +567,13 @@ Media querries
     margin-top: 25px;
   
   }
-
+  .form__input-comment{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin-top: 25px;
+  }
   .form-flex{
     display: flex;
     justify-content: center;
@@ -585,15 +586,6 @@ Media querries
     font-family: 'Roboto', sans-serif;
    
   }
-
-
-  .IconLabelButtons{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-bottom: 10px;
-  }
-  
   
   /* BUTTON */
 
@@ -603,4 +595,42 @@ Media querries
     justify-content: space-evenly;
   }
 
+  .form__button-comment{
+    display: flex;
+    justify-content : center;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 25px;
+    margin-top: 25px;
+
+  }
+
+  /* ADMIN*/
+
+  .admin{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 80%;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin: auto;
+  }
+
+  .admin-flex{
+    display: flex;
+    width: 95%;
+    flex-direction: column;
+    margin: auto;
+    justify-content: center;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    
+  }
+
+  .admin-items{
+    margin-bottom: 15px;
+  }
 }

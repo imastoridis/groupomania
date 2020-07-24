@@ -9,7 +9,8 @@ import { connect } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import * as Components from '../../../materialui/Imports'
 import logo from '../../../images/icon-left-font-monochrome-black.png'
-/** Login function **/
+
+/** Login function for ADMIN**/
 
 
 function Login(props) {
@@ -24,6 +25,7 @@ function Login(props) {
     })
 
     let history = useHistory();
+
     //Handlechange for form
     const handleChange = (e) => {
         const { id, value } = e.target
@@ -45,7 +47,6 @@ function Login(props) {
                 var adminData = response.config.data
                 const admin = JSON.parse(adminData)
                 console.log(admin)
-                console.log(admin.email)
                 if (admin.email == 'admin@admin.com' && admin.password == 'admin2') {
                     setState(prevState => ({
                         ...prevState,
@@ -54,17 +55,7 @@ function Login(props) {
                     Cookies.set('token', response.data.token);
                     Cookies.set('userId', response.data.userId);
                     history.push('/admin')
-                }
-                if (response.status === 201) {
-                    setState(prevState => ({
-                        ...prevState,
-                        'successMessage': 'Login successful. Redirecting to home page..'
-                    }))
-                    props.setLogin(response.data);
-                    Cookies.set('token', response.data.token);
-                    Cookies.set('userId', response.data.userId);
-                    props.history.push('/messages')
-                }
+                }//Na balo error
                 else if (response.data.code === 204) {
                     props.showError("Username and password do not match");
                 }
@@ -76,7 +67,6 @@ function Login(props) {
                 console.log(error);
             });
     }
-
     return (
         <div className="App">
             <section id="main-container">
@@ -86,7 +76,7 @@ function Login(props) {
                         <section className="message-list" >
                             <img src={logo} alt="logo" className="login-logo"></img>
                             <Components.Button color="primary">
-                                <p>Connexion</p>
+                                <p>Connexion Admin</p>
                             </Components.Button>
                             <div >
                                 <form className="login__input">
@@ -143,9 +133,10 @@ function Login(props) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setLogin: user => dispatch({ type: "SET_LOGIN", payload: user })
+        setLogin: user => dispatch({ type: "SET_LOGIN_ADMIN", payload: user })
     };
 };
+
 
 export default connect(
     null,

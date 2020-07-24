@@ -4,19 +4,19 @@ import { Route, Redirect } from 'react-router-dom'
 import React from 'react'
 import { connect } from 'react-redux'
 
-//Route for user not logged in
-const AuthRoute = ({ component: Component, ...rest }) => {
-  console.log(rest)
+//Route for user logged in
+const AdminRoute = ({ component: Component, ...rest }) => {
+    console.log(rest)
   return (
     <Route
       {...rest}
       render={props =>
-        rest.loggedIn ? (
+        rest.isAdmin ? (
           <Component {...props} />
         ) : (
             <Redirect
               to={{
-                pathname: "/login",
+                pathname: "/messages",
                 state: { from: props.location }
               }}
             />
@@ -24,11 +24,12 @@ const AuthRoute = ({ component: Component, ...rest }) => {
       }
     />
   );
-}
+};
 
 const mapStateToProps = state => {
   return {
-    loggedIn: state.auth.loggedIn
+    loggedIn: state.auth.loggedIn,
+    isAdmin : state.auth.isAdmin
   };
 };
-export default connect(mapStateToProps)(AuthRoute);
+export default connect(mapStateToProps)(AdminRoute);

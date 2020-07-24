@@ -30,7 +30,7 @@ function Header(props) {
                                     </Button>
                                 </Link>
                             </li>
-                            
+
                             <li className="nav__list-li">
                                 <Link to={'/register'} className="navbar__style">
                                     <Button className="navbar__style">
@@ -41,45 +41,47 @@ function Header(props) {
                         </Fragment>
                     ) : (
                             //If user logged in hide login/register tabs
-                            <ul className="nav__list-ul">
-                                <li className="nav__list-li logo">
-                                    <Link to={'/'} >
-                                        <img src={logo} alt="logo"></img>
-                                    </Link>
-                                </li>
-                                <li className="nav__list-li">
-                                    <Link to={'/messages'} className="navbar__style">
-                                        <Button className="navbar__style">
-                                            <h2 className="hover navbar__style">Tableau de bord</h2>
-                                        </Button>
-                                    </Link>
-                                </li>
-                                <li className="nav__list-li">
-                                    <Link to={'/messages/new'} className="navbar__style">
-                                        <Button className="navbar__style">
-                                            <h2 className="hover navbar__style">Nouveau message</h2>
-                                        </Button>
-                                    </Link>
-                                </li>
-                                <li className="nav__list-li">
-                                    <Link to={'/userprofile'} className="navbar__style">
-                                        <Button className="navbar__style">
-                                            <h2 className="hover navbar__style">Profil</h2>
-                                        </Button>
-                                    </Link>
-                                </li>
-                                <li className="nav__list-li">
-                                    <Link to={'/login'} className="navbar__style" onClick={handleLogout}>
-                                        <Button className="navbar__style">
-                                            <h2 className="hover navbar__style">Déconnexion</h2>
-                                        </Button>
-                                    </Link>
-                                </li>
-                            </ul>
+                            <nav className="navbar">
+                                <ul className="nav__list-ul">
+                                    <li className="nav__list-li logo">
+                                        <Link to={'/'} >
+                                            <img src={logo} alt="logo"></img>
+                                        </Link>
+                                    </li>
+                                    <li className="nav__list-li">
+                                        <Link to={'/messages'} className="navbar__style">
+                                            <Button className="navbar__style">
+                                                <h2 className="hover navbar__style">Tableau de bord</h2>
+                                            </Button>
+                                        </Link>
+                                    </li>
+                                    <li className="nav__list-li">
+                                        <Link to={'/messages/new'} className="navbar__style">
+                                            <Button className="navbar__style">
+                                                <h2 className="hover navbar__style">Nouveau message</h2>
+                                            </Button>
+                                        </Link>
+                                    </li>
+                                    <li className="nav__list-li">
+                                        <Link to={'/userprofile'} className="navbar__style">
+                                            <Button className="navbar__style">
+                                                <h2 className="hover navbar__style">Profil</h2>
+                                            </Button>
+                                        </Link>
+                                    </li>
+                                    <li className="nav__list-li">
+                                        <Link to={'/login'} className="navbar__style" onClick={handleLogout}>
+                                            <Button className="navbar__style">
+                                                <h2 className="hover navbar__style">Déconnexion</h2>
+                                            </Button>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </nav>
                         )}
                 </ul>
             </nav>
-           
+
         </div>
     )
 }

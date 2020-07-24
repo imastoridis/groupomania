@@ -62,17 +62,11 @@ module.exports = {
 
     /** Lists all messages on dashboard **/
     listMessages: function (req, res) {
-        var fields = req.query.fields;
-        var limit = parseInt(req.query.limit);
-        var offset = parseInt(req.query.offset);
         var order = req.query.order;
 
         //Verification that messages are not empty 
         models.Message.findAll({
-            /*order: [(order != null) ? order.split(':') : ['title', 'ASC']],
-            attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
-            limit: (!isNaN(limit)) ? limit : null,
-            offset: (!isNaN(offset)) ? offset : null,*/
+            order: [['createdAt', 'DESC']],
             include: [{
                 model: models.User,
                 attributes: ['username']

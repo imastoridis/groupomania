@@ -65,32 +65,34 @@ function CommentForm({ props }) {
     } else {
         //Displays the comment form
         return (
-            <div className="form">
-                <form className="form__input" noValidate autoComplete="off">
-                    <div >
-                        <TextareaAutosize
-                            rowsMin={10}
-                            id="content"
-                            placeholder="Votre commentaire*"
-                            value={state.content}
-                            onChange={handleChange}
-                            label="Votre commentaire"
-                            variant="outlined"
-                            className="form__input-title"
-                        />
+            <section className="section"> 
+                <div className="form">
+                    <div className='form-flex' >
+                        <form className="form__input-comment"  >
+                            <TextareaAutosize
+                                type="text"
+                                rowsMin={10}
+                                id="content"
+                                placeholder="Votre commentaire*"
+                                value={state.content}
+                                onChange={handleChange}
+                                label="Votre commentaire"
+                                variant="outlined"
+                                className="form__input-title"
+                            />
+                            <div className='form__button-comment'>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={handleSubmit}
+                                    id="submit"
+                                   >Valider</Button>
+                            </div>
+                        </form>
                     </div>
-                    <div className="form__comment-button">
-                        <Button 
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                            onClick={handleSubmit}
-                            id="submit"
-                            className="form__comment-button-style">Valider</Button>
-                    </div>
-                </form>
-                <Divider />
-            </div>
+                </div>
+            </section>
         )
     }
 }

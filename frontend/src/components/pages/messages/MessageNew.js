@@ -1,6 +1,7 @@
 //Imports
 
 import React, { useState, useEffect } from 'react';
+import Footer from '../../headers/Footer';
 import axios from 'axios'
 import { useHistory, Link } from "react-router-dom";
 import Header from '../../headers/Header';
@@ -123,6 +124,7 @@ function MessageNew() {
                             </div>
                         </Components.Paper>
                     </main>
+
                 </section>
             </div>
         )

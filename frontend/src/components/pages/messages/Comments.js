@@ -83,7 +83,7 @@ function Comments() {
                             <Components.Paper elevation={6} className="messagBox-flex">
                                 <div key={comment.id} className="grid-container-comment" >
                                     <div className="Photo">
-                                        <div>Photo</div>
+                                        <div></div>
                                     </div>
                                     <div className="Username">
                                         {comments.map(comment => (comment.Users).map(username =>

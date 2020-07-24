@@ -48,7 +48,7 @@ module.exports = {
                     where: { email: email }
                 })
                     .then(userFound => {
-                        done(null, userFound); //done (callback) so we execute next function, we put params we need for next function
+                        done(null, userFound); 
                     })
                     .catch(err => {
                         return res.status(500).json({ 'error': 'Authentification utilisateur non possible' });
@@ -149,7 +149,8 @@ module.exports = {
             }
         );
     },
-    //
+    
+    //Gets user profil for profil tab
     getUserProfile: function (req, res) {
         // Getting auth header, check against Token
         var headerAuth = req.headers['authorization'];
@@ -232,12 +233,7 @@ module.exports = {
         // Getting auth header
         var headerAuth = req.headers['authorization'];
         var userId1 = jwtUtils.getUserId(headerAuth);
-        // console.log(userId1)
         // Params
-        var bio = req.body.bio;
-        var username = req.body.username
-        var email = req.body.email
-        var messageId = req.params.id
 
         asyncLib.waterfall([
             function (done) {

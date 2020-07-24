@@ -9,18 +9,21 @@ import { connect } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import * as Components from '../../../materialui/Imports'
 import logo from '../../../images/icon-left-font-monochrome-black.png'
+import { useForm } from "react-hook-form";
 /** Login function **/
 
 
 function Login(props) {
     useEffect(() => {
     }, [])
+
     //Set state
     const [state, setState] = useState({
         email: "",
         password: "",
         token: "",
-        successMessage: null
+        successMessage: null,
+        errorMessage: ""
     })
 
     let history = useHistory();
@@ -34,18 +37,17 @@ function Login(props) {
     }
 
     // Login onClick 
-    const handleSubmitClick = (e) => {
-        e.preventDefault();
+    const onClickSubmit = (e) => {
+
         const payload = {
             "email": state.email,
             "password": state.password,
         }
+
         axios.post("http://localhost:8080/api/users/login", payload)
             .then(function (response) {
                 var adminData = response.config.data
                 const admin = JSON.parse(adminData)
-                console.log(admin)
-                console.log(admin.email)
                 if (admin.email == 'admin@admin.com' && admin.password == 'admin2') {
                     setState(prevState => ({
                         ...prevState,
@@ -63,19 +65,28 @@ function Login(props) {
                     props.setLogin(response.data);
                     Cookies.set('token', response.data.token);
                     Cookies.set('userId', response.data.userId);
+                    window.location.reload()
                     props.history.push('/messages')
+
                 }
                 else if (response.data.code === 204) {
-                    props.showError("Username and password do not match");
+                    console.log(response)
                 }
                 else {
                     console.log(response)
                 }
             })
-            .catch(function (error) {
-                console.log(error);
+            .catch(err => {
+                setState({ errorMessage: err.message });
             });
     }
+
+    const { register, handleSubmit, errors } = useForm();
+    const onSubmit = data => {
+        console.log(data)
+        onClickSubmit()
+
+    };
 
     return (
         <div className="App">
@@ -89,9 +100,10 @@ function Login(props) {
                                 <p>Connexion</p>
                             </Components.Button>
                             <div >
-                                <form className="login__input">
+                                <form className="login__input" onSubmit={handleSubmit(onSubmit)}>
                                     <div>
                                         <Components.TextField
+                                            inputRef={register}
                                             type="email"
                                             name="email"
                                             id="email"
@@ -103,6 +115,9 @@ function Login(props) {
                                     </div>
                                     <div>
                                         <Components.TextField
+                                            inputRef={register({
+                                                pattern: /^(?=.*\d).{4,8}$/
+                                            })}
                                             type="password"
                                             name="password"
                                             id="password"
@@ -118,7 +133,7 @@ function Login(props) {
                                             variant="outlined"
                                             color="primary"
                                             type="submit"
-                                            onClick={handleSubmitClick}
+                                            //onClick={onClickSubmit}
                                             id="submit"
                                         >VALIDER
                                           </Components.Button>

@@ -114,7 +114,6 @@ function Login(props) {
                                     </div>                           
                                 </form>
                             </div>
-
                         </section>
                     </Components.Paper>
                 </main>

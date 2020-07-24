@@ -76,9 +76,7 @@ function Message({ match }) {
     }
 
 
-    /*{messages.map(message => (message.Users).map(username =>
-        <div className="" key={username}>Username: {username.username}</div>
-    ))}*/
+
     if (error) {
         return <div><h3 className="error">{"Un problème technique ne permet pas d'accéder au service que vous désirez. Merci de réessayer ultérieurement"}</h3> </div>;
     } else {
@@ -91,7 +89,7 @@ function Message({ match }) {
                             <Components.Paper elevation={6} className="messagBox-flex">
                                 <div className="grid-container" >
                                     <div className="Photo">
-                                        <div>Photo</div>
+                                        <div></div>
                                     </div>
                                     <div className="Username">
                                     </div>
@@ -118,16 +116,6 @@ function Message({ match }) {
                                                     color="secondary"
                                                     onClick={deleteMessage}>
                                                     <Components.DeleteIcon />
-                                                </Components.IconButton>
-                                                <Components.IconButton
-                                                    color="primary"
-                                                    onClick={deleteMessage}>
-                                                    <Components.ThumbUpIcon />
-                                                </Components.IconButton>
-                                                <Components.IconButton
-                                                    color="secondary"
-                                                    onClick={deleteMessage}>
-                                                    <Components.ThumbDownIcon />
                                                 </Components.IconButton>
                                             </Fragment>
                                         ) : (

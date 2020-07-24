@@ -19,3 +19,8 @@ function Footer() {
 }
 
 export default Footer
+
+
+    /*{messages.map(message => (message.Users).map(username =>
+        <div className="" key={username}>Username: {username.username}</div>
+    ))}*/

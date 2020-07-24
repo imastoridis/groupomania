@@ -37,16 +37,14 @@ exports.router = (function() {
   apiRouter.route('/messages/:id').get(messagesCtrl.listOneMessage);
   apiRouter.route('/messages/:id').put(messagesCtrl.modifyMessage);
 
+  apiRouter.route('/imagetest').post(messagesCtrl.imageTest);
+
   //Comments routes
   apiRouter.route('/comment/').post(commentCtrl.createComment);
   apiRouter.route('/comment/').get(commentCtrl.listComments);
   apiRouter.route('/comment/:id').delete(commentCtrl.deleteOneComment);
   apiRouter.route('/comment/:id').get(commentCtrl.listOneComment);
   apiRouter.route('/comment/:id').put(commentCtrl.modifyComment);
-
-  // Likes routes
-  apiRouter.route('/messages/:messageId/vote/like').post(likesCtrl.likePost);
-  apiRouter.route('/messages/:messageId/vote/dislike').post(likesCtrl.dislikePost);
 
   return apiRouter;
 })();

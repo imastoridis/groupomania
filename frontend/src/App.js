@@ -16,8 +16,7 @@ import MessageModify from './components/pages/messages/MessageModify';
 import CommentModify from './components/pages/messages/CommentModify';
 import AdminDashboard from './components/pages/admin/AdminDashboard';
 import LoginAdmin from './components/pages/authpages/LoginAdmin';
-
-//import AlertComponent from '../src/components/AlertComponent'
+import ImageTest from './components/pages/messages/ImageTest';
 
 // Router Routes
 
@@ -38,6 +37,7 @@ function App() {
             <AuthRoute path='/userprofile' component={UserProfile} />
             <AdminRoute path='/admin' component={AdminDashboard} />
             <AuthRoute exact path='/messages/:id' component={Message} />
+            <AuthRoute exact path='/imagetest' component={ImageTest} />
             <AuthRoute exact path='/modify/:id' component={MessageModify} />
             <AuthRoute exact path='/modifycomment/:id' component={CommentModify} />
           </Switch>

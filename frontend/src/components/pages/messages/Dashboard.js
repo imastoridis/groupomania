@@ -21,7 +21,8 @@ function Dashboard(params) {
         content: "",
         likes: "",
         userId: "",
-        username: ""
+        username: "",
+        attachment: ""
 
     })
     //Declarations
@@ -37,7 +38,8 @@ function Dashboard(params) {
             "likes": state.likes,
             'userId': state.userId,
             'createdAt': state.createdAt,
-            'username': state.username
+            'username': state.username,
+            'attachment' : state.attachment
         }
         //[0].Users[0].username
         axios.get("http://localhost:8080/api/messages", messageData)
@@ -66,7 +68,7 @@ function Dashboard(params) {
                                         <Link to={`/messages/${message.id}`} >
                                             <div key={message.id} className="grid-container" >
                                                 <div className="Photo">
-                                                    <div>Photo</div>
+                                                    <div>{messages.attachment}</div>
                                                 </div>
                                                 <div className="Username">
                                                     {messages.map(message => (message.Users).map(username =>
@@ -87,7 +89,6 @@ function Dashboard(params) {
                                             </div>
                                         </Link>
                                     </Paper>
-
                                 </div>
                             </div>
                         )}

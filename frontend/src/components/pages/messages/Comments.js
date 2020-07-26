@@ -6,7 +6,7 @@ import Cookies from 'js-cookie'
 import { Link } from 'react-router-dom'
 import * as Components from '../../../materialui/Imports'
 import moment from 'moment';
-
+import Container from '@material-ui/core/Container';
 /* Displays the comments under the message */
 function Comments() {
     useEffect(() => {
@@ -67,29 +67,21 @@ function Comments() {
         axios.delete(`http://localhost:8080/api/comment/${e}`)
             .then(function (response) {
                 window.location.reload()
-             
+
             })
             .catch(function (error) {
                 console.log(error);
             });
     }
-    // {messages.map(message => (message.Users).map(username =>
+
     return (
         <div >
             <section>
-                <main>
+                <Container maxWidth="lg">
                     {comments.map(comment =>
                         <div key={comment.id} className="message-box" >
                             <Components.Paper elevation={6} className="messagBox-flex">
                                 <div key={comment.id} className="grid-container-comment" >
-                                    <div className="Photo">
-                                        <div></div>
-                                    </div>
-                                    <div className="Username">
-                                        {comments.map(comment => (comment.Users).map(username =>
-                                            <div className="" key={username}>Username: {username.username}</div>
-                                        ))}
-                                    </div>
                                     <div className="Comments">
                                         <h3 className="">{comment.content}</h3>
                                     </div>
@@ -118,16 +110,6 @@ function Comments() {
                                                     onClick={e => deleteComment(comment.id)}>
                                                     <Components.DeleteIcon />
                                                 </Components.IconButton >
-                                                <Components.IconButton
-                                                    color="primary"
-                                                    size="small">
-                                                    <Components.ThumbUpIcon />
-                                                </Components.IconButton>
-                                                <Components.IconButton
-                                                    color="secondary"
-                                                    size="small">
-                                                    <Components.ThumbDownIcon />
-                                                </Components.IconButton>
                                             </Fragment>
                                         ) : (
                                                 <Fragment>
@@ -138,7 +120,7 @@ function Comments() {
                             </Components.Paper>
                         </div>
                     )}
-                </main>
+                </Container>
             </section>
         </div>
     )

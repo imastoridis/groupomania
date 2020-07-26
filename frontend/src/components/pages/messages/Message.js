@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import moment from 'moment';
-
+import Container from '@material-ui/core/Container';
 import * as Components from '../../../materialui/Imports'
 
 // Displays one message after clicking on dashboard
@@ -75,8 +75,6 @@ function Message({ match }) {
             });
     }
 
-
-
     if (error) {
         return <div><h3 className="error">{"Un problème technique ne permet pas d'accéder au service que vous désirez. Merci de réessayer ultérieurement"}</h3> </div>;
     } else {
@@ -84,7 +82,7 @@ function Message({ match }) {
             <div>
                 <section>
                     <Header />
-                    <main>
+                    <Container maxWidth="lg">
                         <div key={messages.id} className="message-box" >
                             <Components.Paper elevation={6} className="messagBox-flex">
                                 <div className="grid-container" >
@@ -94,6 +92,7 @@ function Message({ match }) {
                                     <div className="Username">
                                     </div>
                                     <div className="Comments">
+                                        <img src={`/images/${messages.attachment}`} onError={i => i.target.style.display = 'none'} className="image"></img>
                                         <h3 className="">{messages.content}</h3>
                                     </div>
                                     <div className="Createdat">
@@ -126,7 +125,7 @@ function Message({ match }) {
                                 </div>
                             </Components.Paper>
                         </div>
-                    </main>
+                    </Container>
                     <div className="form__button-comment">
                         <div className="form__button-newcomment">
                             <Components.Button

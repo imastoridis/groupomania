@@ -2,31 +2,117 @@
 var models = require('../models');
 var asyncLib = require('async');
 var jwtUtils = require('../utils/jwt.utils');
+var fs = require('fs');
+var multer = require('multer')
+
 
 // Routes
 module.exports = {
 
-    /**  Creates new message **/
-    createMessage: function (req, res) {
+    createImageMessageImage: function (req, res) {
         // Getting auth header and userId
         var headerAuth = req.headers['authorization'];
         var userId = jwtUtils.getUserId(headerAuth);
+        let attachmentURL
 
+        var multer = require('multer')
+        var upload = multer({ dest: 'images/' })
         // Params
+
         var title = req.body.title;
         var content = req.body.content;
-
-        if (title == null || content == null) {
-            return res.status(400).json({ 'error': 'Rien à publier' });
-        }
-
         asyncLib.waterfall([
             //Finds user by userID
+
             function (done) {
                 models.User.findOne({
                     where: { id: userId }
                 })
                     .then(userFound => {
+                        console.log(req.body)
+                        done(null, userFound);
+                    })
+                    .catch(err => {
+                        return res.status(500).json({ 'error': 'Utilisateur non authentifié' });
+                    });
+            },
+            //Creates new message
+            function (userFound, done) {
+                console.log(req.body)
+                if (userFound !== null) {
+                    let attachmentURL = `${req.file.filename}`;
+                    //let attachmentURL = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+
+                    if (req.file != undefined) {
+                        (req, res) => {
+                            try {
+                                //console.log(req.file)
+                                res.send(req.file);
+                            } catch (err) {
+                                res.send(400);
+                            }
+                        }
+                    }
+                    else {
+                        attachmentURL == null
+                    };
+
+                    if ((attachmentURL == null)) {
+                        res.status(400).json({ error: 'Rien à publier' })
+                    } else {
+                        models.Message.create({
+                            title: title,
+                            content: content,
+                            likes: 0,
+                            UserId: userFound.id,
+                            attachment: attachmentURL
+                        })
+                            .then(newMessage => {
+                                done(newMessage);
+                            })
+                            .catch(err => {
+                                return res.status(500).json({ 'error': 'Message non authentifié' });
+                            });
+                    }
+                }
+            },
+        ],
+            //Response
+            function (newMessage) {
+                if (newMessage) {
+                    return res.status(201).json(newMessage);
+                } else {
+                    return res.status(500).json({ 'error': 'message non publié' });
+                } s
+            });
+    },
+    /**  Creates new message **/
+    createMessage: function (req, res) {
+        // Getting auth header and userId
+        var headerAuth = req.headers['authorization'];
+        var userId = jwtUtils.getUserId(headerAuth);
+        let attachmentURL
+
+        var multer = require('multer')
+        var upload = multer({ dest: 'images/' })
+        // Params
+        var title = req.body.title;
+        var content = req.body.content;
+        var attachment = req.body.attachment
+
+        if (title == null || content == null) {
+            return res.status(400).json({ 'error': 'Rien à publier&' });
+        }
+
+        asyncLib.waterfall([
+            //Finds user by userID
+
+            function (done) {
+                models.User.findOne({
+                    where: { id: userId }
+                })
+                    .then(userFound => {
+                        console.log(req.body)
                         done(null, userFound);
                     })
                     .catch(err => {
@@ -185,7 +271,8 @@ module.exports = {
         //Declaration de l'url de l'image
         let attachmentURL
         //identifier qui créé le message
-        let id = utils.getUserId(req.headers.authorization)
+        //let id = utils.getUserId(req.headers.authorization)
+        var id = jwtUtils.getUserId(req.headers.authorization);
         models.User.findOne({
             attributes: ['id', 'email', 'username'],
             where: { id: id }
@@ -203,9 +290,9 @@ module.exports = {
                     if ((content == 'null' && attachmentURL == null)) {
                         res.status(400).json({ error: 'Rien à publier' })
                     } else {
-                        models.Post.create({
+                        models.Message.create({
                             content: content,
-                            attachement: attachmentURL,
+                            attachment: attachmentURL,
                             UserId: user.id
                         })
                             .then((newPost) => {

@@ -109,6 +109,10 @@ footer {
   margin-top: 50px;
 }
 
+.input {
+  margin-left: 70px;
+}
+
 /* Messages */
 
 .grid-container {
@@ -117,11 +121,11 @@ footer {
   justify-items: stretch;
   justify-content: stretch;
   align-items: stretch;
-  grid-template-columns:20% 10% 60% 10%;
-  grid-template-rows: 10% 10% 55% 25%;
+  grid-template-columns: 5% 25%  35% 25% ;
+  grid-template-rows:5% 5% 83% 7%;
   width: 100%;
   font-size: 0.70em;
-  grid-template-areas: "Photo Title Title Title" "Username Createdat Createdat Createdat" ". Comments Comments Comments" ". Other Other Other";
+  grid-template-areas: "Createdat Createdat Createdat Createdat" "Title Title Title Title" "Comments Comments Comments Comments" "Other Other Other Other";
 }
 
 
@@ -129,23 +133,26 @@ footer {
   display: grid;
   justify-items: left;
   justify-items: stretch;
-  justify-content: stretch;
+  justify-content: center;
   align-items: stretch;
-  grid-template-columns:30% 10% 60% 0%;
-  grid-template-rows: 0% 10% 75% 15%;
+  grid-template-columns:5% 25%  35% 25% ;
+  grid-template-rows: 5% 5% 75% 5%;
   width: 100%;
   font-size: 0.70em;
-  grid-template-areas: "Photo Title Title Title" "Username Createdat Createdat Createdat" ". Comments Comments Comments" ". Other Other Other";
+  grid-template-areas: "Createdat Createdat Createdat Createdat" "Title Title Title Title" "Comments Comments Comments Comments" "Other Other Other Other";
 }
 
-.messageBox {
+.message-box {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   display: flex;
   flex-direction: row;
-  width: 80%;
-  background-color: 	white;
+  justify-content: center;
+  height: fit-content;
+  width: 100%;
   opacity: 0.95;
+  margin: auto;
+  margin-bottom: 15px;
 
 }
 .messagBox-flex{
@@ -154,36 +161,38 @@ footer {
   align-items: center;
   margin: auto;
   margin-top: 15px;
-  width: 80%;
+  width: 90%;
   
 }
-.Photo { grid-area: Photo; }
 
-.Username { grid-area: Username;
-  font-size: 0.65rem; 
-}
 
 .Comments { grid-area: Comments; 
 font-size: 0.55rem;
 font-weight: normal;
+display: flex;
+margin: auto;
+justify-content: center;
+align-content: center;
+align-items: center;
+
 }
 
 .Createdat { grid-area: Createdat;
   font-size: 0.50rem; 
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .Title { grid-area: Title;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   font-size: 0.70em;
 }
 
 .Other { grid-area: Other;
   display: flex;
-  align-items: flex-end;
-  align-content: flex-start;
+  justify-content: space-evenly;
+  align-items: center;
  }
 
 
@@ -418,65 +427,82 @@ Media querries
     display: grid;
     justify-items: left;
     justify-items: stretch;
-    justify-content: stretch;
+    justify-content: center;
     align-items: stretch;
-    grid-template-columns:20% 10% 60% 10%;
-    grid-template-rows: 15% 10% 65% 10%;
+    grid-template-columns:5% 25%  35% 25% ;
+    grid-template-rows: 5% 5% 83% 7%;
+    margin: auto;
     width: 100%;
     font-size: 1.5em;
-    grid-template-areas: "Photo Title Title Title" "Username Createdat Createdat Createdat" ". Comments Comments Comments" ". Other Other Other";
+    grid-template-areas: "Createdat Createdat Createdat Createdat" "Title Title Title Title" "Comments Comments Comments Comments" "Other Other Other Other";
   }
-  
+ 
   .grid-container-comment {
     display: grid;
     justify-items: left;
     justify-items: stretch;
-    justify-content: stretch;
+    justify-content: center;
     align-items: stretch;
-    grid-template-columns:20% 10% 60% 10%;
-    grid-template-rows: 0% 10% 65% 25%;
+    grid-template-columns:5% 25%  35% 25% ;
+    grid-template-rows: 5% 5% 75% 5%;
     width: 100%;
     font-size: 1.5em;
-    grid-template-areas: "Photo Title Title Title" "Username Createdat Createdat Createdat" ". Comments Comments Comments" ". Other Other Other";
+    grid-template-areas: "Createdat Createdat Createdat Createdat" "Title Title Title Title" "Comments Comments Comments Comments" "Other Other Other Other";
   }
   
+  .message-box {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 70%;
+    height: fit-content;
+    margin: auto;
+    opacity: 0.95;
+    margin-bottom: 15px;
+    align-content: center;
+  
+  }
+
   .messagBox-flex{
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
     margin-top: 15px;
-    width: 70%;
+    width: 100%;    
+  }
 
-  }
-  .Photo { grid-area: Photo; }
-  
-  .Username { grid-area: Username;
-    font-size: 0.65rem; 
-  }
+
   
   .Comments { grid-area: Comments; 
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: normal;
+  margin: auto;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
   }
   
   .Createdat { grid-area: Createdat;
     font-size: 0.70rem; 
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
   }
   
   .Title { grid-area: Title;
     display: flex;
-    align-items: center;
-    font-size: 1.1em;
+    align-items: flex-start;
+    font-size: 1em;
     
   }
   
   .Other { grid-area: Other;
     display: flex;
     justify-content: space-evenly;
-    align-items: flex-end;
+    align-items: center;
+
    }
   
   a {

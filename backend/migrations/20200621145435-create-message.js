@@ -26,7 +26,7 @@ module.exports = {
       },
       attachment: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       likes: {
         allowNull: false,

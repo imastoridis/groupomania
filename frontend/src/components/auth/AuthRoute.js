@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 
 //Route for user not logged in
 const AuthRoute = ({ component: Component, ...rest }) => {
-  console.log(rest)
   return (
     <Route
       {...rest}

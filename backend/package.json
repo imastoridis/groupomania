@@ -20,13 +20,23 @@
     "async": "^3.2.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-formidable": "^1.2.0",
+    "form-data": "^3.0.0",
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
+    "logger": "0.0.1",
     "moment": "^2.27.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
-    "sequelize": "^5.21.13"
+    "path": "^0.12.7",
+    "querystring": "^0.2.0",
+    "react-image-fallback": "^8.0.0",
+    "sequelize": "^5.21.13",
+    "serve-index": "^1.9.1"
   }
 }

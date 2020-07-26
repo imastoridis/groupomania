@@ -9,7 +9,7 @@ var multer = require('multer')
 // Routes
 module.exports = {
 
-    createImageMessageImage: function (req, res) {
+    createImageMessage: function (req, res) {
         // Getting auth header and userId
         var headerAuth = req.headers['authorization'];
         var userId = jwtUtils.getUserId(headerAuth);

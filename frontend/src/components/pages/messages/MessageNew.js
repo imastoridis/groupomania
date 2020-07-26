@@ -111,7 +111,7 @@ function MessageNew() {
                     <main>
                         <Components.Paper elevation={6} className="form-container">
                             <div className="form">
-                                <Components.Button color="primary" >
+                                <Components.Button  size="large" color="primary" >
                                     <p>NOUVEAU MESSAGE</p>
                                 </Components.Button>
                                 <div className='form-flex'>
@@ -141,8 +141,9 @@ function MessageNew() {
                                             onChange={handleChange}
                                         />
                                         <div className='form__button-comment2'>
-                                            <div >
+                                            <div className="font-size">
                                                 <Components.Button
+                                                    size="large"
                                                     type="submit"
                                                     id="submit"
                                                     variant="contained"
@@ -152,6 +153,7 @@ function MessageNew() {
                                             <div >
                                                 <Link to={`/`}>
                                                     <Components.Button
+                                                        size="large"
                                                         type="submit"
                                                         variant="contained"
                                                         color="primary"
@@ -162,7 +164,7 @@ function MessageNew() {
                                     </form>
                                 </div>
                                 <Components.Divider />
-                                <Components.Button color="primary" >
+                                <Components.Button  size="large" color="primary" >
                                     <p>NOUVEAU MESSAGE AVEC PHOTO</p>
                                 </Components.Button>
                                 <div className='form-flex'>

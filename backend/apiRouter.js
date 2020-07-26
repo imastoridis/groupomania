@@ -53,7 +53,7 @@ exports.router = (function() {
   apiRouter.route('/users/me/').delete(usersCtrl.deleteUserProfile);
 
   // Messages routes
-  apiRouter.route('/messages/newimage/').post(upload.single('file'), messagesCtrl.createImageMessageImage);
+  apiRouter.route('/messages/newimage/').post(upload.single('file'), messagesCtrl.createImageMessage);
   apiRouter.route('/messages/new/').post(messagesCtrl.createMessage);
   apiRouter.route('/messages/').get(messagesCtrl.listMessages);
   apiRouter.route('/messages/images').get(messagesCtrl.listMessages);

@@ -50,6 +50,7 @@ img {
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding-bottom: 15px;
 }
 
 .nav__list-li {
@@ -446,7 +447,7 @@ Media querries
     grid-template-columns:5% 25%  35% 25% ;
     grid-template-rows: 5% 5% 75% 5%;
     width: 100%;
-    font-size: 1.5em;
+    font-size: 2rem;
     grid-template-areas: "Createdat Createdat Createdat Createdat" "Title Title Title Title" "Comments Comments Comments Comments" "Other Other Other Other";
   }
   
@@ -486,7 +487,7 @@ Media querries
   }
   
   .Createdat { grid-area: Createdat;
-    font-size: 0.70rem; 
+    font-size: 1rem; 
     display: flex;
     align-items: flex-start;
   }
@@ -572,7 +573,7 @@ Media querries
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
+    width: 50%;
   }
   .form-container{
     display: flex;
@@ -589,6 +590,7 @@ Media querries
     justify-content: center;
     width: 70%;
     margin-top: 25px;
+    font-size: 1.7rem;
   
   }
   .form__input-comment{
@@ -608,6 +610,7 @@ Media querries
     margin-top: 25px;
     margin: auto;
     font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
    
   }
   
@@ -626,6 +629,7 @@ Media querries
     margin: auto;
     margin-bottom: 25px;
     margin-top: 25px;
+    font-size: 1.7rem;
 
   }
 
@@ -660,9 +664,12 @@ Media querries
 
   
   .logo{
-    width: 20%;
-    margin-bottom: 60px;
+    width: 15%;
+    margin-bottom: 80px;
   
+  }
 
+  .navbar__style{
+    font-size: 2.2rem;
   }
 }

@@ -199,4 +199,3 @@ function MessageNew() {
 }
 export default MessageNew;
 
-//onClick={imageClick}

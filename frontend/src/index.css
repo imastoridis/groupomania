@@ -1,32 +1,29 @@
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 html {
   margin: 0;
   padding: 0;
 }
 
-h3{
+h3 {
   font-weight: normal;
 }
+
 img {
-  max-width:100%;
+  max-width: 100%;
 }
 
 #main-container {
-  background-color:white;
+  background-color: white;
   font-family: 'Roboto', sans-serif;
   width: 100%;
   margin: auto;
-
 }
 
 /* NAVBAR - HEADER - - FOOTER - BGR IMAGE*/
@@ -38,12 +35,11 @@ img {
   opacity: 0.8;
   display: flex;
   width: 100%;
-
 }
 
 .nav__list-ul {
   list-style: none;
-  margin:auto;
+  margin: auto;
   margin-right: 25px;
   display: flex;
   flex-direction: column;
@@ -58,26 +54,25 @@ img {
   justify-content: center;
 }
 
-.nav__list-li-left{
-  color:#f5f5f5;
+.nav__list-li-left {
+  color: #f5f5f5;
   display: flex;
   justify-content: center;
   width: 40%;
 }
 
-.logo{
+.logo {
   width: 80%;
   margin-top: 30px;
   margin-left: 25px;
-
 }
 
-.login-logo{
+.login-logo {
   width: 100%;
 }
 
-.navbar__style{
-  color:#f5f5f5;
+.navbar__style {
+  color: #f5f5f5;
   text-decoration: none;
 }
 
@@ -90,7 +85,7 @@ footer {
   background-color: #1976D2;
   color: #f5f5f5;
   display: flex;
-  justify-content:space-evenly!important;
+  justify-content: space-evenly!important;
   flex-direction: row!important;
   opacity: 0.8;
   position: fixed;
@@ -99,11 +94,11 @@ footer {
   width: 100%;
   margin: auto;
   font-size: 0.80rem;
-
 }
 
 /* LOGIN */
-.login-box{
+
+.login-box {
   display: flex;
   width: 80%;
   margin: auto;
@@ -122,13 +117,12 @@ footer {
   justify-items: stretch;
   justify-content: stretch;
   align-items: stretch;
-  grid-template-columns: 5% 25%  35% 25% ;
-  grid-template-rows:5% 5% 83% 7%;
+  grid-template-columns: 5% 25% 35% 25%;
+  grid-template-rows: 5% 5% 83% 7%;
   width: 100%;
   font-size: 0.70em;
   grid-template-areas: "Createdat Createdat Createdat Createdat" "Title Title Title Title" "Comments Comments Comments Comments" "Other Other Other Other";
 }
-
 
 .grid-container-comment {
   display: grid;
@@ -136,7 +130,7 @@ footer {
   justify-items: stretch;
   justify-content: center;
   align-items: stretch;
-  grid-template-columns:5% 25%  35% 25% ;
+  grid-template-columns: 5% 25% 35% 25%;
   grid-template-rows: 5% 5% 75% 5%;
   width: 100%;
   font-size: 0.70em;
@@ -154,52 +148,53 @@ footer {
   opacity: 0.95;
   margin: auto;
   margin-bottom: 15px;
-
 }
-.messagBox-flex{
+
+.messagBox-flex {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
   margin-top: 15px;
   width: 90%;
-  
 }
 
-
-.Comments { grid-area: Comments; 
-font-size: 0.55rem;
-font-weight: normal;
-display: flex;
-margin: auto;
-justify-content: center;
-align-content: center;
-align-items: center;
-
+.Comments {
+  grid-area: Comments;
+  font-size: 0.55rem;
+  font-weight: normal;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
-.Createdat { grid-area: Createdat;
-  font-size: 0.50rem; 
+.Createdat {
+  grid-area: Createdat;
+  font-size: 0.50rem;
   display: flex;
   align-items: flex-start;
 }
 
-.Title { grid-area: Title;
+.Title {
+  grid-area: Title;
   display: flex;
   align-items: flex-start;
   font-size: 0.70em;
 }
 
-.Other { grid-area: Other;
+.Other {
+  grid-area: Other;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
- }
-
+}
 
 a {
   color: black;
-  text-decoration: none; /* no underline */
+  text-decoration: none;
+  /* no underline */
 }
 
 .message-list {
@@ -211,9 +206,9 @@ a {
   align-items: center;
 }
 
-
 /*LOGIN/SIGNUP FORM*/
-.login-box{
+
+.login-box {
   display: flex;
   width: 90%;
   margin: auto;
@@ -221,7 +216,7 @@ a {
   margin-top: 70px;
 }
 
-.login__input{
+.login__input {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -230,10 +225,11 @@ a {
   align-items: center;
 }
 
-.login__button{
+.login__button {
   margin-bottom: 25px;
   margin-top: 25px;
 }
+
 .form {
   display: flex;
   justify-content: flex-end;
@@ -242,35 +238,36 @@ a {
   width: 100%;
 }
 
-.form__button{
-  justify-content : flex-end;
+.form__button {
+  justify-content: flex-end;
   width: 60%;
   margin: auto;
   margin-bottom: 25px;
   margin-top: 25px;
 }
 
-.form__button-comment{
+.form__button-comment {
   display: flex;
-  justify-content : center;
+  justify-content: center;
   width: 100%;
   margin: auto;
   margin-bottom: 25px;
   margin-top: 25px;
-}
-.form__button-comment2{
-  display: flex;
-  justify-content : center;
-  width: 100%;
-  margin: auto;
-  margin-bottom: 25px;
-  margin-top: 25px;
-  justify-content : space-evenly;
 }
 
-.form__comment-button-style{
+.form__button-comment2 {
   display: flex;
-  justify-content : center;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  justify-content: space-evenly;
+}
+
+.form__comment-button-style {
+  display: flex;
+  justify-content: center;
   margin: auto;
   width: 20%;
   border: none;
@@ -279,18 +276,19 @@ a {
   transition: background-color 200ms ease-in-out;
   cursor: pointer;
   color: white;
-  border: solid #212931 ;
+  border: solid #212931;
   margin: 0rem 5px 0rem 0;
   line-height: 1.5rem;
   border-radius: 7px;
-  
 }
+
 .form__comment-button-style:hover {
   background-color: #FFFAFA;
   color: black;
-  border: solid #212931 ;
+  border: solid #212931;
 }
-.form__input{
+
+.form__input {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -302,48 +300,43 @@ a {
   width: 99%;
   margin: auto;
   font-family: 'Roboto', sans-serif;
- 
 }
+
 /* PROFIL */
 
-.profil{
+.profil {
   padding-bottom: 65px;
-
   margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.profil-data{
+.profil-data {
   width: 60%;
 }
 
-.button{
+.button {
   margin-top: 25px;
 }
 
-
 /* BUTTON */
-
-
 
 /***********************************************
 Media querries
 */
 
 /* Tablet Styles */
-@media only screen and (min-width: 501px) and (max-width: 960px) {
 
-  .login-box{
+@media only screen and (min-width: 501px) and (max-width: 960px) {
+  .login-box {
     margin-bottom: 70px;
   }
-
 }
 
 /* Desktop Styles */
+
 @media only screen and (min-width: 961px) {
-  
   .navbar {
     background-color: #1976D2;
     color: #f5f5f5;
@@ -353,52 +346,46 @@ Media querries
     display: flex;
     justify-content: space-evenly;
   }
-
   .nav__list-ul {
     list-style: none;
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-around;
+
   }
-  
   .nav__list-li {
     font-size: 0.65rem;
+    margin-top:10px
   }
-  
-  .nav__list-li-left{
-    color:#f5f5f5;
+  .nav__list-li-left {
+    color: #f5f5f5;
     display: flex;
     justify-content: center;
     width: 40%;
   }
-  
-  .link{
+  .link {
     justify-content: right;
     margin-right: 25px;
     width: 20%;
   }
-  
-  .logo{
+  .logo {
     width: 15%;
-    height: 15px;
-    margin-top: 10px;
+    height: 0px;
+    margin-top: 30px;
+   
   }
-  
-  .login-logo{
-  margin-bottom: 50px;
+  .login-logo {
+    margin-bottom: 50px;
   }
-  
-  .navbar__style{
-    color:#f5f5f5;
+  .navbar__style {
+    color: #f5f5f5;
     text-decoration: none;
   }
-  
   .hover:hover {
     color: aqua;
     opacity: 0.7;
   }
-  
   footer {
     background-color: #1976D2;
     color: #f5f5f5;
@@ -411,46 +398,41 @@ Media querries
     left: 0;
     bottom: 0;
     width: 100%;
-  
+    font-size: 1em;
   }
-  
   /* LOGIN */
-  .login-box{
+  .login-box {
     display: flex;
     width: 40%;
     margin: auto;
     margin-top: 90px;
   }
-  
   /* Messages */
-
   .grid-container {
     display: grid;
     justify-items: left;
     justify-items: stretch;
     justify-content: center;
     align-items: stretch;
-    grid-template-columns:5% 25%  35% 25% ;
+    grid-template-columns: 5% 25% 35% 25%;
     grid-template-rows: 5% 5% 83% 7%;
     margin: auto;
     width: 100%;
     font-size: 1.5em;
     grid-template-areas: "Createdat Createdat Createdat Createdat" "Title Title Title Title" "Comments Comments Comments Comments" "Other Other Other Other";
   }
- 
   .grid-container-comment {
     display: grid;
     justify-items: left;
     justify-items: stretch;
     justify-content: center;
     align-items: stretch;
-    grid-template-columns:5% 25%  35% 25% ;
+    grid-template-columns: 5% 25% 35% 25%;
     grid-template-rows: 5% 5% 75% 5%;
     width: 100%;
     font-size: 2rem;
     grid-template-areas: "Createdat Createdat Createdat Createdat" "Title Title Title Title" "Comments Comments Comments Comments" "Other Other Other Other";
   }
-  
   .message-box {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
@@ -463,61 +445,53 @@ Media querries
     opacity: 0.95;
     margin-bottom: 15px;
     align-content: center;
-  
   }
-
-  .messagBox-flex{
+  .messagBox-flex {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
     margin-top: 15px;
-    width: 100%;    
+    width: 100%;
   }
-
-
-  
-  .Comments { grid-area: Comments; 
-  font-size: 1.1rem;
-  font-weight: normal;
-  margin: auto;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
+  .Comments {
+    grid-area: Comments;
+    font-size: 1.1rem;
+    font-weight: normal;
+    margin: auto;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
   }
-  
-  .Createdat { grid-area: Createdat;
-    font-size: 1rem; 
+  .Createdat {
+    grid-area: Createdat;
+    font-size: 1rem;
     display: flex;
     align-items: flex-start;
   }
-  
-  .Title { grid-area: Title;
+  .Title {
+    grid-area: Title;
     display: flex;
     align-items: flex-start;
     font-size: 1em;
-    
   }
-  
-  .Other { grid-area: Other;
+  .Other {
+    grid-area: Other;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-
-   }
-  
+  }
   a {
     color: black;
-    text-decoration: none; /* no underline */
+    text-decoration: none;
+    /* no underline */
   }
-  
   .product__specs {
     width: 100%;
     margin: auto;
     text-align: center;
     color: #221812;
   }
-  
   .message-list {
     display: flex;
     flex-direction: column;
@@ -526,25 +500,21 @@ Media querries
     margin-top: 40px;
   }
   /* PROFILE */
-
-  .profil{
-    padding-bottom: 65px;
-    padding-top: 65px;
+  .profil {
+    padding-bottom: 50px;
+    padding-top: 35px;
     margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-
-  .profil-data{
+  .profil-data {
     width: 60%;
   }
-
-  .button{
+  .button {
     margin-top: 25px;
   }
-
-  .messagBox-flex-profil{
+  .messagBox-flex-profil {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -553,7 +523,6 @@ Media querries
     width: 50%;
   }
   /*LOGIN/SIGNUP FORM*/
-  
   .form {
     display: flex;
     flex-direction: column;
@@ -562,20 +531,17 @@ Media querries
     text-align: center;
     margin: 50px;
     margin-top: 40px;
-    
- 
   }
-  .section{
-   
+  .section {
     display: flex;
   }
-  .form__button-newcomment{
+  .form__button-newcomment {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 50%;
   }
-  .form-container{
+  .form-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -583,59 +549,52 @@ Media querries
     margin-top: 55px;
     width: 50%;
   }
-
-  .form__input{
+  .form__input {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 70%;
     margin-top: 25px;
     font-size: 1.7rem;
-  
   }
-  .form__input-comment{
+  .form__input-comment {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
     margin-top: 25px;
   }
-  .form-flex{
+  .form-flex {
     display: flex;
     justify-content: center;
   }
-  
   .form__input-title {
     display: flex;
     margin-top: 25px;
     margin: auto;
     font-family: 'Roboto', sans-serif;
     font-size: 1.5rem;
-   
   }
-  
   /* BUTTON */
-
   .button-flex {
     margin-top: 25px;
     display: flex;
     justify-content: space-evenly;
   }
-
-  .form__button-comment{
+  .form__button-comment {
     display: flex;
-    justify-content : center;
+    justify-content: center;
     width: 50%;
     margin: auto;
     margin-bottom: 25px;
     margin-top: 25px;
     font-size: 1.7rem;
-
   }
-
+  .font-size {
+    font-size: 1.7rem;
+  }
   /* ADMIN*/
-
-  .admin{
+  .admin {
     display: flex;
     justify-content: center;
     align-content: center;
@@ -646,8 +605,7 @@ Media querries
     align-items: center;
     margin: auto;
   }
-
-  .admin-flex{
+  .admin-flex {
     display: flex;
     width: 95%;
     flex-direction: column;
@@ -655,21 +613,15 @@ Media querries
     justify-content: center;
     padding-bottom: 15px;
     padding-top: 15px;
-    
   }
-
-  .admin-items{
+  .admin-items {
     margin-bottom: 15px;
   }
-
-  
-  .logo{
+  .logo {
     width: 15%;
     margin-bottom: 80px;
-  
   }
-
-  .navbar__style{
-    font-size: 2.2rem;
+  .navbar__style {
+    font-size: 1.5rem;
   }
 }

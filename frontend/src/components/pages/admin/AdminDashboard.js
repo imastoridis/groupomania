@@ -87,6 +87,7 @@ function AdminDashboard(params) {
                                             </div>
                                             <div className="admin-items">
                                                 <h3 className="">Commentaire :</h3>
+                                                <img src={`/images/${message.attachment}`} onError={i => i.target.style.display = 'none'} className="image"></img>
                                                 <div>{message.content}</div>
                                             </div>
                                             <div className="admin-items">

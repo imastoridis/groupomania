@@ -47,6 +47,7 @@ function UserProfileUpdate() {
             <UserProfileInfo />
             <main className="message-box">
                 <div className="form ">
+                    <h3>Modifier votre profil</h3>
                     <Components.Paper elevation={6} className="messagBox-flex-profil" >
                         <div className='profil'>
                             <form onSubmit={handleForm}  >

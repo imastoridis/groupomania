@@ -54,6 +54,9 @@ function Message({ match }) {
 
         axios.get(`http://localhost:8080/api/messages/${match.params.id}`, messageById)
             .then(function (response) {
+                let obj = {
+                    
+                }
                 const messages = response.data
                 setFetchMessage(messages)
             })

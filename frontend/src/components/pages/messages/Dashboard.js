@@ -30,8 +30,8 @@ function Dashboard(params) {
     })
     //Declarations
     const [messages, setMessages] = useState([]);
-    const [iamges, setImages] = useState([]);
-    const [error, setError] = useState(null);
+    //const [iamges, setImages] = useState([]);
+    const [ error, setError] = useState(null);
 
     //Gets all the messages
     const FetchMessages = (e) => {
@@ -74,7 +74,7 @@ function Dashboard(params) {
                                                 <h2 className="content">{message.title}</h2>
                                             </div>
                                             <div className="Comments">
-                                                <img src={`/images/${message.attachment}`} onError={i => i.target.style.display = 'none'} className="image"></img>
+                                                <img alt="comment" src={`/images/${message.attachment}`} onError={i => i.target.style.display = 'none' } className="image"></img>
                                                 <h3 className="">{message.content}</h3>
                                             </div>
                                             <div className="Other">

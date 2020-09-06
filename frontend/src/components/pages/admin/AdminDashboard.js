@@ -1,7 +1,7 @@
 //Imports
 import React, { useState, useEffect } from 'react';
 import Header from '../../headers/Header';
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { connect } from "react-redux";
 import moment from 'moment';
@@ -29,7 +29,7 @@ function AdminDashboard(params) {
     const [messages, setMessages] = useState([]);
     const [error, setError] = useState(null);
     const stateStore = store.getState()
-    let history = useHistory();
+    //let history = useHistory();
 
     //Gets all the messages
     const FetchMessages = (e) => {

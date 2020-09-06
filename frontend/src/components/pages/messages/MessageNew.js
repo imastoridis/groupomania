@@ -1,11 +1,9 @@
 //Imports
 import FormData from 'form-data'
 import React, { useState, useEffect } from 'react';
-import Footer from '../../headers/Footer';
 import axios from 'axios'
 import { useHistory, Link } from "react-router-dom";
 import Header from '../../headers/Header';
-import Cookies from 'js-cookie'
 import * as Components from '../../../materialui/Imports'
 var fs = require('fs');
 var querystring = require('querystring');

@@ -26,6 +26,13 @@ server.get('/', function(req, res) { //function = callback
 server.use('/api/', apiRouter)
 
 //Launch server
+/*
 server.listen(8080, function() {
     console.log('Serveur en ecoute')
-})
+})*/
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+server.listen(port);

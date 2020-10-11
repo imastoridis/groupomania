@@ -36,7 +36,7 @@ exports.router = (function() {
 
 
   apiRouter.use((req, res, next) => { 
-    res.setHeader('Access-Control-Allow-Origin', "http://localhost:3000", "*"); 
+    res.setHeader('Access-Control-Allow-Origin', "https://groupomania.com.imastoridis.com", "http://localhost:3000", "*"); 
     res.setHeader('Access-Control-Max-Age', "1000")
     res.header('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization, client-security-token');

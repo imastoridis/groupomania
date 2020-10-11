@@ -38,9 +38,5 @@
     "react-image-fallback": "^8.0.0",
     "sequelize": "^5.21.13",
     "serve-index": "^1.9.1"
-  },
-
-  "engines": {
-    "node": "12.4.1"
   }
 }
